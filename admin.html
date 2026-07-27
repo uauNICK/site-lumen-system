@@ -12,6 +12,10 @@
     <!-- FontAwesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+
+    <!-- Firebase SDK Compat via CDN -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
     <style>
         body {
             display: flex;
@@ -82,6 +86,7 @@
         <div id="adminDashboardView" class="admin-view hidden">
             <div class="admin-nav-tabs">
                 <button class="tab-btn active" data-tab="tab-dashboard"><i class="fa-solid fa-chart-pie"></i> Dashboard & Analytics</button>
+                <button class="tab-btn" data-tab="tab-firebase"><i class="fa-solid fa-fire text-cyan"></i> Conexão Firebase DB</button>
                 <button class="tab-btn" data-tab="tab-plans-edit"><i class="fa-solid fa-tags"></i> Gerenciar Planos & Vantagens</button>
                 <button class="tab-btn" data-tab="tab-images"><i class="fa-solid fa-image"></i> Imagens & Logo</button>
                 <button class="tab-btn" data-tab="tab-colors"><i class="fa-solid fa-palette"></i> Paleta de Cores</button>
@@ -177,6 +182,44 @@
                             <tbody id="tableAccessLogs">
                             </tbody>
                         </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Firebase Connection -->
+            <div class="tab-content" id="tab-firebase">
+                <h3><i class="fa-solid fa-fire text-cyan"></i> Conexão e Sincronização com o Firebase DB</h3>
+                <p class="tab-desc">Cole as chaves do seu projeto Firebase para sincronizar dados, métricas e fotos em tempo real na nuvem.</p>
+
+                <div class="product-form">
+                    <div class="form-group">
+                        <label for="fbApiKey">API Key (`apiKey`)</label>
+                        <input type="text" id="fbApiKey" placeholder="AIzaSy...">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label for="fbAuthDomain">Auth Domain (`authDomain`)</label>
+                            <input type="text" id="fbAuthDomain" placeholder="seu-projeto.firebaseapp.com">
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="fbDatabaseURL">Database URL (`databaseURL`)</label>
+                            <input type="text" id="fbDatabaseURL" placeholder="https://seu-projeto-default-rtdb.firebaseio.com">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label for="fbProjectId">Project ID (`projectId`)</label>
+                            <input type="text" id="fbProjectId" placeholder="seu-projeto-id">
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="fbAppId">App ID (`appId`)</label>
+                            <input type="text" id="fbAppId" placeholder="1:123456789:web:abcdef">
+                        </div>
+                    </div>
+
+                    <div class="form-actions margin-top-20">
+                        <button type="button" class="btn btn-primary" id="btnSaveFirebaseConfig"><i class="fa-solid fa-bolt"></i> Salvar e Conectar ao Firebase</button>
+                        <span id="firebaseStatusBadge" class="badge-tag margin-left-12"><i class="fa-solid fa-circle-dot"></i> Armazenamento Local (Offline)</span>
                     </div>
                 </div>
             </div>
@@ -393,7 +436,6 @@
                     </button>
                 </div>
 
-                <!-- Case Edit/Add Form -->
                 <form id="caseForm" class="product-form hidden">
                     <h4 id="caseFormTitle">Adicionar Novo Case no Portfólio</h4>
                     <input type="hidden" id="caseEditId">
@@ -439,9 +481,7 @@
                     </div>
                 </form>
 
-                <!-- Portfolio Cases List -->
                 <div class="admin-products-list" id="adminCasesList">
-                    <!-- Dynamically populated -->
                 </div>
             </div>
 

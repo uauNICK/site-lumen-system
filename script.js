@@ -1,8 +1,15 @@
 /* ==========================================================================
-   LUMEN SYSTEM - CORE INSTITUTIONAL, ANALYTICS ENGINE & ADMIN DASHBOARD
+   LUMEN SYSTEM - CORE INSTITUTIONAL, ANALYTICS ENGINE & FIREBASE DB SYNC
    ========================================================================== */
 
 const DEFAULT_STATE = {
+    firebase: {
+        apiKey: "",
+        authDomain: "",
+        databaseURL: "",
+        projectId: "",
+        appId: ""
+    },
     settings: {
         brandName: "LUMEN SYSTEM",
         brandSlogan: "CLAREZA GERA RESULTADOS",
@@ -156,6 +163,7 @@ const DEFAULT_STATE = {
 
 let appState = loadState();
 let isAdminLoggedIn = false;
+let isFirebaseConnected = false;
 
 // Temp Image Buffer
 let tempImages = { logo: null, hero: null, about: null, case: null };
@@ -168,6 +176,7 @@ function loadState() {
             return {
                 ...DEFAULT_STATE,
                 ...parsed,
+                firebase: { ...DEFAULT_STATE.firebase, ...(parsed.firebase || {}) },
                 settings: { ...DEFAULT_STATE.settings, ...(parsed.settings || {}) },
                 colors: { ...DEFAULT_STATE.colors, ...(parsed.colors || {}) },
                 plans: {
@@ -194,7 +203,59 @@ function loadState() {
 
 function saveState(skipRender = false) {
     localStorage.setItem('lumen_full_admin_state', JSON.stringify(appState));
+
+    if (isFirebaseConnected && typeof firebase !== 'undefined' && firebase.apps.length) {
+        try {
+            firebase.database().ref('lumen_app_state').set(appState);
+        } catch (err) {
+            console.warn("Erro ao sincronizar com Firebase DB:", err);
+        }
+    }
+
     if (!skipRender) renderApp();
+}
+
+function initFirebaseConnection() {
+    const fb = appState.firebase;
+    const badge = document.getElementById('firebaseStatusBadge');
+
+    if (!fb || !fb.apiKey || !fb.databaseURL) {
+        if (badge) badge.innerHTML = `<i class="fa-solid fa-circle-dot"></i> Armazenamento Local (Offline)`;
+        isFirebaseConnected = false;
+        return;
+    }
+
+    if (typeof firebase !== 'undefined') {
+        try {
+            if (!firebase.apps.length) {
+                firebase.initializeApp(fb);
+            }
+            isFirebaseConnected = true;
+            if (badge) badge.innerHTML = `<i class="fa-solid fa-cloud-check text-cyan"></i> Conectado ao Firebase DB (Nuvem em Tempo Real)`;
+
+            // Listen to real-time changes from Firebase DB
+            firebase.database().ref('lumen_app_state').on('value', (snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    appState = {
+                        ...appState,
+                        ...data,
+                        settings: { ...appState.settings, ...(data.settings || {}) },
+                        colors: { ...appState.colors, ...(data.colors || {}) },
+                        plans: { ...appState.plans, ...(data.plans || {}) },
+                        portfolioCases: data.portfolioCases || appState.portfolioCases,
+                        analytics: { ...appState.analytics, ...(data.analytics || {}) }
+                    };
+                    localStorage.setItem('lumen_full_admin_state', JSON.stringify(appState));
+                    renderApp();
+                }
+            });
+        } catch (e) {
+            console.error("Erro na inicialização do Firebase:", e);
+            if (badge) badge.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-magenta"></i> Erro de Conexão Firebase`;
+            isFirebaseConnected = false;
+        }
+    }
 }
 
 function trackVisit() {
@@ -564,6 +625,7 @@ function readFileAsDataURL(file) {
 
 // DOM Initialization
 document.addEventListener('DOMContentLoaded', () => {
+    initFirebaseConnection();
     trackVisit();
     renderApp();
 
@@ -651,6 +713,23 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 showToast("Usuário ou senha de administrador incorretos!", "error");
             }
+        });
+    }
+
+    // Firebase Config Save Button
+    const btnSaveFirebaseConfig = document.getElementById('btnSaveFirebaseConfig');
+    if (btnSaveFirebaseConfig) {
+        btnSaveFirebaseConfig.addEventListener('click', () => {
+            appState.firebase = {
+                apiKey: document.getElementById('fbApiKey').value.trim(),
+                authDomain: document.getElementById('fbAuthDomain').value.trim(),
+                databaseURL: document.getElementById('fbDatabaseURL').value.trim(),
+                projectId: document.getElementById('fbProjectId').value.trim(),
+                appId: document.getElementById('fbAppId').value.trim()
+            };
+            saveState();
+            initFirebaseConnection();
+            showToast("Configuração do Firebase salva! Testando conexão...", "success");
         });
     }
 
@@ -935,7 +1014,15 @@ function bindColorPicker(pickerId, textId) {
 }
 
 function populateAdminForms() {
-    const { settings, colors, plans } = appState;
+    const { settings, colors, plans, firebase: fb } = appState;
+
+    if (fb) {
+        if (document.getElementById('fbApiKey')) document.getElementById('fbApiKey').value = fb.apiKey || "";
+        if (document.getElementById('fbAuthDomain')) document.getElementById('fbAuthDomain').value = fb.authDomain || "";
+        if (document.getElementById('fbDatabaseURL')) document.getElementById('fbDatabaseURL').value = fb.databaseURL || "";
+        if (document.getElementById('fbProjectId')) document.getElementById('fbProjectId').value = fb.projectId || "";
+        if (document.getElementById('fbAppId')) document.getElementById('fbAppId').value = fb.appId || "";
+    }
 
     if (document.getElementById('previewAdminLogo')) document.getElementById('previewAdminLogo').src = settings.logoImage;
     if (document.getElementById('previewAdminHero')) document.getElementById('previewAdminHero').src = settings.heroImage;
