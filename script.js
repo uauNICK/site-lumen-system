@@ -975,6 +975,31 @@ document.addEventListener('DOMContentLoaded', () => {
     trackVisit();
     renderApp();
 
+    // Mobile Hamburger Navigation Menu Toggle
+    const mobileToggle = document.getElementById('mobileToggle');
+    const mainNav = document.getElementById('mainNav');
+    if (mobileToggle && mainNav) {
+        mobileToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('mobile-active');
+            const icon = mobileToggle.querySelector('i');
+            if (icon) {
+                if (mainNav.classList.contains('mobile-active')) {
+                    icon.className = 'fa-solid fa-xmark';
+                } else {
+                    icon.className = 'fa-solid fa-bars';
+                }
+            }
+        });
+
+        document.querySelectorAll('.main-nav .nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('mobile-active');
+                const icon = mobileToggle.querySelector('i');
+                if (icon) icon.className = 'fa-solid fa-bars';
+            });
+        });
+    }
+
     if (window.location.hash === '#admin') {
         const modal = document.getElementById('adminModalBackdrop');
         if (modal) modal.classList.add('active');
