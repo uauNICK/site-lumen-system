@@ -21,6 +21,8 @@ const DEFAULT_STATE = {
         heroBadge: "Sites Profissionais por Assinatura",
         heroTitle: "Sites profissionais para o seu negócio, sem pagar tudo de uma vez.",
         heroSubtitle: "Criamos e cuidamos do site da sua empresa por uma mensalidade acessível — hospedagem, suporte e atualizações inclusos.",
+        aboutTitle: "Clareza Gera Resultados",
+        aboutText: "A Lumen System nasceu da união entre desenvolvimento técnico de alto nível e relacionamento próximo com clientes, com o objetivo de tornar a presença digital altamente acessível para pequenos e médios negócios locais.\n\nAcreditamos que todo negócio, independente do tamanho, merece ser encontrado por quem procura por ele — e que isso não precisa custar caro nem ser complicado.\n\nPor trás da marca, dois sócios cuidam de cada detalhe: um focado em entender e atender cada cliente com clareza, e outro em transformar essa visão em um site rápido, seguro e funcional no ar.",
         logoImage: "assets/logo_lumen_system.jpg",
         heroImage: "assets/logo_lumen_system.jpg",
         aboutImage: "assets/logo_lumen_system.jpg"
@@ -496,6 +498,20 @@ function renderApp() {
     }
     if (document.getElementById('heroSubtitle')) {
         document.getElementById('heroSubtitle').textContent = settings.heroSubtitle;
+    }
+
+    // Dynamic About Us Title and Text Rendering
+    if (document.getElementById('siteAboutTitle')) {
+        const titleStr = settings.aboutTitle || "Clareza Gera Resultados";
+        document.getElementById('siteAboutTitle').innerHTML = titleStr.includes('span')
+            ? titleStr
+            : titleStr.replace(/Resultados/gi, '<span class="gradient-text">Resultados</span>');
+    }
+
+    if (document.getElementById('siteAboutTextContainer')) {
+        const rawText = settings.aboutText || "";
+        const paragraphs = rawText.split('\n\n').filter(Boolean);
+        document.getElementById('siteAboutTextContainer').innerHTML = paragraphs.map(p => `<p class="about-desc">${p.trim()}</p>`).join('');
     }
 
     renderPlansGrid();
@@ -1328,7 +1344,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // General Settings Save
+    // General Settings Save (including About Us Text & Title)
     const generalSettingsForm = document.getElementById('generalSettingsForm');
     if (generalSettingsForm) {
         generalSettingsForm.addEventListener('submit', (e) => {
@@ -1339,9 +1355,11 @@ document.addEventListener('DOMContentLoaded', () => {
             appState.settings.email = document.getElementById('settingEmail').value.trim();
             appState.settings.heroTitle = document.getElementById('settingHeroTitle').value.trim();
             appState.settings.heroSubtitle = document.getElementById('settingHeroSubtitle').value.trim();
+            appState.settings.aboutTitle = document.getElementById('settingAboutTitle').value.trim();
+            appState.settings.aboutText = document.getElementById('settingAboutText').value.trim();
 
             saveState();
-            showToast("Informações da empresa salvas com sucesso!", "success");
+            showToast("Informações da empresa e texto 'Sobre Nós' salvos com sucesso!", "success");
         });
     }
 
@@ -1436,6 +1454,8 @@ function populateAdminForms() {
     if (document.getElementById('settingEmail')) document.getElementById('settingEmail').value = settings.email || "contato@lumensystem.com.br";
     if (document.getElementById('settingHeroTitle')) document.getElementById('settingHeroTitle').value = settings.heroTitle;
     if (document.getElementById('settingHeroSubtitle')) document.getElementById('settingHeroSubtitle').value = settings.heroSubtitle;
+    if (document.getElementById('settingAboutTitle')) document.getElementById('settingAboutTitle').value = settings.aboutTitle || "Clareza Gera Resultados";
+    if (document.getElementById('settingAboutText')) document.getElementById('settingAboutText').value = settings.aboutText || "";
 
     if (plans) {
         if (document.getElementById('plan1Name')) document.getElementById('plan1Name').value = plans.plan1.name || "Plano Essencial";

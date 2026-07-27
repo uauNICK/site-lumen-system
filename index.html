@@ -249,16 +249,11 @@
                 </div>
                 <div class="about-content">
                     <span class="section-tag">SOBRE A LUMEN SYSTEM</span>
-                    <h2 class="section-title">Clareza Gera <span class="gradient-text">Resultados</span></h2>
-                    <p class="about-desc">
-                        A **Lumen System** nasceu da união entre desenvolvimento técnico de alto nível e relacionamento próximo com clientes, com o objetivo de tornar a presença digital altamente acessível para pequenos e médios negócios locais.
-                    </p>
-                    <p class="about-desc">
-                        Acreditamos que todo negócio, independente do tamanho, merece ser encontrado por quem procura por ele — e que isso não precisa custar caro nem ser complicado.
-                    </p>
-                    <p class="about-desc">
-                        Por trás da marca, dois sócios cuidam de cada detalhe: um focado em entender e atender cada cliente com clareza, e outro em transformar essa visão em um site rápido, seguro e funcional no ar.
-                    </p>
+                    <h2 class="section-title" id="siteAboutTitle">Clareza Gera <span class="gradient-text">Resultados</span></h2>
+                    
+                    <div id="siteAboutTextContainer">
+                        <!-- Parágrafos renderizados dinamicamente do Firebase/Local DB -->
+                    </div>
 
                     <div class="about-highlights">
                         <div class="h-item">
@@ -1042,11 +1037,23 @@
 
                             <div class="form-group">
                                 <label for="settingHeroSubtitle">Subtítulo do Hero</label>
-                                <textarea id="settingHeroSubtitle" rows="3" required>Criamos e cuidamos do site da sua empresa por uma mensalidade acessível — hospedagem, suporte e atualizações inclusos.</textarea>
+                                <textarea id="settingHeroSubtitle" rows="2" required>Criamos e cuidamos do site da sua empresa por uma mensalidade acessível — hospedagem, suporte e atualizações inclusos.</textarea>
                             </div>
 
-                            <div class="form-actions">
-                                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Salvar Dados da Empresa</button>
+                            <div class="product-form margin-top-20">
+                                <h4 class="text-cyan"><i class="fa-solid fa-building"></i> Seção "Sobre Nós" (Editável)</h4>
+                                <div class="form-group margin-top-12">
+                                    <label for="settingAboutTitle">Título da Seção Sobre Nós</label>
+                                    <input type="text" id="settingAboutTitle" value="Clareza Gera Resultados">
+                                </div>
+                                <div class="form-group">
+                                    <label for="settingAboutText">Texto Completo da Seção Sobre Nós (Separe parágrafos com uma linha em branco)</label>
+                                    <textarea id="settingAboutText" rows="6" placeholder="Escreva aqui a história e proposta da sua empresa..."></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-actions margin-top-20">
+                                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Salvar Dados da Empresa & Sobre Nós</button>
                                 <button type="button" class="btn btn-danger-outline" id="btnResetToDefaults"><i class="fa-solid fa-rotate-left"></i> Resetar Tudo para Fábrica</button>
                             </div>
                         </form>
