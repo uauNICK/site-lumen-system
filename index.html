@@ -16,17 +16,17 @@
 <body>
 
     <!-- Ambient Glowing Backgrounds -->
-    <div class="ambient-glow bg-glow-1"></div>
-    <div class="ambient-glow bg-glow-2"></div>
+    <div class="ambient-glow bg-glow-1" id="bgGlow1"></div>
+    <div class="ambient-glow bg-glow-2" id="bgGlow2"></div>
 
     <!-- Header Navigation -->
     <header class="site-header" id="siteHeader">
         <div class="container header-container">
             <a href="#hero" class="logo-brand">
-                <img src="assets/logo_lumen_system.jpg" alt="Lumen System Logo" class="brand-logo-img">
+                <img src="assets/logo_lumen_system.jpg" alt="Lumen System Logo" class="brand-logo-img" id="siteBrandLogo">
                 <div class="brand-text">
-                    <span class="brand-name">LUMEN SYSTEM</span>
-                    <span class="brand-slogan">CLAREZA GERA RESULTADOS</span>
+                    <span class="brand-name" id="siteBrandName">LUMEN SYSTEM</span>
+                    <span class="brand-slogan" id="siteBrandSlogan">CLAREZA GERA RESULTADOS</span>
                 </div>
             </a>
 
@@ -44,7 +44,7 @@
 
             <div class="header-actions">
                 <button class="btn btn-outline btn-sm admin-btn" id="openAdminBtn" title="Painel Admin">
-                    <i class="fa-solid fa-lock"></i> Painel Admin
+                    <i class="fa-solid fa-sliders"></i> Painel Admin
                 </button>
                 <a href="https://wa.me/5524992584133?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Lumen%20System%20e%20gostaria%20de%20um%20or%C3%A7amento." target="_blank" class="btn btn-primary btn-sm header-wa-btn">
                     <i class="fa-brands fa-whatsapp"></i> <span id="headerWaDisplay">Contato</span>
@@ -64,7 +64,7 @@
                 <div class="hero-content">
                     <div class="hero-badge">
                         <span class="badge-dot"></span>
-                        <span>Sites Profissionais por Assinatura</span>
+                        <span id="siteHeroBadge">Sites Profissionais por Assinatura</span>
                     </div>
                     <h1 class="hero-title" id="heroTitle">
                         Sites profissionais para o seu negócio, <span class="gradient-text">sem pagar tudo de uma vez</span>.
@@ -145,84 +145,7 @@
                 </div>
 
                 <div class="plans-grid" id="plansGrid">
-                    <!-- Plano 1: Essencial -->
-                    <div class="plan-card">
-                        <div class="plan-header">
-                            <span class="plan-badge">Para Autônomos e Iniciantes</span>
-                            <h3 class="plan-name">Plano Essencial</h3>
-                            <p class="plan-target">Ideal para validar seu negócio na internet rapidamente.</p>
-                            <div class="plan-price-box">
-                                <span class="setup-price">Setup de Implantação: R$ 350,00</span>
-                                <div class="monthly-price">R$ 89<span class="period">/mês</span></div>
-                            </div>
-                        </div>
-                        <div class="plan-body">
-                            <ul class="plan-features">
-                                <li><i class="fa-solid fa-circle-check"></i> Landing Page de 1 Página</li>
-                                <li><i class="fa-solid fa-circle-check"></i> Design 100% Responsivo (Mobile/PC)</li>
-                                <li><i class="fa-solid fa-circle-check"></i> Hospedagem + Domínio (.com.br) inclusos</li>
-                                <li><i class="fa-solid fa-circle-check"></i> Botão Direto para WhatsApp</li>
-                                <li><i class="fa-solid fa-circle-check"></i> Suporte Técnico e Atualizações</li>
-                                <li><i class="fa-solid fa-circle-check"></i> Certificado de Segurança SSL</li>
-                            </ul>
-                            <a href="https://wa.me/5524992584133?text=Ol%C3%A1!%20Quero%20contratar%20o%20Plano%20Essencial%20(R%24%2089/m%C3%AAs)." target="_blank" class="btn btn-glass btn-full">
-                                Escolher Plano Essencial
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Plano 2: Profissional (Destaque) -->
-                    <div class="plan-card featured">
-                        <div class="featured-ribbon">MAIS POPULAR</div>
-                        <div class="plan-header">
-                            <span class="plan-badge">Para Empresas em Crescimento</span>
-                            <h3 class="plan-name">Plano Profissional</h3>
-                            <p class="plan-target">Site completo com múltiplas páginas e catálogo.</p>
-                            <div class="plan-price-box">
-                                <span class="setup-price">Setup de Implantação: R$ 650,00</span>
-                                <div class="monthly-price">R$ 149<span class="period">/mês</span></div>
-                            </div>
-                        </div>
-                        <div class="plan-body">
-                            <ul class="plan-features">
-                                <li><i class="fa-solid fa-circle-check"></i> Site Multi-páginas (Até 5 Páginas)</li>
-                                <li><i class="fa-solid fa-circle-check"></i> Catálogo de Produtos / Serviços</li>
-                                <li><i class="fa-solid fa-circle-check"></i> <strong>Painel Admin Exclusivo</strong> para editar dados e fotos</li>
-                                <li><i class="fa-solid fa-circle-check"></i> Hospedagem + Domínio (.com.br) inclusos</li>
-                                <li><i class="fa-solid fa-circle-check"></i> Otimização SEO para o Google</li>
-                                <li><i class="fa-solid fa-circle-check"></i> Suporte VIP via WhatsApp</li>
-                            </ul>
-                            <a href="https://wa.me/5524992584133?text=Ol%C3%A1!%20Quero%20contratar%20o%20Plano%20Profissional%20(R%24%20149/m%C3%AAs)." target="_blank" class="btn btn-primary btn-full">
-                                Escolher Plano Profissional
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Plano 3: Loja Virtual / Sistema -->
-                    <div class="plan-card">
-                        <div class="plan-header">
-                            <span class="plan-badge">Catálogo Completo & Vendas</span>
-                            <h3 class="plan-name">Loja Virtual / Sistema</h3>
-                            <p class="plan-target">Para quem precisa de catálogo avançado ou pedidos online.</p>
-                            <div class="plan-price-box">
-                                <span class="setup-price">Setup de Implantação: R$ 1.200,00</span>
-                                <div class="monthly-price">R$ 249<span class="period">/mês</span></div>
-                            </div>
-                        </div>
-                        <div class="plan-body">
-                            <ul class="plan-features">
-                                <li><i class="fa-solid fa-circle-check"></i> Catálogo Ilimitado de Produtos</li>
-                                <li><i class="fa-solid fa-circle-check"></i> Sistema de Pedidos para WhatsApp</li>
-                                <li><i class="fa-solid fa-circle-check"></i> Painel de Gestão Avançado</li>
-                                <li><i class="fa-solid fa-circle-check"></i> Banco de Dados e Estatísticas</li>
-                                <li><i class="fa-solid fa-circle-check"></i> Hospedagem de Alta Velocidade + Domínio</li>
-                                <li><i class="fa-solid fa-circle-check"></i> Suporte Prioritário 24/7</li>
-                            </ul>
-                            <a href="https://wa.me/5524992584133?text=Ol%C3%A1!%20Quero%20contratar%20o%20Plano%20Loja%20Virtual%20/%20Sistema%20(R%24%20249/m%C3%AAs)." target="_blank" class="btn btn-glass btn-full">
-                                Escolher Loja / Sistema
-                            </a>
-                        </div>
-                    </div>
+                    <!-- Dynamic Plans rendered from state -->
                 </div>
 
                 <!-- Plan FAQ Summary -->
@@ -256,59 +179,7 @@
                 </div>
 
                 <div class="portfolio-grid" id="portfolioGrid">
-                    <!-- Case 1: Cantinho do Sabor (Principal Cliente Ativo) -->
-                    <div class="portfolio-card featured-case">
-                        <div class="portfolio-img-wrap">
-                            <img src="assets/cantinho_do_sabor.png" alt="Cantinho do Sabor">
-                            <span class="portfolio-tag main-client-tag"><i class="fa-solid fa-star"></i> Cliente Principal</span>
-                        </div>
-                        <div class="portfolio-body">
-                            <div class="case-header-flex">
-                                <h3>Cantinho do Sabor</h3>
-                                <span class="case-subtag">Gastronomia & Delivery</span>
-                            </div>
-                            <p class="portfolio-desc">"Cardápio digital e plataforma de pedidos sob medida desenvolvida com foco em exibição dos pratos e alta velocidade no envio de pedidos pelo WhatsApp."</p>
-                            <a href="https://cantinhodosaborvr.com.br" target="_blank" class="btn btn-primary btn-sm btn-full">
-                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver Site ao Vivo (cantinhodosaborvr.com.br)
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Case 2: Studio Márcia Araújo -->
-                    <div class="portfolio-card">
-                        <div class="portfolio-img-wrap">
-                            <img src="assets/studio_marcia_araujo.png" alt="Studio Márcia Araújo">
-                            <span class="portfolio-tag">Estética & Beleza</span>
-                        </div>
-                        <div class="portfolio-body">
-                            <div class="case-header-flex">
-                                <h3>Studio Márcia Araújo</h3>
-                                <span class="case-subtag">Estética & Saúde</span>
-                            </div>
-                            <p class="portfolio-desc">"Site profissional desenvolvido para exibição de tratamentos estéticos, agendamento de horários e atendimento rápido via WhatsApp."</p>
-                            <a href="https://studiomaharaujo.vercel.app/" target="_blank" class="btn btn-outline btn-sm btn-full">
-                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver Site ao Vivo (studiomaharaujo)
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Case 3: Perfecto Confecções -->
-                    <div class="portfolio-card">
-                        <div class="portfolio-img-wrap">
-                            <img src="assets/lumen_digital_catalog_1785183697092.png" alt="Perfecto Confecções">
-                            <span class="portfolio-tag">Varejo & Moda</span>
-                        </div>
-                        <div class="portfolio-body">
-                            <div class="case-header-flex">
-                                <h3>Perfecto Confecções</h3>
-                                <span class="case-subtag">Catálogo & Vendas</span>
-                            </div>
-                            <p class="portfolio-desc">"Plataforma de catálogo digital de peças com painel administrativo para atualização de estoque e envio direto de pedidos para o WhatsApp."</p>
-                            <a href="https://perfectoconfeccoes.vercel.app/" target="_blank" class="btn btn-outline btn-sm btn-full">
-                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver Site ao Vivo (perfectoconfeccoes)
-                            </a>
-                        </div>
-                    </div>
+                    <!-- Dynamic Portfolio Cases rendered from state -->
                 </div>
             </div>
         </section>
@@ -381,7 +252,7 @@
         <section class="about-section" id="about">
             <div class="container about-grid">
                 <div class="about-visual">
-                    <img src="assets/logo_lumen_system.jpg" alt="Lumen System - Clareza Gera Resultados" class="about-img">
+                    <img src="assets/logo_lumen_system.jpg" alt="Lumen System - Clareza Gera Resultados" class="about-img" id="siteAboutImage">
                 </div>
                 <div class="about-content">
                     <span class="section-tag">SOBRE A LUMEN SYSTEM</span>
@@ -632,13 +503,13 @@
         </button>
     </div>
 
-    <!-- Admin Panel Modal -->
+    <!-- Painel Admin Modal Expandido -->
     <div class="modal-backdrop" id="adminModalBackdrop">
-        <div class="admin-modal">
+        <div class="admin-modal modal-lg">
             <div class="modal-header">
                 <div class="modal-title">
                     <i class="fa-solid fa-user-shield text-cyan"></i>
-                    <span>Painel Administrativo <strong>Lumen System</strong></span>
+                    <span>Painel Administrativo Completo <strong>Lumen System</strong></span>
                 </div>
                 <button class="modal-close" id="closeAdminModalBtn">&times;</button>
             </div>
@@ -646,7 +517,7 @@
             <div class="modal-body">
                 <!-- Login View -->
                 <div id="adminLoginView" class="admin-view">
-                    <p class="login-instruction">Acesso restrito para os administradores da empresa.</p>
+                    <p class="login-instruction">Acesso restrito para administradores. Faça login para gerenciar fotos, cores, planos e portfólio.</p>
                     <form id="adminLoginForm" class="login-form">
                         <div class="form-group">
                             <label for="adminUser">Usuário</label>
@@ -657,50 +528,191 @@
                             <input type="password" id="adminPass" placeholder="Senha admin" required value="lumen123">
                         </div>
                         <button type="submit" class="btn btn-primary btn-full">
-                            <i class="fa-solid fa-right-to-bracket"></i> Entrar no Painel
+                            <i class="fa-solid fa-right-to-bracket"></i> Entrar no Painel Admin
                         </button>
-                        <p class="login-hint"><i class="fa-solid fa-circle-info"></i> Login de teste: Usuário: <code>admin</code> | Senha: <code>lumen123</code></p>
+                        <p class="login-hint"><i class="fa-solid fa-circle-info"></i> Credenciais padrão: Usuário: <code>admin</code> | Senha: <code>lumen123</code></p>
                     </form>
                 </div>
 
                 <!-- Admin Dashboard View -->
                 <div id="adminDashboardView" class="admin-view hidden">
                     <div class="admin-nav-tabs">
-                        <button class="tab-btn active" data-tab="tab-general"><i class="fa-solid fa-gear"></i> Dados da Empresa</button>
+                        <button class="tab-btn active" data-tab="tab-images"><i class="fa-solid fa-image"></i> Imagens & Logo</button>
+                        <button class="tab-btn" data-tab="tab-colors"><i class="fa-solid fa-palette"></i> Paleta de Cores</button>
+                        <button class="tab-btn" data-tab="tab-portfolio-crud"><i class="fa-solid fa-briefcase"></i> Portfólio / Cases</button>
                         <button class="tab-btn" data-tab="tab-plans-edit"><i class="fa-solid fa-tags"></i> Preços dos Planos</button>
+                        <button class="tab-btn" data-tab="tab-general"><i class="fa-solid fa-gear"></i> Empresa & Textos</button>
                     </div>
 
-                    <!-- Tab 1: General Settings -->
-                    <div class="tab-content active" id="tab-general">
-                        <h3>Informações da Empresa</h3>
-                        <form id="generalSettingsForm" class="settings-form">
-                            <div class="form-group">
-                                <label for="settingWaNumber">Telefone / WhatsApp (DDD + Número)</label>
-                                <input type="text" id="settingWaNumber" value="24992584133" required>
+                    <!-- Tab 1: Upload & Replace Site Images & Logo -->
+                    <div class="tab-content active" id="tab-images">
+                        <h3>Gerenciamento de Imagens e Logotipo</h3>
+                        <p class="tab-desc">Envie novas fotos direto do seu computador (Upload via arquivo) ou cole o link da imagem.</p>
+
+                        <div class="admin-images-grid">
+                            <!-- Logo Upload Box -->
+                            <div class="image-upload-card">
+                                <h4>Logotipo Oficial da Empresa</h4>
+                                <div class="img-preview-box">
+                                    <img src="assets/logo_lumen_system.jpg" id="previewAdminLogo" alt="Logo Preview">
+                                </div>
+                                <div class="upload-controls">
+                                    <label class="btn btn-outline btn-sm upload-btn">
+                                        <i class="fa-solid fa-upload"></i> Escolher Imagem (Upload)
+                                        <input type="file" id="fileUploadLogo" accept="image/*" class="file-input-hidden">
+                                    </label>
+                                    <input type="text" id="urlInputLogo" placeholder="ou cole a URL da imagem..." class="form-input-sm">
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="settingEmail">E-mail Comercial</label>
-                                <input type="email" id="settingEmail" value="contato@lumensystem.com.br" required>
+                            <!-- Hero Banner Upload Box -->
+                            <div class="image-upload-card">
+                                <h4>Imagem Principal do Hero</h4>
+                                <div class="img-preview-box">
+                                    <img src="assets/logo_lumen_system.jpg" id="previewAdminHero" alt="Hero Preview">
+                                </div>
+                                <div class="upload-controls">
+                                    <label class="btn btn-outline btn-sm upload-btn">
+                                        <i class="fa-solid fa-upload"></i> Escolher Imagem (Upload)
+                                        <input type="file" id="fileUploadHero" accept="image/*" class="file-input-hidden">
+                                    </label>
+                                    <input type="text" id="urlInputHero" placeholder="ou cole a URL da imagem..." class="form-input-sm">
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="settingHeroTitle">Título do Hero</label>
-                                <input type="text" id="settingHeroTitle" value="Sites profissionais para o seu negócio, sem pagar tudo de uma vez." required>
+                            <!-- About Image Upload Box -->
+                            <div class="image-upload-card">
+                                <h4>Imagem da Seção Sobre Nós</h4>
+                                <div class="img-preview-box">
+                                    <img src="assets/logo_lumen_system.jpg" id="previewAdminAbout" alt="About Preview">
+                                </div>
+                                <div class="upload-controls">
+                                    <label class="btn btn-outline btn-sm upload-btn">
+                                        <i class="fa-solid fa-upload"></i> Escolher Imagem (Upload)
+                                        <input type="file" id="fileUploadAbout" accept="image/*" class="file-input-hidden">
+                                    </label>
+                                    <input type="text" id="urlInputAbout" placeholder="ou cole a URL da imagem..." class="form-input-sm">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-actions margin-top-20">
+                            <button type="button" class="btn btn-primary" id="btnSaveImages"><i class="fa-solid fa-floppy-disk"></i> Salvar Todas as Imagens</button>
+                        </div>
+                    </div>
+
+                    <!-- Tab 2: Custom Theme & Color Palette Picker -->
+                    <div class="tab-content" id="tab-colors">
+                        <h3>Personalização da Paleta de Cores do Site</h3>
+                        <p class="tab-desc">Escolha as cores que combinam com a sua marca. As alterações refletem imediatamente no site.</p>
+
+                        <form id="themeColorForm" class="settings-form">
+                            <div class="color-picker-grid">
+                                <div class="color-picker-item">
+                                    <label for="colorCyan">Cor Primária (Ciano / Neon Principal)</label>
+                                    <div class="color-input-flex">
+                                        <input type="color" id="colorCyan" value="#00f0ff">
+                                        <input type="text" id="colorCyanText" value="#00f0ff" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="color-picker-item">
+                                    <label for="colorViolet">Cor Secundária (Violeta / Gradiente)</label>
+                                    <div class="color-input-flex">
+                                        <input type="color" id="colorViolet" value="#7000ff">
+                                        <input type="text" id="colorVioletText" value="#7000ff" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="color-picker-item">
+                                    <label for="colorMagenta">Cor de Acento (Magenta Glow)</label>
+                                    <div class="color-input-flex">
+                                        <input type="color" id="colorMagenta" value="#ff007f">
+                                        <input type="text" id="colorMagentaText" value="#ff007f" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="color-picker-item">
+                                    <label for="colorBgDark">Cor de Fundo Escuro (Background)</label>
+                                    <div class="color-input-flex">
+                                        <input type="color" id="colorBgDark" value="#090c15">
+                                        <input type="text" id="colorBgDarkText" value="#090c15" readonly>
+                                    </div>
+                                </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="settingHeroSubtitle">Subtítulo do Hero</label>
-                                <textarea id="settingHeroSubtitle" rows="3" required>Criamos e cuidamos do site da sua empresa por uma mensalidade acessível — hospedagem, suporte e atualizações inclusos.</textarea>
-                            </div>
-
-                            <div class="form-actions">
-                                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Salvar Alterações</button>
+                            <div class="form-actions margin-top-20">
+                                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-palette"></i> Aplicar e Salvar Paleta de Cores</button>
+                                <button type="button" class="btn btn-outline" id="btnResetColors"><i class="fa-solid fa-rotate-left"></i> Restaurar Cores Padrão</button>
                             </div>
                         </form>
                     </div>
 
-                    <!-- Tab 2: Plans Management -->
+                    <!-- Tab 3: Portfolio & Cases CRUD -->
+                    <div class="tab-content" id="tab-portfolio-crud">
+                        <div class="tab-header-flex">
+                            <div>
+                                <h3>Gerenciador de Cases do Portfólio</h3>
+                                <p class="tab-desc">Adicione, edite ou remova os trabalhos exibidos na galeria.</p>
+                            </div>
+                            <button class="btn btn-primary btn-sm" id="btnAddNewCase">
+                                <i class="fa-solid fa-plus"></i> Adicionar Novo Case
+                            </button>
+                        </div>
+
+                        <!-- Case Edit/Add Form -->
+                        <form id="caseForm" class="product-form hidden">
+                            <h4 id="caseFormTitle">Adicionar Novo Case no Portfólio</h4>
+                            <input type="hidden" id="caseEditId">
+
+                            <div class="form-row">
+                                <div class="form-group col-6">
+                                    <label for="caseTitle">Nome do Cliente / Projeto *</label>
+                                    <input type="text" id="caseTitle" placeholder="Ex: Cantinho do Sabor" required>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="caseTag">Segmento / Categoria *</label>
+                                    <input type="text" id="caseTag" placeholder="Ex: Gastronomia & Delivery" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-6">
+                                    <label for="caseUrl">URL / Link do Site (Ex: https://...)</label>
+                                    <input type="text" id="caseUrl" placeholder="Ex: https://cantinhodosaborvr.com.br" required>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="caseImage">Imagem do Case (Upload ou URL)</label>
+                                    <input type="file" id="fileCaseImage" accept="image/*" class="form-input-sm margin-bottom-6">
+                                    <input type="text" id="caseImageUrl" placeholder="ou cole a URL da imagem da preview...">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="caseDesc">Descrição Curta / Resultado *</label>
+                                <textarea id="caseDesc" rows="3" placeholder="Descreva brevemente o que foi feito no projeto..." required></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="checkbox-card-inline">
+                                    <input type="checkbox" id="caseIsFeatured">
+                                    <span>Marcar como <strong>⭐ Cliente Principal / Destaque</strong></span>
+                                </label>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Salvar Case</button>
+                                <button type="button" class="btn btn-outline" id="btnCancelCaseForm">Cancelar</button>
+                            </div>
+                        </form>
+
+                        <!-- Portfolio Cases List -->
+                        <div class="admin-products-list" id="adminCasesList">
+                            <!-- Dynamically populated -->
+                        </div>
+                    </div>
+
+                    <!-- Tab 4: Plans Management -->
                     <div class="tab-content" id="tab-plans-edit">
                         <h3>Valores dos Planos (Setup & Mensalidade)</h3>
                         <form id="plansSettingsForm" class="settings-form">
@@ -732,6 +744,49 @@
                             </div>
                         </form>
                     </div>
+
+                    <!-- Tab 5: General Company Text & Settings -->
+                    <div class="tab-content" id="tab-general">
+                        <h3>Informações Gerais da Empresa e Textos</h3>
+                        <form id="generalSettingsForm" class="settings-form">
+                            <div class="form-row">
+                                <div class="form-group col-6">
+                                    <label for="settingBrandName">Nome da Empresa (Cabeçalho)</label>
+                                    <input type="text" id="settingBrandName" value="LUMEN SYSTEM" required>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="settingBrandSlogan">Slogan Oficial</label>
+                                    <input type="text" id="settingBrandSlogan" value="CLAREZA GERA RESULTADOS" required>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-6">
+                                    <label for="settingWaNumber">Telefone / WhatsApp (DDD + Número)</label>
+                                    <input type="text" id="settingWaNumber" value="24992584133" required>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="settingEmail">E-mail Comercial</label>
+                                    <input type="email" id="settingEmail" value="contato@lumensystem.com.br" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="settingHeroTitle">Título do Hero (Página Inicial)</label>
+                                <input type="text" id="settingHeroTitle" value="Sites profissionais para o seu negócio, sem pagar tudo de uma vez." required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="settingHeroSubtitle">Subtítulo do Hero</label>
+                                <textarea id="settingHeroSubtitle" rows="3" required>Criamos e cuidamos do site da sua empresa por uma mensalidade acessível — hospedagem, suporte e atualizações inclusos.</textarea>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Salvar Dados da Empresa</button>
+                                <button type="button" class="btn btn-danger-outline" id="btnResetToDefaults"><i class="fa-solid fa-rotate-left"></i> Resetar Tudo para Fábrica</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
@@ -745,10 +800,10 @@
         <div class="container footer-grid">
             <div class="footer-brand">
                 <a href="#hero" class="logo-brand">
-                    <img src="assets/logo_lumen_system.jpg" alt="Lumen System Logo" class="brand-logo-img">
+                    <img src="assets/logo_lumen_system.jpg" alt="Lumen System Logo" class="brand-logo-img" id="siteFooterLogo">
                     <div class="brand-text">
-                        <span class="brand-name">LUMEN SYSTEM</span>
-                        <span class="brand-slogan">CLAREZA GERA RESULTADOS</span>
+                        <span class="brand-name" id="siteFooterBrandName">LUMEN SYSTEM</span>
+                        <span class="brand-slogan" id="siteFooterBrandSlogan">CLAREZA GERA RESULTADOS</span>
                     </div>
                 </a>
                 <p>Criamos e cuidamos do site da sua empresa por uma mensalidade acessível — hospedagem, domínio, suporte e atualizações inclusos.</p>
