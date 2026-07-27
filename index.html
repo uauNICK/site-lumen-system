@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumen System | Sistemas, Plataformas & Landing Pages Catalógicas</title>
+    <meta name="description" content="Lumen System - Desenvolvimento de sistemas sob medida, plataformas digitais, landing pages catalógicas com painel administrativo e estimativas de preços transparentes.">
+    <!-- Google Fonts: Syne & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Dynamic Glowing Canvas Background -->
+    <div class="ambient-glow bg-glow-1"></div>
+    <div class="ambient-glow bg-glow-2"></div>
+
+    <!-- Header Navigation -->
+    <header class="site-header" id="siteHeader">
+        <div class="container header-container">
+            <a href="#" class="logo">
+                <span class="logo-icon"><i class="fa-solid fa-lightbulb"></i></span>
+                <span class="logo-text"><strong class="highlight">LUMEN</strong> SYSTEM</span>
+            </a>
+
+            <nav class="main-nav" id="mainNav">
+                <a href="#hero" class="nav-link active">Início</a>
+                <a href="#catalog" class="nav-link">Catálogo & Preços</a>
+                <a href="#simulator" class="nav-link">Simulador de Orçamento</a>
+                <a href="#about" class="nav-link">Sobre</a>
+                <a href="#contact" class="nav-link">Contato</a>
+            </nav>
+
+            <div class="header-actions">
+                <button class="btn btn-outline btn-sm admin-btn" id="openAdminBtn" title="Painel Administrativo">
+                    <i class="fa-solid fa-user-gear"></i> Painel Admin
+                </button>
+                <a href="https://wa.me/5524992584133?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Lumen%20System%20e%20gostaria%20de%20um%20or%C3%A7amento." target="_blank" class="btn btn-primary btn-sm header-wa-btn" id="headerWaBtn">
+                    <i class="fa-brands fa-whatsapp"></i> <span id="headerWaNumberDisplay">(24) 99258-4133</span>
+                </a>
+                <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir Menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section" id="hero">
+            <div class="container hero-grid">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <span class="badge-dot"></span>
+                        <span id="heroBadgeText">Sistemas, Plataformas & Landing Pages Catalógicas</span>
+                    </div>
+                    <h1 class="hero-title" id="heroTitle">
+                        Ilumine o seu negócio com <span class="gradient-text">sistemas de alta conversão</span>
+                    </h1>
+                    <p class="hero-subtitle" id="heroSubtitle">
+                        Criamos plataformas web sob medida, landing pages estilo catálogo interativo com painel de gerenciamento simples para você atualizar seus produtos e serviços sem complicações.
+                    </p>
+
+                    <div class="hero-cta-group">
+                        <a href="#catalog" class="btn btn-primary btn-lg">
+                            <i class="fa-solid fa-layer-group"></i> Ver Catálogo & Médias de Preços
+                        </a>
+                        <a href="#simulator" class="btn btn-glass btn-lg">
+                            <i class="fa-solid fa-calculator"></i> Simular Meu Projeto
+                        </a>
+                    </div>
+
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">+150</span>
+                            <span class="stat-label">Sistemas & Sites</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Painel Gerenciável</span>
+                        </div>
+                        <div class="stat-divider"></div>
+                        <div class="stat-item">
+                            <span class="stat-number">24/7</span>
+                            <span class="stat-label">Suporte WhatsApp</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="visual-card-wrapper">
+                        <div class="visual-card-glow"></div>
+                        <div class="visual-card">
+                            <img src="assets/lumen_landing_page_1785183677226.png" alt="Lumen System Mockup" id="heroMainImage" class="hero-img">
+                            <div class="floating-badge badge-top-right">
+                                <i class="fa-solid fa-shield-halved"></i> Painel Admin Incluso
+                            </div>
+                            <div class="floating-badge badge-bottom-left">
+                                <i class="fa-solid fa-bolt"></i> Resposta Instantânea
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Catalog & Prices Section -->
+        <section class="catalog-section" id="catalog">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-tag">CATÁLOGO DE SERVIÇOS & SOLUÇÕES</span>
+                    <h2 class="section-title">Confira Nossos Modelos e <span class="gradient-text">Médias de Preços</span></h2>
+                    <p class="section-subtitle">Transparência total. Todos os nossos sistemas contam com painel administrativo exclusivo para alteração de fotos, preços e dados.</p>
+                </div>
+
+                <!-- Catalog Filter Tabs -->
+                <div class="catalog-filters" id="catalogFilters">
+                    <button class="filter-btn active" data-filter="all">Todos os Serviços</button>
+                    <button class="filter-btn" data-filter="landing-page">Landing Pages Catalógicas</button>
+                    <button class="filter-btn" data-filter="plataforma">Plataformas Web</button>
+                    <button class="filter-btn" data-filter="sistema">Sistemas Sob Medida</button>
+                </div>
+
+                <!-- Product Catalog Grid -->
+                <div class="catalog-grid" id="catalogGrid">
+                    <!-- Dynamic Items Inserted via JavaScript -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Budget Simulator -->
+        <section class="simulator-section" id="simulator">
+            <div class="container">
+                <div class="simulator-card">
+                    <div class="simulator-header">
+                        <span class="section-tag"><i class="fa-solid fa-calculator"></i> FERRAMENTA INTERATIVA</span>
+                        <h2>Simulador de Orçamento Lumen</h2>
+                        <p>Monte o escopo do seu projeto e descubra na hora a estimativa média de investimento.</p>
+                    </div>
+
+                    <div class="simulator-body-grid">
+                        <div class="simulator-options">
+                            <div class="sim-group">
+                                <label class="sim-label">1. Escolha o Tipo de Projeto:</label>
+                                <div class="radio-cards">
+                                    <label class="radio-card active">
+                                        <input type="radio" name="projectType" value="landing" data-price="890" checked>
+                                        <div class="card-content">
+                                            <i class="fa-solid fa-gem"></i>
+                                            <span class="title">Landing Page Catálogo</span>
+                                            <span class="desc">Para produtos, catálogo visual e WhatsApp.</span>
+                                            <span class="base-price">A partir de R$ 890</span>
+                                        </div>
+                                    </label>
+                                    <label class="radio-card">
+                                        <input type="radio" name="projectType" value="plataforma" data-price="1890">
+                                        <div class="card-content">
+                                            <i class="fa-solid fa-layer-group"></i>
+                                            <span class="title">Plataforma Web Completa</span>
+                                            <span class="desc">Múltiplas páginas, catálogo avançado e área do cliente.</span>
+                                            <span class="base-price">A partir de R$ 1.890</span>
+                                        </div>
+                                    </label>
+                                    <label class="radio-card">
+                                        <input type="radio" name="projectType" value="sistema" data-price="2990">
+                                        <div class="card-content">
+                                            <i class="fa-solid fa-code"></i>
+                                            <span class="title">Sistema Gestão / Sob Medida</span>
+                                            <span class="desc">Automações, banco de dados e fluxos personalizados.</span>
+                                            <span class="base-price">A partir de R$ 2.990</span>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="sim-group">
+                                <label class="sim-label">2. Adicionais & Funcionalidades:</label>
+                                <div class="checkbox-grid">
+                                    <label class="checkbox-card">
+                                        <input type="checkbox" name="addon" value="admin" data-price="0" checked disabled>
+                                        <span><i class="fa-solid fa-check text-cyan"></i> Painel Admin Gerenciável <strong>(INCLUSO GRÁTIS)</strong></span>
+                                    </label>
+                                    <label class="checkbox-card">
+                                        <input type="checkbox" name="addon" value="wa_btn" data-price="150" checked>
+                                        <span><i class="fa-brands fa-whatsapp"></i> Botões Flutuantes & Automação WhatsApp (+R$ 150)</span>
+                                    </label>
+                                    <label class="checkbox-card">
+                                        <input type="checkbox" name="addon" value="domain_hosting" data-price="250">
+                                        <span><i class="fa-solid fa-globe"></i> Domínio + Hospedagem por 1 Ano (+R$ 250)</span>
+                                    </label>
+                                    <label class="checkbox-card">
+                                        <input type="checkbox" name="addon" value="seo" data-price="300">
+                                        <span><i class="fa-solid fa-chart-line"></i> Otimização SEO Google Avançada (+R$ 300)</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Simulator Result Box -->
+                        <div class="simulator-result">
+                            <div class="result-box">
+                                <span class="result-label">Estimativa Média de Investimento</span>
+                                <div class="price-display" id="simTotalDisplay">R$ 1.040,00</div>
+                                <span class="result-note">*Valor parcelável em até 12x no cartão de crédito.</span>
+
+                                <div class="result-features">
+                                    <ul>
+                                        <li><i class="fa-solid fa-circle-check"></i> Código 100% limpo e responsivo</li>
+                                        <li><i class="fa-solid fa-circle-check"></i> Painel admin para trocar imagens e textos</li>
+                                        <li><i class="fa-solid fa-circle-check"></i> Suporte técnico direto</li>
+                                    </ul>
+                                </div>
+
+                                <button class="btn btn-primary btn-full btn-lg" id="sendSimWaBtn">
+                                    <i class="fa-brands fa-whatsapp"></i> Enviar este Orçamento pelo WhatsApp
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="about-section" id="about">
+            <div class="container about-grid">
+                <div class="about-visual">
+                    <img src="assets/lumen_saas_platform_1785183687003.png" alt="Lumen System Platform UI" class="about-img">
+                </div>
+                <div class="about-content">
+                    <span class="section-tag">POR QUE A LUMEN SYSTEM?</span>
+                    <h2 class="section-title">Sistemas inteligentes criados para dar <span class="gradient-text">autonomia à sua empresa</span></h2>
+                    <p class="section-desc">
+                        Na **Lumen System**, acreditamos que sua empresa precisa de uma presença digital impactante e fácil de manter. Nossos sistemas e landing pages catalógicas vêm acompanhados de um **Painel Administrativo intuitivo**, onde você mesmo pode alterar fotos, atualizar o catálogo de produtos e modificar as informações da empresa quando quiser.
+                    </p>
+
+                    <div class="features-list">
+                        <div class="feature-item">
+                            <div class="feature-icon"><i class="fa-solid fa-sliders"></i></div>
+                            <div class="feature-text">
+                                <h3>Total Autonomia Admin</h3>
+                                <p>Altere fotos, dados de contato e produtos sem precisar pagar por manutenção contínua.</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                            <div class="feature-text">
+                                <h3>Visual 100% Responsivo</h3>
+                                <p>Perfeito em celulares, tablets e computadores, garantindo que nenhum cliente se perca.</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-item">
+                            <div class="feature-icon"><i class="fa-brands fa-whatsapp"></i></div>
+                            <div class="feature-text">
+                                <h3>Conversão Direta para WhatsApp</h3>
+                                <p>Botões flutuantes e links de produto pré-formatados direto para o WhatsApp **(24) 99258-4133**.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section" id="contact">
+            <div class="container">
+                <div class="contact-card">
+                    <div class="contact-grid">
+                        <div class="contact-info">
+                            <span class="section-tag">FALE CONOSCO</span>
+                            <h2>Pronto para transformar sua presença digital?</h2>
+                            <p>Entre em contato conosco agora mesmo pelo WhatsApp ou envie uma mensagem. Respondemos rapidamente!</p>
+
+                            <div class="contact-details">
+                                <a href="https://wa.me/5524992584133" target="_blank" class="detail-item" id="contactWaLink">
+                                    <div class="icon-box"><i class="fa-brands fa-whatsapp"></i></div>
+                                    <div>
+                                        <span class="label">WhatsApp Direct (Clique para abrir)</span>
+                                        <span class="value" id="contactWaDisplay">(24) 99258-4133</span>
+                                    </div>
+                                </a>
+
+                                <div class="detail-item">
+                                    <div class="icon-box"><i class="fa-solid fa-envelope"></i></div>
+                                    <div>
+                                        <span class="label">E-mail Comercial</span>
+                                        <span class="value" id="contactEmailDisplay">contato@lumensystem.com.br</span>
+                                    </div>
+                                </div>
+
+                                <div class="detail-item">
+                                    <div class="icon-box"><i class="fa-solid fa-clock"></i></div>
+                                    <div>
+                                        <span class="label">Atendimento</span>
+                                        <span class="value">Segunda a Sábado - 08h às 20h</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="contact-form-wrapper">
+                            <form id="contactForm" class="contact-form">
+                                <h3>Envie uma Mensagem Rápida</h3>
+                                <div class="form-group">
+                                    <label for="contactName">Seu Nome</label>
+                                    <input type="text" id="contactName" placeholder="Ex: Carlos Silva" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contactPhone">Telefone / WhatsApp</label>
+                                    <input type="tel" id="contactPhone" placeholder="(24) 99999-9999" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contactService">Serviço de Interesse</label>
+                                    <select id="contactService" required>
+                                        <option value="Landing Page Catálogo">Landing Page Catálogo</option>
+                                        <option value="Plataforma Web">Plataforma Web</option>
+                                        <option value="Sistema Sob Medida">Sistema Sob Medida</option>
+                                        <option value="Outro">Outro Assunto</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contactMessage">Mensagem</label>
+                                    <textarea id="contactMessage" rows="4" placeholder="Descreva brevemente o que você precisa..." required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-full btn-lg">
+                                    <i class="fa-solid fa-paper-plane"></i> Enviar Mensagem
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Interactive Floating Bar (Lumen Float Bar) -->
+    <div class="lumen-float-bar">
+        <!-- Floating WhatsApp Button -->
+        <a href="https://wa.me/5524992584133?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Lumen%20System." target="_blank" class="float-btn float-wa" id="floatWaBtn" title="Falar no WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span class="float-tooltip">WhatsApp (24) 99258-4133</span>
+        </a>
+
+        <!-- Floating Calculator Trigger -->
+        <a href="#simulator" class="float-btn float-sim" title="Simular Orçamento">
+            <i class="fa-solid fa-calculator"></i>
+            <span class="float-tooltip">Simulador de Preços</span>
+        </a>
+
+        <!-- Floating Admin Login Trigger -->
+        <button class="float-btn float-admin" id="floatAdminBtn" title="Painel Admin">
+            <i class="fa-solid fa-lock"></i>
+            <span class="float-tooltip">Área Admin</span>
+        </button>
+    </div>
+
+    <!-- Admin Panel Modal -->
+    <div class="modal-backdrop" id="adminModalBackdrop">
+        <div class="admin-modal">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fa-solid fa-user-shield text-cyan"></i>
+                    <span>Painel Administrativo <strong>Lumen System</strong></span>
+                </div>
+                <button class="modal-close" id="closeAdminModalBtn">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <!-- Login View (shown if not logged in) -->
+                <div id="adminLoginView" class="admin-view">
+                    <p class="login-instruction">Acesso restrito para administradores da empresa.</p>
+                    <form id="adminLoginForm" class="login-form">
+                        <div class="form-group">
+                            <label for="adminUser">Usuário</label>
+                            <input type="text" id="adminUser" placeholder="Ex: admin" required value="admin">
+                        </div>
+                        <div class="form-group">
+                            <label for="adminPass">Senha</label>
+                            <input type="password" id="adminPass" placeholder="Senha admin" required value="lumen123">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">
+                            <i class="fa-solid fa-right-to-bracket"></i> Entrar no Painel
+                        </button>
+                        <p class="login-hint"><i class="fa-solid fa-circle-info"></i> Login de teste: Usuário: <code>admin</code> | Senha: <code>lumen123</code></p>
+                    </form>
+                </div>
+
+                <!-- Admin Dashboard View (shown after authentication) -->
+                <div id="adminDashboardView" class="admin-view hidden">
+                    <div class="admin-nav-tabs">
+                        <button class="tab-btn active" data-tab="tab-products"><i class="fa-solid fa-boxes-stacked"></i> Catálogo & Preços</button>
+                        <button class="tab-btn" data-tab="tab-general"><i class="fa-solid fa-gear"></i> Dados da Empresa</button>
+                    </div>
+
+                    <!-- Tab 1: Products / Catalog Manager -->
+                    <div class="tab-content active" id="tab-products">
+                        <div class="tab-header-flex">
+                            <h3>Produtos e Serviços Cadastrados</h3>
+                            <button class="btn btn-primary btn-sm" id="btnAddNewProduct">
+                                <i class="fa-solid fa-plus"></i> Adicionar Produto/Sistema
+                            </button>
+                        </div>
+
+                        <!-- Product Form (Add/Edit) -->
+                        <form id="productEditForm" class="product-form hidden">
+                            <h4 id="productFormTitle">Adicionar Novo Produto no Catálogo</h4>
+                            <input type="hidden" id="prodEditId">
+                            
+                            <div class="form-row">
+                                <div class="form-group col-6">
+                                    <label for="prodTitle">Nome do Serviço / Sistema</label>
+                                    <input type="text" id="prodTitle" placeholder="Ex: Landing Page para Restaurante" required>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="prodCategory">Categoria</label>
+                                    <select id="prodCategory" required>
+                                        <option value="landing-page">Landing Page Catálogo</option>
+                                        <option value="plataforma">Plataforma Web</option>
+                                        <option value="sistema">Sistema Sob Medida</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-6">
+                                    <label for="prodPrice">Média de Preço (Texto Exibido)</label>
+                                    <input type="text" id="prodPrice" placeholder="Ex: A partir de R$ 890" required>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="prodImage">URL da Imagem / Foto</label>
+                                    <input type="text" id="prodImage" placeholder="assets/lumen_landing_page_...png ou URL externa" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="prodDesc">Descrição Resumida</label>
+                                <textarea id="prodDesc" rows="3" placeholder="Descreva o que o sistema/site oferece..." required></textarea>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Salvar Produto</button>
+                                <button type="button" class="btn btn-outline" id="btnCancelProductForm">Cancelar</button>
+                            </div>
+                        </form>
+
+                        <!-- Products List Table/Cards -->
+                        <div class="admin-products-list" id="adminProductsList">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+
+                    <!-- Tab 2: General Settings -->
+                    <div class="tab-content" id="tab-general">
+                        <h3>Informações Básicas da Empresa</h3>
+                        <form id="generalSettingsForm" class="settings-form">
+                            <div class="form-group">
+                                <label for="settingWaNumber">Telefone / WhatsApp (Apenas Números com DDD)</label>
+                                <input type="text" id="settingWaNumber" value="24992584133" required>
+                                <small>Este número é usado nos botões de atendimento do site todo.</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="settingEmail">E-mail de Contato Comercial</label>
+                                <input type="email" id="settingEmail" value="contato@lumensystem.com.br" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="settingHeroTitle">Título Principal do Site (Hero)</label>
+                                <input type="text" id="settingHeroTitle" value="Ilumine o seu negócio com sistemas de alta conversão" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="settingHeroSubtitle">Subtítulo do Hero</label>
+                                <textarea id="settingHeroSubtitle" rows="3" required>Criamos plataformas web sob medida, landing pages estilo catálogo interativo com painel de gerenciamento simples para você atualizar seus produtos e serviços sem complicações.</textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="settingHeroImage">URL da Foto Principal do Hero</label>
+                                <input type="text" id="settingHeroImage" value="assets/lumen_landing_page_1785183677226.png" required>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Salvar Configurações</button>
+                                <button type="button" class="btn btn-outline btn-danger-outline" id="btnResetToDefaults">
+                                    <i class="fa-solid fa-rotate-left"></i> Restaurar Dados de Fábrica
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container footer-grid">
+            <div class="footer-brand">
+                <a href="#" class="logo">
+                    <span class="logo-icon"><i class="fa-solid fa-lightbulb"></i></span>
+                    <span class="logo-text"><strong class="highlight">LUMEN</strong> SYSTEM</span>
+                </a>
+                <p>Desenvolvimento de plataformas web, sistemas de gestão sob medida e landing pages catalógicas inteligentes com painel admin completo.</p>
+                <div class="social-links">
+                    <a href="https://wa.me/5524992584133" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-links">
+                <h4>Navegação</h4>
+                <ul>
+                    <li><a href="#hero">Início</a></li>
+                    <li><a href="#catalog">Catálogo de Serviços</a></li>
+                    <li><a href="#simulator">Simulador de Orçamento</a></li>
+                    <li><a href="#about">Sobre a Lumen</a></li>
+                    <li><a href="#contact">Contato Direct</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-links">
+                <h4>Serviços</h4>
+                <ul>
+                    <li><a href="#catalog">Landing Page Catálogo</a></li>
+                    <li><a href="#catalog">Plataformas SaaS & Web</a></li>
+                    <li><a href="#catalog">Sistemas com Painel Admin</a></li>
+                    <li><a href="#catalog">Integração WhatsApp</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-contact">
+                <h4>Atendimento WhatsApp</h4>
+                <p><i class="fa-brands fa-whatsapp text-cyan"></i> <span id="footerWaDisplay">(24) 99258-4133</span></p>
+                <p><i class="fa-solid fa-envelope text-cyan"></i> <span id="footerEmailDisplay">contato@lumensystem.com.br</span></p>
+                <p><i class="fa-solid fa-shield-halved text-cyan"></i> Sistemas Protegidos & Responsivos</p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="container bottom-flex">
+                <p>&copy; 2026 Lumen System. Todos os direitos reservados.</p>
+                <button class="footer-admin-link" id="footerAdminLink"><i class="fa-solid fa-key"></i> Painel de Administração</button>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
