@@ -943,7 +943,7 @@ function generateCustomReport() {
                 </tr>`;
             });
         }
-        html += `</tbody>mtable></div>`;
+        html += `</tbody></table></div>`;
         tableWrapper.innerHTML = html;
     }
 }
@@ -993,11 +993,21 @@ document.addEventListener('DOMContentLoaded', () => {
     trackVisit();
     renderApp();
 
-    // Prevent Enter inside textareas from submitting forms (Inserts new line)
+    // Ensure Enter inside any textarea inserts a newline (\n) and moves cursor to line below
     document.querySelectorAll('textarea').forEach(textarea => {
-        textarea.addEventListener('keydown', (e) => {
+        textarea.addEventListener('keydown', function(e) {
             if (e.key === 'Enter') {
-                e.stopPropagation(); // Prevents triggering form submission on Enter in textareas
+                e.preventDefault();
+                e.stopPropagation();
+
+                const start = this.selectionStart;
+                const end = this.selectionEnd;
+
+                // Insert newline character at current cursor position
+                this.value = this.value.substring(0, start) + "\n" + this.value.substring(end);
+
+                // Set cursor position right after the newly inserted newline
+                this.selectionStart = this.selectionEnd = start + 1;
             }
         });
     });
