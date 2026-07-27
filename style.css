@@ -527,7 +527,7 @@ input, select, textarea {
 .plan-faq-item strong { display: block; font-size: 15px; margin-bottom: 6px; color: var(--text-main); }
 .plan-faq-item p { font-size: 13px; color: var(--text-muted); }
 
-/* Portfolio Section */
+/* Portfolio Section & Featured Case */
 .portfolio-section { padding: 90px 0; }
 .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
 .portfolio-card {
@@ -541,6 +541,34 @@ input, select, textarea {
 .portfolio-card:hover {
     border-color: var(--primary-cyan);
     transform: translateY(-5px);
+}
+
+.portfolio-card.featured-case {
+    border-color: var(--primary-cyan);
+    background: linear-gradient(135deg, rgba(17, 22, 37, 0.95), rgba(0, 240, 255, 0.08));
+    box-shadow: var(--shadow-glow);
+}
+
+.main-client-tag {
+    background: linear-gradient(135deg, var(--primary-cyan), var(--primary-violet)) !important;
+    color: #050b14 !important;
+    font-weight: 800 !important;
+}
+
+.case-header-flex {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.case-subtag {
+    font-size: 11px;
+    color: var(--primary-cyan);
+    font-weight: 700;
+    text-transform: uppercase;
 }
 
 .portfolio-img-wrap { position: relative; height: 200px; }
