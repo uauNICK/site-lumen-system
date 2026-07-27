@@ -64,7 +64,8 @@ const DEFAULT_STATE = {
         planInterests: {
             "Plano Essencial": 18,
             "Plano Profissional": 34,
-            "Loja Virtual / Sistema": 12
+            "Loja Virtual / Sistema": 12,
+            "Estilo Cantinho do Sabor": 15
         },
         deviceCounts: {
             "Desktop": 82,
@@ -153,7 +154,6 @@ function saveState(skipRender = false) {
     if (!skipRender) renderApp();
 }
 
-// Track Client Access Automatically
 function trackVisit() {
     let visitorId = localStorage.getItem('lumen_visitor_id');
     let isNew = false;
@@ -166,7 +166,6 @@ function trackVisit() {
 
     appState.analytics.totalVisits++;
 
-    // Detect Device & Browser
     const ua = navigator.userAgent;
     let device = "Desktop";
     if (/tablet|ipad|playbook|silk/i.test(ua)) device = "Tablet";
@@ -193,7 +192,6 @@ function trackVisit() {
     saveState(true);
 }
 
-// Track Plan Conversion or Contact Enquiry Lead
 function trackConversion(planName, amount, clientName = "Cliente do Site") {
     if (!appState.analytics.planInterests[planName]) {
         appState.analytics.planInterests[planName] = 0;
@@ -401,6 +399,9 @@ function renderPortfolioGrid() {
             ? `<span class="portfolio-tag main-client-tag"><i class="fa-solid fa-star"></i> ${item.tag || 'Cliente Principal'}</span>`
             : `<span class="portfolio-tag">${item.tag || 'Case'}</span>`;
 
+        const waCaseMessage = `Olá! Vi o projeto do *${item.title}* no portfólio da Lumen System e gostaria de um orçamento para um site como este para a minha empresa.`;
+        const waCaseLink = getWaLink(waCaseMessage);
+
         card.innerHTML = `
             <div class="portfolio-img-wrap">
                 <img src="${item.image}" alt="${item.title}" onerror="this.src='assets/logo_lumen_system.jpg'">
@@ -412,25 +413,27 @@ function renderPortfolioGrid() {
                     <span class="case-subtag">${item.subtag || ''}</span>
                 </div>
                 <p class="portfolio-desc">"${item.desc}"</p>
-                <a href="${item.url}" target="_blank" class="btn ${item.isFeatured ? 'btn-primary' : 'btn-outline'} btn-sm btn-full">
-                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver Site ao Vivo (${item.title.toLowerCase().replace(/\s+/g, '')})
-                </a>
+                <div class="portfolio-actions-flex">
+                    <a href="${waCaseLink}" target="_blank" onclick="trackConversion('Estilo ${item.title}', 650.00, 'Interessado no modelo ' + '${item.title}')" class="btn btn-wa-action btn-sm btn-full">
+                        <i class="fa-brands fa-whatsapp"></i> Quero um site como este
+                    </a>
+                    <a href="${item.url}" target="_blank" class="btn btn-outline btn-sm btn-full">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> Ver Site ao Vivo
+                    </a>
+                </div>
             </div>
         `;
         grid.appendChild(card);
     });
 }
 
-// Render Analytics Dashboard Component
 function renderAnalyticsDashboard() {
     const { analytics } = appState;
     if (!analytics) return;
 
-    // KPI 1: Pageviews & Unique Visitors
     if (document.getElementById('kpiTotalVisits')) document.getElementById('kpiTotalVisits').textContent = analytics.totalVisits;
     if (document.getElementById('kpiUniqueVisits')) document.getElementById('kpiUniqueVisits').textContent = `${analytics.uniqueVisitorsCount} visitantes únicos`;
 
-    // KPI 2: Total Revenue & Conversions
     const totalRev = (analytics.conversions || []).reduce((acc, curr) => acc + (curr.amount || 0), 0);
     if (document.getElementById('kpiTotalRevenue')) {
         document.getElementById('kpiTotalRevenue').textContent = `R$ ${totalRev.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
@@ -439,11 +442,9 @@ function renderAnalyticsDashboard() {
         document.getElementById('kpiConversionsCount').textContent = `${analytics.conversions.length} propostas iniciadas`;
     }
 
-    // KPI 3: Conversion Rate CTR
     const ctr = analytics.totalVisits > 0 ? ((analytics.conversions.length / analytics.totalVisits) * 100).toFixed(1) : "0.0";
     if (document.getElementById('kpiConversionRate')) document.getElementById('kpiConversionRate').textContent = `${ctr}%`;
 
-    // Plan Sales Bars
     const barsContainer = document.getElementById('planSalesBars');
     if (barsContainer) {
         barsContainer.innerHTML = '';
@@ -468,7 +469,6 @@ function renderAnalyticsDashboard() {
         });
     }
 
-    // Device Stats Box
     const deviceBox = document.getElementById('deviceStatsBox');
     if (deviceBox) {
         deviceBox.innerHTML = '';
@@ -488,7 +488,6 @@ function renderAnalyticsDashboard() {
         });
     }
 
-    // Leads Table
     const tableLeads = document.getElementById('tableLeadsLog');
     if (tableLeads) {
         tableLeads.innerHTML = '';
@@ -505,7 +504,6 @@ function renderAnalyticsDashboard() {
         });
     }
 
-    // Access Logs Table
     const tableLogs = document.getElementById('tableAccessLogs');
     if (tableLogs) {
         tableLogs.innerHTML = '';
