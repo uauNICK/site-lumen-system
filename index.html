@@ -3,44 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lumen System | Sistemas, Plataformas & Landing Pages Catalógicas</title>
-    <meta name="description" content="Lumen System - Desenvolvimento de sistemas sob medida, plataformas digitais, landing pages catalógicas com painel administrativo e estimativas de preços transparentes.">
+    <title>Lumen System | Sites Profissionais por Assinatura - Clareza Gera Resultados</title>
+    <meta name="description" content="Lumen System - Sites profissionais para o seu negócio por uma mensalidade acessível. Hospedagem, domínio, suporte e atualizações inclusos.">
     <!-- Google Fonts: Syne & Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Icons -->
+    <!-- FontAwesome icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Dynamic Glowing Canvas Background -->
+    <!-- Ambient Glowing Backgrounds -->
     <div class="ambient-glow bg-glow-1"></div>
     <div class="ambient-glow bg-glow-2"></div>
 
     <!-- Header Navigation -->
     <header class="site-header" id="siteHeader">
         <div class="container header-container">
-            <a href="#" class="logo">
-                <span class="logo-icon"><i class="fa-solid fa-lightbulb"></i></span>
-                <span class="logo-text"><strong class="highlight">LUMEN</strong> SYSTEM</span>
+            <a href="#hero" class="logo-brand">
+                <img src="assets/logo_lumen_system.jpg" alt="Lumen System Logo" class="brand-logo-img">
+                <div class="brand-text">
+                    <span class="brand-name">LUMEN SYSTEM</span>
+                    <span class="brand-slogan">Clareza Gera Resultados</span>
+                </div>
             </a>
 
             <nav class="main-nav" id="mainNav">
                 <a href="#hero" class="nav-link active">Início</a>
-                <a href="#catalog" class="nav-link">Catálogo & Preços</a>
-                <a href="#simulator" class="nav-link">Simulador de Orçamento</a>
+                <a href="#plans" class="nav-link">Planos</a>
+                <a href="#portfolio" class="nav-link">Portfólio</a>
+                <a href="#how-it-works" class="nav-link">Como Funciona</a>
                 <a href="#about" class="nav-link">Sobre</a>
+                <a href="#testimonials" class="nav-link">Depoimentos</a>
+                <a href="#faq" class="nav-link">FAQ</a>
+                <a href="#blog" class="nav-link">Blog</a>
                 <a href="#contact" class="nav-link">Contato</a>
             </nav>
 
             <div class="header-actions">
-                <button class="btn btn-outline btn-sm admin-btn" id="openAdminBtn" title="Painel Administrativo">
-                    <i class="fa-solid fa-user-gear"></i> Painel Admin
+                <button class="btn btn-outline btn-sm admin-btn" id="openAdminBtn" title="Painel Admin">
+                    <i class="fa-solid fa-lock"></i> Painel Admin
                 </button>
-                <a href="https://wa.me/5524992584133?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Lumen%20System%20e%20gostaria%20de%20um%20or%C3%A7amento." target="_blank" class="btn btn-primary btn-sm header-wa-btn" id="headerWaBtn">
-                    <i class="fa-brands fa-whatsapp"></i> <span id="headerWaNumberDisplay">(24) 99258-4133</span>
+                <a href="https://wa.me/5524992584133?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Lumen%20System%20e%20gostaria%20de%20um%20or%C3%A7amento." target="_blank" class="btn btn-primary btn-sm header-wa-btn">
+                    <i class="fa-brands fa-whatsapp"></i> <span id="headerWaDisplay">(24) 99258-4133</span>
                 </a>
                 <button class="mobile-toggle" id="mobileToggle" aria-label="Abrir Menu">
                     <i class="fa-solid fa-bars"></i>
@@ -51,45 +58,33 @@
 
     <!-- Main Content -->
     <main>
-        <!-- Hero Section -->
+        <!-- 1. Hero Section (Início) -->
         <section class="hero-section" id="hero">
             <div class="container hero-grid">
                 <div class="hero-content">
                     <div class="hero-badge">
                         <span class="badge-dot"></span>
-                        <span id="heroBadgeText">Sistemas, Plataformas & Landing Pages Catalógicas</span>
+                        <span>Sites Profissionais por Assinatura</span>
                     </div>
                     <h1 class="hero-title" id="heroTitle">
-                        Ilumine o seu negócio com <span class="gradient-text">sistemas de alta conversão</span>
+                        Sites profissionais para o seu negócio, <span class="gradient-text">sem pagar tudo de uma vez</span>.
                     </h1>
                     <p class="hero-subtitle" id="heroSubtitle">
-                        Criamos plataformas web sob medida, landing pages estilo catálogo interativo com painel de gerenciamento simples para você atualizar seus produtos e serviços sem complicações.
+                        Criamos e cuidamos do site da sua empresa por uma mensalidade acessível — hospedagem, suporte e atualizações inclusos.
                     </p>
 
                     <div class="hero-cta-group">
-                        <a href="#catalog" class="btn btn-primary btn-lg">
-                            <i class="fa-solid fa-layer-group"></i> Ver Catálogo & Médias de Preços
+                        <a href="https://wa.me/5524992584133?text=Ol%C3%A1!%20Quero%20falar%20no%20WhatsApp%20sobre%20o%20site%20para%20minha%20empresa." target="_blank" class="btn btn-primary btn-lg" id="heroWaBtn">
+                            <i class="fa-brands fa-whatsapp"></i> Falar no WhatsApp
                         </a>
-                        <a href="#simulator" class="btn btn-glass btn-lg">
-                            <i class="fa-solid fa-calculator"></i> Simular Meu Projeto
+                        <a href="#plans" class="btn btn-glass btn-lg">
+                            <i class="fa-solid fa-tags"></i> Ver Planos & Preços
                         </a>
                     </div>
 
-                    <div class="hero-stats">
-                        <div class="stat-item">
-                            <span class="stat-number">+150</span>
-                            <span class="stat-label">Sistemas & Sites</span>
-                        </div>
-                        <div class="stat-divider"></div>
-                        <div class="stat-item">
-                            <span class="stat-number">100%</span>
-                            <span class="stat-label">Painel Gerenciável</span>
-                        </div>
-                        <div class="stat-divider"></div>
-                        <div class="stat-item">
-                            <span class="stat-number">24/7</span>
-                            <span class="stat-label">Suporte WhatsApp</span>
-                        </div>
+                    <div class="hero-trust">
+                        <i class="fa-solid fa-shield-halved text-cyan"></i>
+                        <span>Sem taxa oculta de manutenção | Hospedagem & Domínio Inclusos</span>
                     </div>
                 </div>
 
@@ -97,12 +92,12 @@
                     <div class="visual-card-wrapper">
                         <div class="visual-card-glow"></div>
                         <div class="visual-card">
-                            <img src="assets/lumen_landing_page_1785183677226.png" alt="Lumen System Mockup" id="heroMainImage" class="hero-img">
+                            <img src="assets/logo_lumen_system.jpg" alt="Lumen System Clareza Gera Resultados" class="hero-img" id="heroMainImage">
                             <div class="floating-badge badge-top-right">
-                                <i class="fa-solid fa-shield-halved"></i> Painel Admin Incluso
+                                <i class="fa-solid fa-check-double"></i> 100% Gerenciável
                             </div>
                             <div class="floating-badge badge-bottom-left">
-                                <i class="fa-solid fa-bolt"></i> Resposta Instantânea
+                                <i class="fa-solid fa-bolt"></i> Suporte Contínuo
                             </div>
                         </div>
                     </div>
@@ -110,174 +105,444 @@
             </div>
         </section>
 
-        <!-- Catalog & Prices Section -->
-        <section class="catalog-section" id="catalog">
+        <!-- Seção "Por que ter um site" -->
+        <section class="why-us-section" id="why-us">
             <div class="container">
                 <div class="section-header text-center">
-                    <span class="section-tag">CATÁLOGO DE SERVIÇOS & SOLUÇÕES</span>
-                    <h2 class="section-title">Confira Nossos Modelos e <span class="gradient-text">Médias de Preços</span></h2>
-                    <p class="section-subtitle">Transparência total. Todos os nossos sistemas contam com painel administrativo exclusivo para alteração de fotos, preços e dados.</p>
+                    <span class="section-tag">VALOR REAIS PARA O SEU NEGÓCIO</span>
+                    <h2 class="section-title">Por que seu negócio precisa de um <span class="gradient-text">site profissional</span>?</h2>
                 </div>
 
-                <!-- Catalog Filter Tabs -->
-                <div class="catalog-filters" id="catalogFilters">
-                    <button class="filter-btn active" data-filter="all">Todos os Serviços</button>
-                    <button class="filter-btn" data-filter="landing-page">Landing Pages Catalógicas</button>
-                    <button class="filter-btn" data-filter="plataforma">Plataformas Web</button>
-                    <button class="filter-btn" data-filter="sistema">Sistemas Sob Medida</button>
-                </div>
+                <div class="why-grid">
+                    <div class="why-card">
+                        <div class="why-icon"><i class="fa-brands fa-google"></i></div>
+                        <h3>Seja encontrado no Google</h3>
+                        <p>Quem procura um serviço pesquisa antes de decidir — sem site, seu negócio fica de fora dessa busca estratégica.</p>
+                    </div>
 
-                <!-- Product Catalog Grid -->
-                <div class="catalog-grid" id="catalogGrid">
-                    <!-- Dynamic Items Inserted via JavaScript -->
+                    <div class="why-card">
+                        <div class="why-icon"><i class="fa-solid fa-award"></i></div>
+                        <h3>Mais credibilidade</h3>
+                        <p>Um site profissional passa muito mais confiança e segurança do que apenas um perfil de rede social.</p>
+                    </div>
+
+                    <div class="why-card">
+                        <div class="why-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                        <h3>Sem grandes investimentos</h3>
+                        <p>Com o modelo de mensalidade, você começa a ter presença digital de alto nível sem precisar de um valor alto de uma vez.</p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Interactive Budget Simulator -->
-        <section class="simulator-section" id="simulator">
+        <!-- 2. Página/Seção de Planos (Planos por Assinatura) -->
+        <section class="plans-section" id="plans">
             <div class="container">
-                <div class="simulator-card">
-                    <div class="simulator-header">
-                        <span class="section-tag"><i class="fa-solid fa-calculator"></i> FERRAMENTA INTERATIVA</span>
-                        <h2>Simulador de Orçamento Lumen</h2>
-                        <p>Monte o escopo do seu projeto e descubra na hora a estimativa média de investimento.</p>
-                    </div>
+                <div class="section-header text-center">
+                    <span class="section-tag">TRANSPARÊNCIA DE PREÇOS</span>
+                    <h2 class="section-title">Escolha o plano ideal para o seu negócio</h2>
+                    <p class="section-subtitle">Todos os planos incluem hospedagem, domínio e suporte técnico contínuo. Fidelidade mínima de 12 meses.</p>
+                </div>
 
-                    <div class="simulator-body-grid">
-                        <div class="simulator-options">
-                            <div class="sim-group">
-                                <label class="sim-label">1. Escolha o Tipo de Projeto:</label>
-                                <div class="radio-cards">
-                                    <label class="radio-card active">
-                                        <input type="radio" name="projectType" value="landing" data-price="890" checked>
-                                        <div class="card-content">
-                                            <i class="fa-solid fa-gem"></i>
-                                            <span class="title">Landing Page Catálogo</span>
-                                            <span class="desc">Para produtos, catálogo visual e WhatsApp.</span>
-                                            <span class="base-price">A partir de R$ 890</span>
-                                        </div>
-                                    </label>
-                                    <label class="radio-card">
-                                        <input type="radio" name="projectType" value="plataforma" data-price="1890">
-                                        <div class="card-content">
-                                            <i class="fa-solid fa-layer-group"></i>
-                                            <span class="title">Plataforma Web Completa</span>
-                                            <span class="desc">Múltiplas páginas, catálogo avançado e área do cliente.</span>
-                                            <span class="base-price">A partir de R$ 1.890</span>
-                                        </div>
-                                    </label>
-                                    <label class="radio-card">
-                                        <input type="radio" name="projectType" value="sistema" data-price="2990">
-                                        <div class="card-content">
-                                            <i class="fa-solid fa-code"></i>
-                                            <span class="title">Sistema Gestão / Sob Medida</span>
-                                            <span class="desc">Automações, banco de dados e fluxos personalizados.</span>
-                                            <span class="base-price">A partir de R$ 2.990</span>
-                                        </div>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="sim-group">
-                                <label class="sim-label">2. Adicionais & Funcionalidades:</label>
-                                <div class="checkbox-grid">
-                                    <label class="checkbox-card">
-                                        <input type="checkbox" name="addon" value="admin" data-price="0" checked disabled>
-                                        <span><i class="fa-solid fa-check text-cyan"></i> Painel Admin Gerenciável <strong>(INCLUSO GRÁTIS)</strong></span>
-                                    </label>
-                                    <label class="checkbox-card">
-                                        <input type="checkbox" name="addon" value="wa_btn" data-price="150" checked>
-                                        <span><i class="fa-brands fa-whatsapp"></i> Botões Flutuantes & Automação WhatsApp (+R$ 150)</span>
-                                    </label>
-                                    <label class="checkbox-card">
-                                        <input type="checkbox" name="addon" value="domain_hosting" data-price="250">
-                                        <span><i class="fa-solid fa-globe"></i> Domínio + Hospedagem por 1 Ano (+R$ 250)</span>
-                                    </label>
-                                    <label class="checkbox-card">
-                                        <input type="checkbox" name="addon" value="seo" data-price="300">
-                                        <span><i class="fa-solid fa-chart-line"></i> Otimização SEO Google Avançada (+R$ 300)</span>
-                                    </label>
-                                </div>
+                <div class="plans-grid" id="plansGrid">
+                    <!-- Plano 1: Essencial -->
+                    <div class="plan-card">
+                        <div class="plan-header">
+                            <span class="plan-badge">Para Autônomos e Iniciantes</span>
+                            <h3 class="plan-name">Plano Essencial</h3>
+                            <p class="plan-target">Ideal para validar seu negócio na internet rapidamente.</p>
+                            <div class="plan-price-box">
+                                <span class="setup-price">Setup de Implantação: R$ 350,00</span>
+                                <div class="monthly-price">R$ 89<span class="period">/mês</span></div>
                             </div>
                         </div>
+                        <div class="plan-body">
+                            <ul class="plan-features">
+                                <li><i class="fa-solid fa-circle-check"></i> Landing Page de 1 Página</li>
+                                <li><i class="fa-solid fa-circle-check"></i> Design 100% Responsivo (Mobile/PC)</li>
+                                <li><i class="fa-solid fa-circle-check"></i> Hospedagem + Domínio (.com.br) inclusos</li>
+                                <li><i class="fa-solid fa-circle-check"></i> Botão Direto para WhatsApp</li>
+                                <li><i class="fa-solid fa-circle-check"></i> Suporte Técnico e Atualizações</li>
+                                <li><i class="fa-solid fa-circle-check"></i> Certificado de Segurança SSL</li>
+                            </ul>
+                            <a href="https://wa.me/5524992584133?text=Ol%C3%A1!%20Quero%20contratar%20o%20Plano%20Essencial%20(R%24%2089/m%C3%AAs)." target="_blank" class="btn btn-glass btn-full">
+                                Escolher Plano Essencial
+                            </a>
+                        </div>
+                    </div>
 
-                        <!-- Simulator Result Box -->
-                        <div class="simulator-result">
-                            <div class="result-box">
-                                <span class="result-label">Estimativa Média de Investimento</span>
-                                <div class="price-display" id="simTotalDisplay">R$ 1.040,00</div>
-                                <span class="result-note">*Valor parcelável em até 12x no cartão de crédito.</span>
-
-                                <div class="result-features">
-                                    <ul>
-                                        <li><i class="fa-solid fa-circle-check"></i> Código 100% limpo e responsivo</li>
-                                        <li><i class="fa-solid fa-circle-check"></i> Painel admin para trocar imagens e textos</li>
-                                        <li><i class="fa-solid fa-circle-check"></i> Suporte técnico direto</li>
-                                    </ul>
-                                </div>
-
-                                <button class="btn btn-primary btn-full btn-lg" id="sendSimWaBtn">
-                                    <i class="fa-brands fa-whatsapp"></i> Enviar este Orçamento pelo WhatsApp
-                                </button>
+                    <!-- Plano 2: Profissional (Destaque) -->
+                    <div class="plan-card featured">
+                        <div class="featured-ribbon">MAIS POPULAR</div>
+                        <div class="plan-header">
+                            <span class="plan-badge">Para Empresas em Crescimento</span>
+                            <h3 class="plan-name">Plano Profissional</h3>
+                            <p class="plan-target">Site completo com múltiplas páginas e catálogo.</p>
+                            <div class="plan-price-box">
+                                <span class="setup-price">Setup de Implantação: R$ 650,00</span>
+                                <div class="monthly-price">R$ 149<span class="period">/mês</span></div>
                             </div>
+                        </div>
+                        <div class="plan-body">
+                            <ul class="plan-features">
+                                <li><i class="fa-solid fa-circle-check"></i> Site Multi-páginas (Até 5 Páginas)</li>
+                                <li><i class="fa-solid fa-circle-check"></i> Catálogo de Produtos / Serviços</li>
+                                <li><i class="fa-solid fa-circle-check"></i> <strong>Painel Admin Exclusivo</strong> para editar dados e fotos</li>
+                                <li><i class="fa-solid fa-circle-check"></i> Hospedagem + Domínio (.com.br) inclusos</li>
+                                <li><i class="fa-solid fa-circle-check"></i> Otimização SEO para o Google</li>
+                                <li><i class="fa-solid fa-circle-check"></i> Suporte VIP via WhatsApp</li>
+                            </ul>
+                            <a href="https://wa.me/5524992584133?text=Ol%C3%A1!%20Quero%20contratar%20o%20Plano%20Profissional%20(R%24%20149/m%C3%AAs)." target="_blank" class="btn btn-primary btn-full">
+                                Escolher Plano Profissional
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Plano 3: Loja Virtual / Sistema -->
+                    <div class="plan-card">
+                        <div class="plan-header">
+                            <span class="plan-badge">Catálogo Completo & Vendas</span>
+                            <h3 class="plan-name">Loja Virtual / Sistema</h3>
+                            <p class="plan-target">Para quem precisa de catálogo avançado ou pedidos online.</p>
+                            <div class="plan-price-box">
+                                <span class="setup-price">Setup de Implantação: R$ 1.200,00</span>
+                                <div class="monthly-price">R$ 249<span class="period">/mês</span></div>
+                            </div>
+                        </div>
+                        <div class="plan-body">
+                            <ul class="plan-features">
+                                <li><i class="fa-solid fa-circle-check"></i> Catálogo Ilimitado de Produtos</li>
+                                <li><i class="fa-solid fa-circle-check"></i> Sistema de Pedidos para WhatsApp</li>
+                                <li><i class="fa-solid fa-circle-check"></i> Painel de Gestão Avançado</li>
+                                <li><i class="fa-solid fa-circle-check"></i> Banco de Dados e Estatísticas</li>
+                                <li><i class="fa-solid fa-circle-check"></i> Hospedagem de Alta Velocidade + Domínio</li>
+                                <li><i class="fa-solid fa-circle-check"></i> Suporte Prioritário 24/7</li>
+                            </ul>
+                            <a href="https://wa.me/5524992584133?text=Ol%C3%A1!%20Quero%20contratar%20o%20Plano%20Loja%20Virtual%20/%20Sistema%20(R%24%20249/m%C3%AAs)." target="_blank" class="btn btn-glass btn-full">
+                                Escolher Loja / Sistema
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Plan FAQ Summary -->
+                <div class="plan-faq-box">
+                    <h3><i class="fa-solid fa-circle-question text-cyan"></i> Dúvidas Frequentes sobre os Planos</h3>
+                    <div class="plan-faq-grid">
+                        <div class="plan-faq-item">
+                            <strong>Posso trocar de plano depois?</strong>
+                            <p>Sim! Você pode realizar o upgrade de plano a qualquer momento conforme o seu negócio crescer.</p>
+                        </div>
+                        <div class="plan-faq-item">
+                            <strong>Existe multa de cancelamento?</strong>
+                            <p>O contrato possui fidelidade mínima de 12 meses. O cancelamento antes desse prazo está sujeito à multa proporcional conforme o contrato.</p>
+                        </div>
+                        <div class="plan-faq-item">
+                            <strong>O que acontece se eu atrasar o pagamento?</strong>
+                            <p>Fornecemos prazos amigáveis de reaviso antes de qualquer suspensão temporária do serviço.</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- About Section -->
+        <!-- 3. Página/Seção Portfólio / Cases -->
+        <section class="portfolio-section" id="portfolio">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-tag">CASES & RESULTADOS</span>
+                    <h2 class="section-title">Alguns negócios que já <span class="gradient-text">colocamos no ar</span></h2>
+                    <p class="section-subtitle">Confira demonstrações reais de sites e catálogos desenvolvidos com a tecnologia Lumen System.</p>
+                </div>
+
+                <div class="portfolio-grid" id="portfolioGrid">
+                    <!-- Case 1 -->
+                    <div class="portfolio-card">
+                        <div class="portfolio-img-wrap">
+                            <img src="assets/lumen_landing_page_1785183677226.png" alt="Studio Beleza & Estética">
+                            <span class="portfolio-tag">Estética & Saúde</span>
+                        </div>
+                        <div class="portfolio-body">
+                            <h3>Studio Beleza & Estética</h3>
+                            <p class="portfolio-desc">"Site desenvolvido em 5 dias úteis, com foco em exibir os tratamentos e facilitar o agendamento direto no WhatsApp."</p>
+                            <a href="https://wa.me/5524992584133?text=Quero%20um%20site%20parecido%20com%20o%20Studio%20Beleza" target="_blank" class="btn btn-outline btn-sm">
+                                <i class="fa-solid fa-eye"></i> Ver Exemplo
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Case 2 -->
+                    <div class="portfolio-card">
+                        <div class="portfolio-img-wrap">
+                            <img src="assets/lumen_saas_platform_1785183687003.png" alt="Oficina Flow Auto Center">
+                            <span class="portfolio-tag">Automotivo</span>
+                        </div>
+                        <div class="portfolio-body">
+                            <h3>Oficina Flow Auto Center</h3>
+                            <p class="portfolio-desc">"Landing page catálogo criada em 4 dias com botão de atendimento rápido para orçamentos de serviços mecânicos."</p>
+                            <a href="https://wa.me/5524992584133?text=Quero%20um%20site%20parecido%20com%20a%20Oficina%20Flow" target="_blank" class="btn btn-outline btn-sm">
+                                <i class="fa-solid fa-eye"></i> Ver Exemplo
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Case 3 -->
+                    <div class="portfolio-card">
+                        <div class="portfolio-img-wrap">
+                            <img src="assets/lumen_digital_catalog_1785183697092.png" alt="Perfecto Confecções">
+                            <span class="portfolio-tag">Varejo & Moda</span>
+                        </div>
+                        <div class="portfolio-body">
+                            <h3>Perfecto Confecções</h3>
+                            <p class="portfolio-desc">"Plataforma de catálogo digital de peças com painel administrativo para atualização de estoque e envio de pedidos no WhatsApp."</p>
+                            <a href="https://wa.me/5524992584133?text=Quero%20um%20site%20parecido%20com%20a%20Perfecto%20Confec%C3%A7%C3%B5es" target="_blank" class="btn btn-outline btn-sm">
+                                <i class="fa-solid fa-eye"></i> Ver Exemplo
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Página/Seção Como Funciona -->
+        <section class="how-it-works-section" id="how-it-works">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-tag">PASSO A PASSO</span>
+                    <h2 class="section-title">Do primeiro contato ao <span class="gradient-text">site no ar</span></h2>
+                    <p class="section-subtitle">Processo descomplicado em 5 etapas transparentes para colocar sua empresa no Google.</p>
+                </div>
+
+                <div class="steps-timeline">
+                    <!-- Step 1 -->
+                    <div class="step-card">
+                        <div class="step-number">01</div>
+                        <div class="step-content">
+                            <h3>1. Conversa Inicial</h3>
+                            <p>Você nos conta sobre o seu negócio e escolhe o plano ideal para a sua necessidade.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="step-card">
+                        <div class="step-number">02</div>
+                        <div class="step-content">
+                            <h3>2. Briefing</h3>
+                            <p>Preenchimento de um formulário simples com as informações, textos e imagens do seu negócio.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="step-card">
+                        <div class="step-number">03</div>
+                        <div class="step-content">
+                            <h3>3. Produção</h3>
+                            <p>Nossa equipe monta o layout profissional e envia para sua aprovação rápida.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="step-card">
+                        <div class="step-number">04</div>
+                        <div class="step-content">
+                            <h3>4. Ajustes</h3>
+                            <p>Revisamos juntos até o site ficar exatamente do jeito que você imaginou.</p>
+                        </div>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div class="step-card highlight-step">
+                        <div class="step-number">05</div>
+                        <div class="step-content">
+                            <h3>5. Site no Ar!</h3>
+                            <p>Publicação com hospedagem, domínio (.com.br) e suporte contínuo inclusos na mensalidade.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center margin-top-40">
+                    <a href="https://wa.me/5524992584133?text=Ol%C3%A1!%20Li%20como%20funciona%20e%20quero%20come%C3%A7ar%20o%20meu%20site." target="_blank" class="btn btn-primary btn-lg">
+                        <i class="fa-brands fa-whatsapp"></i> Quer começar agora? Fale no WhatsApp
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Página/Seção Sobre -->
         <section class="about-section" id="about">
             <div class="container about-grid">
                 <div class="about-visual">
-                    <img src="assets/lumen_saas_platform_1785183687003.png" alt="Lumen System Platform UI" class="about-img">
+                    <img src="assets/logo_lumen_system.jpg" alt="Lumen System - Clareza Gera Resultados" class="about-img">
                 </div>
                 <div class="about-content">
-                    <span class="section-tag">POR QUE A LUMEN SYSTEM?</span>
-                    <h2 class="section-title">Sistemas inteligentes criados para dar <span class="gradient-text">autonomia à sua empresa</span></h2>
-                    <p class="section-desc">
-                        Na **Lumen System**, acreditamos que sua empresa precisa de uma presença digital impactante e fácil de manter. Nossos sistemas e landing pages catalógicas vêm acompanhados de um **Painel Administrativo intuitivo**, onde você mesmo pode alterar fotos, atualizar o catálogo de produtos e modificar as informações da empresa quando quiser.
+                    <span class="section-tag">SOBRE A LUMEN SYSTEM</span>
+                    <h2 class="section-title">Clareza Gera <span class="gradient-text">Resultados</span></h2>
+                    <p class="about-desc">
+                        A **Lumen System** nasceu da união entre desenvolvimento técnico de alto nível e relacionamento próximo com clientes, com o objetivo de tornar a presença digital altamente acessível para pequenos e médios negócios locais.
+                    </p>
+                    <p class="about-desc">
+                        Acreditamos que todo negócio, independente do tamanho, merece ser encontrado por quem procura por ele — e que isso não precisa custar caro nem ser complicado.
+                    </p>
+                    <p class="about-desc">
+                        Por trás da marca, dois sócios cuidam de cada detalhe: um focado em entender e atender cada cliente com clareza, e outro em transformar essa visão em um site rápido, seguro e funcional no ar.
                     </p>
 
-                    <div class="features-list">
-                        <div class="feature-item">
-                            <div class="feature-icon"><i class="fa-solid fa-sliders"></i></div>
-                            <div class="feature-text">
-                                <h3>Total Autonomia Admin</h3>
-                                <p>Altere fotos, dados de contato e produtos sem precisar pagar por manutenção contínua.</p>
-                            </div>
+                    <div class="about-highlights">
+                        <div class="h-item">
+                            <i class="fa-solid fa-check-double text-cyan"></i>
+                            <span>Desenvolvimento Técnico Especializado</span>
                         </div>
-
-                        <div class="feature-item">
-                            <div class="feature-icon"><i class="fa-solid fa-mobile-screen-button"></i></div>
-                            <div class="feature-text">
-                                <h3>Visual 100% Responsivo</h3>
-                                <p>Perfeito em celulares, tablets e computadores, garantindo que nenhum cliente se perca.</p>
-                            </div>
+                        <div class="h-item">
+                            <i class="fa-solid fa-comments text-cyan"></i>
+                            <span>Atendimento Próximo e Humanizado</span>
                         </div>
-
-                        <div class="feature-item">
-                            <div class="feature-icon"><i class="fa-brands fa-whatsapp"></i></div>
-                            <div class="feature-text">
-                                <h3>Conversão Direta para WhatsApp</h3>
-                                <p>Botões flutuantes e links de produto pré-formatados direto para o WhatsApp **(24) 99258-4133**.</p>
-                            </div>
+                        <div class="h-item">
+                            <i class="fa-solid fa-rocket text-cyan"></i>
+                            <span>Foco Total na Conversão de Leads</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Contact Section -->
+        <!-- 6. Seção Depoimentos -->
+        <section class="testimonials-section" id="testimonials">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-tag">PROVA SOCIAL</span>
+                    <h2 class="section-title">Negócios locais que confiam na <span class="gradient-text">Lumen System</span></h2>
+                </div>
+
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="test-text">"Ter um site gerenciável mudou o atendimento da minha loja. Os clientes chegam no WhatsApp já sabendo o que querem!"</p>
+                        <div class="author-info">
+                            <strong>— Roberto M., Empreendedor Local</strong>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="stars">★★★★★</div>
+                        <p class="test-text">"A mensalidade cabe certinho no orçamento. Ter o suporte contínuo me dá tranquilidade para focar nas vendas."</p>
+                        <div class="author-info">
+                            <strong>— Amanda S., Clínica de Estética</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. Seção FAQ (Perguntas Frequentes) -->
+        <section class="faq-section" id="faq">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-tag">TIRE SUAS DÚVIDAS</span>
+                    <h2 class="section-title">Perguntas <span class="gradient-text">Frequentes</span></h2>
+                </div>
+
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>Quanto tempo demora para o site ficar pronto?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="accordion-body">
+                            <p>O prazo varia conforme o plano e a rapidez no envio das informações, mas costuma ficar entre 3 e 7 dias úteis após recebermos todo o conteúdo.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>Preciso pagar tudo de uma vez?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="accordion-body">
+                            <p>Não! Você paga apenas um valor único de implantação (setup) e depois uma mensalidade acessível, que já inclui hospedagem, domínio e suporte técnico contínuo.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>Existe fidelidade? Posso cancelar quando quiser?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="accordion-body">
+                            <p>O contrato tem um período de fidelidade mínima de 12 meses. Após esse período, o cancelamento pode ser feito com aviso prévio. Cancelamentos antes desse prazo estão sujeitos a uma multa proporcional detalhada no contrato.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>O que acontece se eu precisar de suporte?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="accordion-body">
+                            <p>Basta chamar diretamente pelo nosso WhatsApp de atendimento (24) 99258-4133. Respondemos rapidamente dentro do prazo definido no seu plano.</p>
+                        </div>
+                    </div>
+
+                    <div class="accordion-item">
+                        <button class="accordion-header">
+                            <span>Posso migrar de plano depois?</span>
+                            <i class="fa-solid fa-chevron-down"></i>
+                        </button>
+                        <div class="accordion-body">
+                            <p>Sim, é possível fazer upgrade de plano a qualquer momento conforme a necessidade de expansão do seu negócio.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Seção Blog (SEO & Dicas) -->
+        <section class="blog-section" id="blog">
+            <div class="container">
+                <div class="section-header text-center">
+                    <span class="section-tag">CONTEÚDO & AUTORIDADE</span>
+                    <h2 class="section-title">Dicas para impulsionar seu <span class="gradient-text">negócio no Google</span></h2>
+                </div>
+
+                <div class="blog-grid">
+                    <article class="blog-card">
+                        <div class="blog-body">
+                            <span class="blog-category">SEO & Presença Digital</span>
+                            <h3>5 sinais de que seu negócio está perdendo clientes por não ter site</h3>
+                            <p>Descubra como a falta de uma página oficial no Google pode estar direcionando seus clientes para a concorrência.</p>
+                            <a href="https://wa.me/5524992584133?text=Li%20o%20artigo%20sobre%20os%205%20sinais%20e%20quero%20um%20site." target="_blank" class="read-more">Ler artigo <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+
+                    <article class="blog-card">
+                        <div class="blog-body">
+                            <span class="blog-category">Estratégia</span>
+                            <h3>Site ou só Instagram: qual a diferença para o seu negócio?</h3>
+                            <p>Entenda por que depender apenas de redes sociais é um risco e como um site próprio gera mais vendas duradouras.</p>
+                            <a href="https://wa.me/5524992584133?text=Quero%20saber%20a%20diferen%C3%A7a%20entre%20site%20e%20Instagram." target="_blank" class="read-more">Ler artigo <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+
+                    <article class="blog-card">
+                        <div class="blog-body">
+                            <span class="blog-category">Vendas & Conversão</span>
+                            <h3>Como um site ajuda seu negócio a aparecer no Google</h3>
+                            <p>Conheça os segredos do SEO local e como clientes da sua região podem encontrar seus serviços todos os dias.</p>
+                            <a href="https://wa.me/5524992584133?text=Quero%20aparecer%20no%20Google." target="_blank" class="read-more">Ler artigo <i class="fa-solid fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. Seção Contato -->
         <section class="contact-section" id="contact">
             <div class="container">
                 <div class="contact-card">
                     <div class="contact-grid">
                         <div class="contact-info">
                             <span class="section-tag">FALE CONOSCO</span>
-                            <h2>Pronto para transformar sua presença digital?</h2>
-                            <p>Entre em contato conosco agora mesmo pelo WhatsApp ou envie uma mensagem. Respondemos rapidamente!</p>
+                            <h2>Vamos conversar sobre o seu projeto?</h2>
+                            <p>Respondemos em até 1 dia útil. Prefere ser mais rápido? Chama a gente direto no WhatsApp!</p>
 
                             <div class="contact-details">
                                 <a href="https://wa.me/5524992584133" target="_blank" class="detail-item" id="contactWaLink">
@@ -310,28 +575,27 @@
                             <form id="contactForm" class="contact-form">
                                 <h3>Envie uma Mensagem Rápida</h3>
                                 <div class="form-group">
-                                    <label for="contactName">Seu Nome</label>
+                                    <label for="contactName">Seu Nome *</label>
                                     <input type="text" id="contactName" placeholder="Ex: Carlos Silva" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="contactPhone">Telefone / WhatsApp</label>
+                                    <label for="contactBusiness">Nome do Seu Negócio *</label>
+                                    <input type="text" id="contactBusiness" placeholder="Ex: Studio Bella Estética" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contactPhone">Telefone / WhatsApp *</label>
                                     <input type="tel" id="contactPhone" placeholder="(24) 99999-9999" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="contactService">Serviço de Interesse</label>
-                                    <select id="contactService" required>
-                                        <option value="Landing Page Catálogo">Landing Page Catálogo</option>
-                                        <option value="Plataforma Web">Plataforma Web</option>
-                                        <option value="Sistema Sob Medida">Sistema Sob Medida</option>
-                                        <option value="Outro">Outro Assunto</option>
-                                    </select>
+                                    <label for="contactEmail">E-mail</label>
+                                    <input type="email" id="contactEmail" placeholder="seuemail@exemplo.com">
                                 </div>
                                 <div class="form-group">
-                                    <label for="contactMessage">Mensagem</label>
-                                    <textarea id="contactMessage" rows="4" placeholder="Descreva brevemente o que você precisa..." required></textarea>
+                                    <label for="contactMessage">Mensagem / Dúvida</label>
+                                    <textarea id="contactMessage" rows="3" placeholder="Conte um pouco sobre o que precisa..."></textarea>
                                 </div>
                                 <button type="submit" class="btn btn-primary btn-full btn-lg">
-                                    <i class="fa-solid fa-paper-plane"></i> Enviar Mensagem
+                                    <i class="fa-solid fa-paper-plane"></i> Enviar Mensagem no WhatsApp
                                 </button>
                             </form>
                         </div>
@@ -341,21 +605,18 @@
         </section>
     </main>
 
-    <!-- Interactive Floating Bar (Lumen Float Bar) -->
+    <!-- Botões Flutuantes Interativos (Lumen Float Bar) -->
     <div class="lumen-float-bar">
-        <!-- Floating WhatsApp Button -->
         <a href="https://wa.me/5524992584133?text=Ol%C3%A1!%20Vim%20pelo%20site%20da%20Lumen%20System." target="_blank" class="float-btn float-wa" id="floatWaBtn" title="Falar no WhatsApp">
             <i class="fa-brands fa-whatsapp"></i>
             <span class="float-tooltip">WhatsApp (24) 99258-4133</span>
         </a>
 
-        <!-- Floating Calculator Trigger -->
-        <a href="#simulator" class="float-btn float-sim" title="Simular Orçamento">
-            <i class="fa-solid fa-calculator"></i>
-            <span class="float-tooltip">Simulador de Preços</span>
+        <a href="#plans" class="float-btn float-sim" title="Ver Planos">
+            <i class="fa-solid fa-tags"></i>
+            <span class="float-tooltip">Ver Planos</span>
         </a>
 
-        <!-- Floating Admin Login Trigger -->
         <button class="float-btn float-admin" id="floatAdminBtn" title="Painel Admin">
             <i class="fa-solid fa-lock"></i>
             <span class="float-tooltip">Área Admin</span>
@@ -374,9 +635,9 @@
             </div>
 
             <div class="modal-body">
-                <!-- Login View (shown if not logged in) -->
+                <!-- Login View -->
                 <div id="adminLoginView" class="admin-view">
-                    <p class="login-instruction">Acesso restrito para administradores da empresa.</p>
+                    <p class="login-instruction">Acesso restrito para os administradores da empresa.</p>
                     <form id="adminLoginForm" class="login-form">
                         <div class="form-group">
                             <label for="adminUser">Usuário</label>
@@ -393,105 +654,72 @@
                     </form>
                 </div>
 
-                <!-- Admin Dashboard View (shown after authentication) -->
+                <!-- Admin Dashboard View -->
                 <div id="adminDashboardView" class="admin-view hidden">
                     <div class="admin-nav-tabs">
-                        <button class="tab-btn active" data-tab="tab-products"><i class="fa-solid fa-boxes-stacked"></i> Catálogo & Preços</button>
-                        <button class="tab-btn" data-tab="tab-general"><i class="fa-solid fa-gear"></i> Dados da Empresa</button>
+                        <button class="tab-btn active" data-tab="tab-general"><i class="fa-solid fa-gear"></i> Dados da Empresa</button>
+                        <button class="tab-btn" data-tab="tab-plans-edit"><i class="fa-solid fa-tags"></i> Preços dos Planos</button>
                     </div>
 
-                    <!-- Tab 1: Products / Catalog Manager -->
-                    <div class="tab-content active" id="tab-products">
-                        <div class="tab-header-flex">
-                            <h3>Produtos e Serviços Cadastrados</h3>
-                            <button class="btn btn-primary btn-sm" id="btnAddNewProduct">
-                                <i class="fa-solid fa-plus"></i> Adicionar Produto/Sistema
-                            </button>
-                        </div>
-
-                        <!-- Product Form (Add/Edit) -->
-                        <form id="productEditForm" class="product-form hidden">
-                            <h4 id="productFormTitle">Adicionar Novo Produto no Catálogo</h4>
-                            <input type="hidden" id="prodEditId">
-                            
-                            <div class="form-row">
-                                <div class="form-group col-6">
-                                    <label for="prodTitle">Nome do Serviço / Sistema</label>
-                                    <input type="text" id="prodTitle" placeholder="Ex: Landing Page para Restaurante" required>
-                                </div>
-                                <div class="form-group col-6">
-                                    <label for="prodCategory">Categoria</label>
-                                    <select id="prodCategory" required>
-                                        <option value="landing-page">Landing Page Catálogo</option>
-                                        <option value="plataforma">Plataforma Web</option>
-                                        <option value="sistema">Sistema Sob Medida</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-row">
-                                <div class="form-group col-6">
-                                    <label for="prodPrice">Média de Preço (Texto Exibido)</label>
-                                    <input type="text" id="prodPrice" placeholder="Ex: A partir de R$ 890" required>
-                                </div>
-                                <div class="form-group col-6">
-                                    <label for="prodImage">URL da Imagem / Foto</label>
-                                    <input type="text" id="prodImage" placeholder="assets/lumen_landing_page_...png ou URL externa" required>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="prodDesc">Descrição Resumida</label>
-                                <textarea id="prodDesc" rows="3" placeholder="Descreva o que o sistema/site oferece..." required></textarea>
-                            </div>
-
-                            <div class="form-actions">
-                                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Salvar Produto</button>
-                                <button type="button" class="btn btn-outline" id="btnCancelProductForm">Cancelar</button>
-                            </div>
-                        </form>
-
-                        <!-- Products List Table/Cards -->
-                        <div class="admin-products-list" id="adminProductsList">
-                            <!-- Populated dynamically -->
-                        </div>
-                    </div>
-
-                    <!-- Tab 2: General Settings -->
-                    <div class="tab-content" id="tab-general">
-                        <h3>Informações Básicas da Empresa</h3>
+                    <!-- Tab 1: General Settings -->
+                    <div class="tab-content active" id="tab-general">
+                        <h3>Informações da Empresa</h3>
                         <form id="generalSettingsForm" class="settings-form">
                             <div class="form-group">
-                                <label for="settingWaNumber">Telefone / WhatsApp (Apenas Números com DDD)</label>
+                                <label for="settingWaNumber">Telefone / WhatsApp (DDD + Número)</label>
                                 <input type="text" id="settingWaNumber" value="24992584133" required>
-                                <small>Este número é usado nos botões de atendimento do site todo.</small>
                             </div>
 
                             <div class="form-group">
-                                <label for="settingEmail">E-mail de Contato Comercial</label>
+                                <label for="settingEmail">E-mail Comercial</label>
                                 <input type="email" id="settingEmail" value="contato@lumensystem.com.br" required>
                             </div>
 
                             <div class="form-group">
-                                <label for="settingHeroTitle">Título Principal do Site (Hero)</label>
-                                <input type="text" id="settingHeroTitle" value="Ilumine o seu negócio com sistemas de alta conversão" required>
+                                <label for="settingHeroTitle">Título do Hero</label>
+                                <input type="text" id="settingHeroTitle" value="Sites profissionais para o seu negócio, sem pagar tudo de uma vez." required>
                             </div>
 
                             <div class="form-group">
                                 <label for="settingHeroSubtitle">Subtítulo do Hero</label>
-                                <textarea id="settingHeroSubtitle" rows="3" required>Criamos plataformas web sob medida, landing pages estilo catálogo interativo com painel de gerenciamento simples para você atualizar seus produtos e serviços sem complicações.</textarea>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="settingHeroImage">URL da Foto Principal do Hero</label>
-                                <input type="text" id="settingHeroImage" value="assets/lumen_landing_page_1785183677226.png" required>
+                                <textarea id="settingHeroSubtitle" rows="3" required>Criamos e cuidamos do site da sua empresa por uma mensalidade acessível — hospedagem, suporte e atualizações inclusos.</textarea>
                             </div>
 
                             <div class="form-actions">
-                                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Salvar Configurações</button>
-                                <button type="button" class="btn btn-outline btn-danger-outline" id="btnResetToDefaults">
-                                    <i class="fa-solid fa-rotate-left"></i> Restaurar Dados de Fábrica
-                                </button>
+                                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Salvar Alterações</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Tab 2: Plans Management -->
+                    <div class="tab-content" id="tab-plans-edit">
+                        <h3>Valores dos Planos (Setup & Mensalidade)</h3>
+                        <form id="plansSettingsForm" class="settings-form">
+                            <div class="form-group">
+                                <label for="plan1Setup">Plano Essencial - Setup (R$)</label>
+                                <input type="text" id="plan1Setup" value="350,00">
+                                <label for="plan1Monthly">Plano Essencial - Mensalidade (R$)</label>
+                                <input type="text" id="plan1Monthly" value="89,00">
+                            </div>
+                            <hr style="border-color: var(--border-color); margin: 16px 0;">
+
+                            <div class="form-group">
+                                <label for="plan2Setup">Plano Profissional - Setup (R$)</label>
+                                <input type="text" id="plan2Setup" value="650,00">
+                                <label for="plan2Monthly">Plano Profissional - Mensalidade (R$)</label>
+                                <input type="text" id="plan2Monthly" value="149,00">
+                            </div>
+                            <hr style="border-color: var(--border-color); margin: 16px 0;">
+
+                            <div class="form-group">
+                                <label for="plan3Setup">Plano Loja / Sistema - Setup (R$)</label>
+                                <input type="text" id="plan3Setup" value="1200,00">
+                                <label for="plan3Monthly">Plano Loja / Sistema - Mensalidade (R$)</label>
+                                <input type="text" id="plan3Monthly" value="249,00">
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Salvar Preços dos Planos</button>
                             </div>
                         </form>
                     </div>
@@ -500,18 +728,21 @@
         </div>
     </div>
 
-    <!-- Toast Notification Container -->
+    <!-- Toast Notifications Container -->
     <div class="toast-container" id="toastContainer"></div>
 
-    <!-- Footer -->
+    <!-- Rodapé Completo -->
     <footer class="site-footer">
         <div class="container footer-grid">
             <div class="footer-brand">
-                <a href="#" class="logo">
-                    <span class="logo-icon"><i class="fa-solid fa-lightbulb"></i></span>
-                    <span class="logo-text"><strong class="highlight">LUMEN</strong> SYSTEM</span>
+                <a href="#hero" class="logo-brand">
+                    <img src="assets/logo_lumen_system.jpg" alt="Lumen System Logo" class="brand-logo-img">
+                    <div class="brand-text">
+                        <span class="brand-name">LUMEN SYSTEM</span>
+                        <span class="brand-slogan">Clareza Gera Resultados</span>
+                    </div>
                 </a>
-                <p>Desenvolvimento de plataformas web, sistemas de gestão sob medida e landing pages catalógicas inteligentes com painel admin completo.</p>
+                <p>Criamos e cuidamos do site da sua empresa por uma mensalidade acessível — hospedagem, domínio, suporte e atualizações inclusos.</p>
                 <div class="social-links">
                     <a href="https://wa.me/5524992584133" target="_blank" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
                     <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
@@ -523,35 +754,38 @@
                 <h4>Navegação</h4>
                 <ul>
                     <li><a href="#hero">Início</a></li>
-                    <li><a href="#catalog">Catálogo de Serviços</a></li>
-                    <li><a href="#simulator">Simulador de Orçamento</a></li>
-                    <li><a href="#about">Sobre a Lumen</a></li>
-                    <li><a href="#contact">Contato Direct</a></li>
+                    <li><a href="#plans">Planos & Preços</a></li>
+                    <li><a href="#portfolio">Portfólio / Cases</a></li>
+                    <li><a href="#how-it-works">Como Funciona</a></li>
+                    <li><a href="#about">Sobre Nós</a></li>
                 </ul>
             </div>
 
             <div class="footer-links">
-                <h4>Serviços</h4>
+                <h4>Conteúdo</h4>
                 <ul>
-                    <li><a href="#catalog">Landing Page Catálogo</a></li>
-                    <li><a href="#catalog">Plataformas SaaS & Web</a></li>
-                    <li><a href="#catalog">Sistemas com Painel Admin</a></li>
-                    <li><a href="#catalog">Integração WhatsApp</a></li>
+                    <li><a href="#testimonials">Depoimentos</a></li>
+                    <li><a href="#faq">Perguntas Frequentes</a></li>
+                    <li><a href="#blog">Blog & Artigos</a></li>
+                    <li><a href="#contact">Fale Conosco</a></li>
                 </ul>
             </div>
 
             <div class="footer-contact">
-                <h4>Atendimento WhatsApp</h4>
+                <h4>Atendimento Direto</h4>
                 <p><i class="fa-brands fa-whatsapp text-cyan"></i> <span id="footerWaDisplay">(24) 99258-4133</span></p>
                 <p><i class="fa-solid fa-envelope text-cyan"></i> <span id="footerEmailDisplay">contato@lumensystem.com.br</span></p>
-                <p><i class="fa-solid fa-shield-halved text-cyan"></i> Sistemas Protegidos & Responsivos</p>
+                <p><i class="fa-solid fa-location-dot text-cyan"></i> Atendimento Nacional</p>
             </div>
         </div>
 
         <div class="footer-bottom">
             <div class="container bottom-flex">
                 <p>&copy; 2026 Lumen System. Todos os direitos reservados.</p>
-                <button class="footer-admin-link" id="footerAdminLink"><i class="fa-solid fa-key"></i> Painel de Administração</button>
+                <div class="footer-legal">
+                    <a href="#">Termos de Uso</a> | <a href="#">Política de Privacidade</a>
+                    <button class="footer-admin-link" id="footerAdminLink"><i class="fa-solid fa-key"></i> Painel Admin</button>
+                </div>
             </div>
         </div>
     </footer>
