@@ -18,6 +18,7 @@ const DEFAULT_STATE = {
         brandSlogan: "CLAREZA GERA RESULTADOS",
         waNumber: "24992584133",
         email: "contato@lumensystem.com.br",
+        businessHours: "Segunda a Sábado - 08h às 20h",
         heroBadge: "Sites Profissionais por Assinatura",
         heroTitle: "Sites profissionais para o seu negócio, sem pagar tudo de uma vez.",
         heroSubtitle: "Criamos e cuidamos do site da sua empresa por uma mensalidade acessível — hospedagem, suporte e atualizações inclusos.",
@@ -487,6 +488,7 @@ function renderApp() {
     if (document.getElementById('contactWaDisplay')) document.getElementById('contactWaDisplay').textContent = formattedPhone;
     if (document.getElementById('contactWaLink')) document.getElementById('contactWaLink').href = getWaLink();
     if (document.getElementById('contactEmailDisplay')) document.getElementById('contactEmailDisplay').textContent = settings.email;
+    if (document.getElementById('contactBusinessHoursDisplay')) document.getElementById('contactBusinessHoursDisplay').textContent = settings.businessHours || "Segunda a Sábado - 08h às 20h";
     if (document.getElementById('footerWaDisplay')) document.getElementById('footerWaDisplay').textContent = formattedPhone;
     if (document.getElementById('footerEmailDisplay')) document.getElementById('footerEmailDisplay').textContent = settings.email;
     if (document.getElementById('floatWaBtn')) document.getElementById('floatWaBtn').href = getWaLink();
@@ -1344,7 +1346,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // General Settings Save (including About Us Text & Title)
+    // General Settings Save (including About Us & Business Hours)
     const generalSettingsForm = document.getElementById('generalSettingsForm');
     if (generalSettingsForm) {
         generalSettingsForm.addEventListener('submit', (e) => {
@@ -1353,13 +1355,14 @@ document.addEventListener('DOMContentLoaded', () => {
             appState.settings.brandSlogan = document.getElementById('settingBrandSlogan').value.trim();
             appState.settings.waNumber = document.getElementById('settingWaNumber').value.trim();
             appState.settings.email = document.getElementById('settingEmail').value.trim();
+            appState.settings.businessHours = document.getElementById('settingBusinessHours').value.trim();
             appState.settings.heroTitle = document.getElementById('settingHeroTitle').value.trim();
             appState.settings.heroSubtitle = document.getElementById('settingHeroSubtitle').value.trim();
             appState.settings.aboutTitle = document.getElementById('settingAboutTitle').value.trim();
             appState.settings.aboutText = document.getElementById('settingAboutText').value.trim();
 
             saveState();
-            showToast("Informações da empresa e texto 'Sobre Nós' salvos com sucesso!", "success");
+            showToast("Informações da empresa, horário e 'Sobre Nós' salvos com sucesso!", "success");
         });
     }
 
@@ -1452,6 +1455,7 @@ function populateAdminForms() {
     if (document.getElementById('settingBrandSlogan')) document.getElementById('settingBrandSlogan').value = settings.brandSlogan || "CLAREZA GERA RESULTADOS";
     if (document.getElementById('settingWaNumber')) document.getElementById('settingWaNumber').value = settings.waNumber || "24992584133";
     if (document.getElementById('settingEmail')) document.getElementById('settingEmail').value = settings.email || "contato@lumensystem.com.br";
+    if (document.getElementById('settingBusinessHours')) document.getElementById('settingBusinessHours').value = settings.businessHours || "Segunda a Sábado - 08h às 20h";
     if (document.getElementById('settingHeroTitle')) document.getElementById('settingHeroTitle').value = settings.heroTitle;
     if (document.getElementById('settingHeroSubtitle')) document.getElementById('settingHeroSubtitle').value = settings.heroSubtitle;
     if (document.getElementById('settingAboutTitle')) document.getElementById('settingAboutTitle').value = settings.aboutTitle || "Clareza Gera Resultados";
