@@ -500,7 +500,7 @@
         </button>
     </div>
 
-    <!-- Painel Admin Modal Expandido com Configuração Firebase -->
+    <!-- Painel Admin Modal Expandido com Relatórios e Conexão Firebase -->
     <div class="modal-backdrop" id="adminModalBackdrop">
         <div class="admin-modal modal-lg">
             <div class="modal-header">
@@ -535,6 +535,7 @@
                 <div id="adminDashboardView" class="admin-view hidden">
                     <div class="admin-nav-tabs">
                         <button class="tab-btn active" data-tab="tab-dashboard"><i class="fa-solid fa-chart-pie"></i> Dashboard & Analytics</button>
+                        <button class="tab-btn" data-tab="tab-reports"><i class="fa-solid fa-file-invoice-dollar text-cyan"></i> 📊 Relatórios & Filtros</button>
                         <button class="tab-btn" data-tab="tab-firebase"><i class="fa-solid fa-fire text-cyan"></i> Conexão Firebase DB</button>
                         <button class="tab-btn" data-tab="tab-plans-edit"><i class="fa-solid fa-tags"></i> Gerenciar Planos & Vantagens</button>
                         <button class="tab-btn" data-tab="tab-images"><i class="fa-solid fa-image"></i> Imagens & Logo</button>
@@ -545,7 +546,7 @@
 
                     <!-- Tab 0: Dashboard & Analytics Engine -->
                     <div class="tab-content active" id="tab-dashboard">
-                        <h3>Métricas de Acesso & Vendas dos Planos</h3>
+                        <h3>Métricas de Acesso & Vendas dos Planos (Ao Vivo via Firebase DB)</h3>
                         <p class="tab-desc">Acompanhe as visitas em tempo real, taxa de conversão e interessados em contratar cada plano.</p>
 
                         <div class="kpi-grid">
@@ -631,6 +632,65 @@
                                     <tbody id="tableAccessLogs">
                                     </tbody>
                                 </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TAB DE RELATÓRIOS AVANÇADOS COM FILTRO DE DATAS SEM LIMITE -->
+                    <div class="tab-content" id="tab-reports">
+                        <h3>📊 Gerador de Relatórios Personalizados</h3>
+                        <p class="tab-desc">Filtre vendas, solicitações de orçamentos e acessos por qualquer intervalo de datas (sem limite de período).</p>
+
+                        <div class="product-form">
+                            <div class="form-row">
+                                <div class="form-group col-6">
+                                    <label for="reportCategory">Tipo de Relatório</label>
+                                    <select id="reportCategory" class="form-input">
+                                        <option value="leads">💰 Relatório de Vendas & Orçamentos Solicitados</option>
+                                        <option value="access">👁️ Relatório de Tráfego & Acessos de Clientes</option>
+                                        <option value="complete">📑 Relatório Executivo Completo (Geral)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label>Filtros Rápidos de Período</label>
+                                    <div class="btn-group-flex">
+                                        <button class="btn btn-outline btn-sm" onclick="setReportQuickFilter('today')">Hoje</button>
+                                        <button class="btn btn-outline btn-sm" onclick="setReportQuickFilter('7days')">Últimos 7 dias</button>
+                                        <button class="btn btn-outline btn-sm" onclick="setReportQuickFilter('30days')">Últimos 30 dias</button>
+                                        <button class="btn btn-outline btn-sm" onclick="setReportQuickFilter('all')">Todo o Período</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-6">
+                                    <label for="reportStartDate">Data Inicial (De)</label>
+                                    <input type="date" id="reportStartDate">
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="reportEndDate">Data Final (Até)</label>
+                                    <input type="date" id="reportEndDate">
+                                </div>
+                            </div>
+
+                            <div class="form-actions margin-top-20">
+                                <button type="button" class="btn btn-primary" id="btnGenerateReport"><i class="fa-solid fa-magnifying-glass-chart"></i> Gerar Relatório no Tela</button>
+                                <button type="button" class="btn btn-outline" id="btnExportReportCSV"><i class="fa-solid fa-file-csv text-cyan"></i> Baixar Relatório (CSV / Excel)</button>
+                                <button type="button" class="btn btn-outline" id="btnPrintReport"><i class="fa-solid fa-print"></i> Imprimir / Salvar em PDF</button>
+                            </div>
+                        </div>
+
+                        <!-- REPORT DISPLAY BOX -->
+                        <div class="report-results-box margin-top-20" id="reportResultsContainer">
+                            <div class="report-header-print text-center">
+                                <h2>LUMEN SYSTEM - RELATÓRIO EXECUTIVO DE DESEMPENHO</h2>
+                                <p id="reportPeriodBadge" class="text-cyan">Período Selecionado: Todo o Histórico</p>
+                            </div>
+
+                            <div class="kpi-grid margin-top-20" id="reportKpiGrid">
+                            </div>
+
+                            <div class="margin-top-20" id="reportTableWrapper">
                             </div>
                         </div>
                     </div>

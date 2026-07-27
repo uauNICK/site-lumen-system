@@ -1,5 +1,5 @@
 /* ==========================================================================
-   LUMEN SYSTEM - CORE INSTITUTIONAL, ANALYTICS ENGINE & FIREBASE DB SYNC
+   LUMEN SYSTEM - CORE INSTITUTIONAL, ANALYTICS ENGINE, FIREBASE DB & REPORTS
    ========================================================================== */
 
 const DEFAULT_STATE = {
@@ -124,18 +124,21 @@ const DEFAULT_STATE = {
         conversions: [
             {
                 timestamp: new Date(Date.now() - 3600000 * 5).toLocaleString('pt-BR'),
+                isoDate: new Date(Date.now() - 3600000 * 5).toISOString(),
                 clientName: "Cantinho do Sabor",
                 planName: "Loja Virtual / Sistema",
                 amount: 1449.00
             },
             {
                 timestamp: new Date(Date.now() - 3600000 * 18).toLocaleString('pt-BR'),
+                isoDate: new Date(Date.now() - 3600000 * 18).toISOString(),
                 clientName: "Studio Márcia Araújo",
                 planName: "Plano Profissional",
                 amount: 799.00
             },
             {
                 timestamp: new Date(Date.now() - 3600000 * 42).toLocaleString('pt-BR'),
+                isoDate: new Date(Date.now() - 3600000 * 42).toISOString(),
                 clientName: "Perfecto Confecções",
                 planName: "Plano Profissional",
                 amount: 799.00
@@ -144,18 +147,21 @@ const DEFAULT_STATE = {
         accessLogs: [
             {
                 timestamp: new Date(Date.now() - 1000 * 60 * 12).toLocaleString('pt-BR'),
+                isoDate: new Date(Date.now() - 1000 * 60 * 12).toISOString(),
                 device: "Mobile",
                 browser: "Chrome Mobile (Android)",
                 type: "Visitante Recorrente"
             },
             {
                 timestamp: new Date(Date.now() - 1000 * 60 * 35).toLocaleString('pt-BR'),
+                isoDate: new Date(Date.now() - 1000 * 60 * 35).toISOString(),
                 device: "Desktop",
                 browser: "Chrome 122 (Windows)",
                 type: "Novo Visitante"
             },
             {
                 timestamp: new Date(Date.now() - 1000 * 60 * 85).toLocaleString('pt-BR'),
+                isoDate: new Date(Date.now() - 1000 * 60 * 85).toISOString(),
                 device: "Mobile",
                 browser: "Safari (iPhone)",
                 type: "Novo Visitante"
@@ -237,7 +243,7 @@ function initFirebaseConnection() {
             isFirebaseConnected = true;
             if (badge) badge.innerHTML = `<i class="fa-solid fa-cloud-check text-cyan"></i> Firebase Conectado (site-lumen-system)`;
 
-            // Listen to real-time changes from Firebase DB
+            // Fetch & Listen to real-time changes directly from Firebase Realtime Database
             if (firebase.database) {
                 firebase.database().ref('lumen_app_state').on('value', (snapshot) => {
                     const data = snapshot.val();
@@ -291,13 +297,14 @@ function trackVisit() {
 
     const logEntry = {
         timestamp: new Date().toLocaleString('pt-BR'),
+        isoDate: new Date().toISOString(),
         device: device,
         browser: `${browser} (${navigator.platform || 'OS'})`,
         type: isNew ? "Novo Visitante" : "Visitante Recorrente"
     };
 
     appState.analytics.accessLogs.unshift(logEntry);
-    if (appState.analytics.accessLogs.length > 50) appState.analytics.accessLogs.pop();
+    if (appState.analytics.accessLogs.length > 100) appState.analytics.accessLogs.pop();
 
     saveState(true);
 }
@@ -310,13 +317,14 @@ function trackConversion(planName, amount, clientName = "Cliente do Site") {
 
     const conversionEntry = {
         timestamp: new Date().toLocaleString('pt-BR'),
+        isoDate: new Date().toISOString(),
         clientName: clientName,
         planName: planName,
         amount: amount
     };
 
     appState.analytics.conversions.unshift(conversionEntry);
-    if (appState.analytics.conversions.length > 50) appState.analytics.conversions.pop();
+    if (appState.analytics.conversions.length > 100) appState.analytics.conversions.pop();
 
     saveState(true);
 }
@@ -620,6 +628,224 @@ function renderAnalyticsDashboard() {
     }
 }
 
+/* ================= ==========================================================
+   REPORT GENERATION & DATE FILTERING LOGIC (WITHOUT DATE LIMITS)
+   ========================================================================== */
+
+function parseEntryDate(entry) {
+    if (entry.isoDate) return new Date(entry.isoDate);
+    if (entry.timestamp) {
+        // Fallback for pt-BR timestamp strings "DD/MM/YYYY, HH:MM:SS"
+        const parts = entry.timestamp.split(',');
+        if (parts.length > 0) {
+            const dParts = parts[0].trim().split('/');
+            if (dParts.length === 3) {
+                return new Date(dParts[2], dParts[1] - 1, dParts[0]);
+            }
+        }
+    }
+    return new Date();
+}
+
+window.setReportQuickFilter = function(filterType) {
+    const startInput = document.getElementById('reportStartDate');
+    const endInput = document.getElementById('reportEndDate');
+    if (!startInput || !endInput) return;
+
+    const today = new Date();
+    endInput.value = today.toISOString().split('T')[0];
+
+    if (filterType === 'today') {
+        startInput.value = today.toISOString().split('T')[0];
+    } else if (filterType === '7days') {
+        const d7 = new Date();
+        d7.setDate(d7.getDate() - 7);
+        startInput.value = d7.toISOString().split('T')[0];
+    } else if (filterType === '30days') {
+        const d30 = new Date();
+        d30.setDate(d30.getDate() - 30);
+        startInput.value = d30.toISOString().split('T')[0];
+    } else if (filterType === 'all') {
+        startInput.value = "";
+        endInput.value = "";
+    }
+
+    generateCustomReport();
+};
+
+function generateCustomReport() {
+    const category = document.getElementById('reportCategory') ? document.getElementById('reportCategory').value : 'leads';
+    const startVal = document.getElementById('reportStartDate') ? document.getElementById('reportStartDate').value : '';
+    const endVal = document.getElementById('reportEndDate') ? document.getElementById('reportEndDate').value : '';
+
+    let startDate = startVal ? new Date(startVal + 'T00:00:00') : null;
+    let endDate = endVal ? new Date(endVal + 'T23:59:59') : null;
+
+    const periodBadge = document.getElementById('reportPeriodBadge');
+    if (periodBadge) {
+        if (!startDate && !endDate) periodBadge.textContent = "Período Selecionado: Todo o Histórico (Sem limites)";
+        else periodBadge.textContent = `Período Selecionado: ${startVal || 'Início'} até ${endVal || 'Hoje'}`;
+    }
+
+    const leads = (appState.analytics.conversions || []).filter(item => {
+        const d = parseEntryDate(item);
+        if (startDate && d < startDate) return false;
+        if (endDate && d > endDate) return false;
+        return true;
+    });
+
+    const accessLogs = (appState.analytics.accessLogs || []).filter(item => {
+        const d = parseEntryDate(item);
+        if (startDate && d < startDate) return false;
+        if (endDate && d > endDate) return false;
+        return true;
+    });
+
+    const totalRev = leads.reduce((acc, curr) => acc + (curr.amount || 0), 0);
+    const kpiGrid = document.getElementById('reportKpiGrid');
+    if (kpiGrid) {
+        kpiGrid.innerHTML = `
+            <div class="kpi-card">
+                <div class="kpi-icon"><i class="fa-solid fa-eye"></i></div>
+                <div class="kpi-info">
+                    <span class="kpi-label">Acessos no Período</span>
+                    <div class="kpi-val">${accessLogs.length} pageviews</div>
+                </div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-icon icon-green"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                <div class="kpi-info">
+                    <span class="kpi-label">Volume de Orçamentos</span>
+                    <div class="kpi-val text-green">R$ ${totalRev.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</div>
+                </div>
+            </div>
+            <div class="kpi-card">
+                <div class="kpi-icon icon-purple"><i class="fa-solid fa-chart-line"></i></div>
+                <div class="kpi-info">
+                    <span class="kpi-label">Propostas Geradas</span>
+                    <div class="kpi-val text-purple">${leads.length} solicitações</div>
+                </div>
+            </div>
+        `;
+    }
+
+    const tableWrapper = document.getElementById('reportTableWrapper');
+    if (!tableWrapper) return;
+
+    if (category === 'leads' || category === 'complete') {
+        let html = `<h4>💰 Tabela Detalhada de Vendas & Solicitantes de Orçamentos (${leads.length} registros)</h4>`;
+        html += `<div class="table-responsive"><table class="access-log-table">
+            <thead>
+                <tr>
+                    <th>Data / Hora</th>
+                    <th>Cliente / Empresa</th>
+                    <th>Plano / Modelo Solicitado</th>
+                    <th>Valor Estimado</th>
+                </tr>
+            </thead>
+            <tbody>`;
+        
+        if (leads.length === 0) {
+            html += `<tr><td colspan="4" class="text-center" style="padding: 20px;">Nenhuma solicitação de orçamento registrada neste período.</td></tr>`;
+        } else {
+            leads.forEach(l => {
+                html += `<tr>
+                    <td>${l.timestamp}</td>
+                    <td><strong>${l.clientName}</strong></td>
+                    <td><span class="text-cyan">${l.planName}</span></td>
+                    <td>R$ ${l.amount ? l.amount.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) : '350,00'}</td>
+                </tr>`;
+            });
+        }
+        html += `</tbody></table></div>`;
+
+        if (category === 'complete') {
+            html += `<h4 class="margin-top-20">👁️ Registros de Tráfego de Clientes (${accessLogs.length} acessos)</h4>`;
+            html += `<div class="table-responsive"><table class="access-log-table">
+                <thead>
+                    <tr>
+                        <th>Data / Hora</th>
+                        <th>Dispositivo</th>
+                        <th>Navegador</th>
+                        <th>Tipo</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+            if (accessLogs.length === 0) {
+                html += `<tr><td colspan="4" class="text-center" style="padding: 20px;">Nenhum acesso registrado neste período.</td></tr>`;
+            } else {
+                accessLogs.forEach(log => {
+                    html += `<tr>
+                        <td>${log.timestamp}</td>
+                        <td>${log.device}</td>
+                        <td>${log.browser}</td>
+                        <td><span class="badge-tag">${log.type}</span></td>
+                    </tr>`;
+                });
+            }
+            html += `</tbody></table></div>`;
+        }
+
+        tableWrapper.innerHTML = html;
+    } else if (category === 'access') {
+        let html = `<h4>👁️ Registros de Tráfego & Acessos de Clientes (${accessLogs.length} acessos)</h4>`;
+        html += `<div class="table-responsive"><table class="access-log-table">
+            <thead>
+                <tr>
+                    <th>Data / Hora</th>
+                    <th>Dispositivo</th>
+                    <th>Navegador</th>
+                    <th>Tipo</th>
+                </tr>
+            </thead>
+            <tbody>`;
+        if (accessLogs.length === 0) {
+            html += `<tr><td colspan="4" class="text-center" style="padding: 20px;">Nenhum acesso registrado neste período.</td></tr>`;
+        } else {
+            accessLogs.forEach(log => {
+                html += `<tr>
+                    <td>${log.timestamp}</td>
+                    <td>${log.device}</td>
+                    <td>${log.browser}</td>
+                    <td><span class="badge-tag">${log.type}</span></td>
+                </tr>`;
+            });
+        }
+        html += `</tbody></table></div>`;
+        tableWrapper.innerHTML = html;
+    }
+}
+
+function exportReportCSV() {
+    const category = document.getElementById('reportCategory') ? document.getElementById('reportCategory').value : 'leads';
+    let csvContent = "data:text/csv;charset=utf-8,";
+
+    if (category === 'leads') {
+        csvContent += "Data/Hora;Cliente/Empresa;Plano Solicitado;Valor Estimado\n";
+        (appState.analytics.conversions || []).forEach(l => {
+            csvContent += `"${l.timestamp}";"${l.clientName}";"${l.planName}";"${l.amount || 350}"\n`;
+        });
+    } else {
+        csvContent += "Data/Hora;Dispositivo;Navegador;Tipo Visitante\n";
+        (appState.analytics.accessLogs || []).forEach(log => {
+            csvContent += `"${log.timestamp}";"${log.device}";"${log.browser}";"${log.type}"\n`;
+        });
+    }
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", `relatorio_lumen_${category}_${Date.now()}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    showToast("Relatório baixado em formato CSV/Excel!", "success");
+}
+
+function printReportPDF() {
+    window.print();
+}
+
 function readFileAsDataURL(file) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -715,12 +941,23 @@ document.addEventListener('DOMContentLoaded', () => {
                 populateAdminForms();
                 renderAnalyticsDashboard();
                 renderAdminCasesList();
+                generateCustomReport();
                 showToast("Autenticado com Sucesso no Painel Admin!", "success");
             } else {
                 showToast("Usuário ou senha de administrador incorretos!", "error");
             }
         });
     }
+
+    // Report Handlers
+    const btnGenerateReport = document.getElementById('btnGenerateReport');
+    if (btnGenerateReport) btnGenerateReport.addEventListener('click', generateCustomReport);
+
+    const btnExportReportCSV = document.getElementById('btnExportReportCSV');
+    if (btnExportReportCSV) btnExportReportCSV.addEventListener('click', exportReportCSV);
+
+    const btnPrintReport = document.getElementById('btnPrintReport');
+    if (btnPrintReport) btnPrintReport.addEventListener('click', printReportPDF);
 
     // Firebase Config Save Button
     const btnSaveFirebaseConfig = document.getElementById('btnSaveFirebaseConfig');
@@ -1081,6 +1318,7 @@ function populateAdminForms() {
 
     renderAnalyticsDashboard();
     renderAdminCasesList();
+    generateCustomReport();
 }
 
 function renderAdminCasesList() {
