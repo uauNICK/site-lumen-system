@@ -195,7 +195,7 @@ const REAL_ARTICLES = {
 
             <div class="article-callout">
                 <strong>💡 Fato de Mercado:</strong>
-                <p>Uma empresa sem site passa a impressão de ser temporária ou informal. O site institucional funciona como a sede oficial do seu negócio na internet.</p>
+                <p>Uma empresa sem site passa a impressionar como temporária ou informal. O site institucional funciona como a sede oficial do seu negócio na internet.</p>
             </div>
 
             <h3>3. A instabilidade do "terreno alugado" (Redes Sociais)</h3>
@@ -476,9 +476,13 @@ function renderApp() {
     const formattedPhone = formatPhone(settings.waNumber);
 
     if (document.getElementById('siteBrandName')) document.getElementById('siteBrandName').textContent = settings.brandName || "LUMEN SYSTEM";
-    if (document.getElementById('siteBrandSlogan')) document.getElementById('siteBrandSlogan').textContent = settings.brandSlogan || "CLAREZA GERA RESULTADOS";
+    if (document.getElementById('siteBrandSlogan')) {
+        document.getElementById('siteBrandSlogan').innerHTML = (settings.brandSlogan || "CLAREZA GERA RESULTADOS").replace(/\n/g, '<br>');
+    }
     if (document.getElementById('siteFooterBrandName')) document.getElementById('siteFooterBrandName').textContent = settings.brandName || "LUMEN SYSTEM";
-    if (document.getElementById('siteFooterBrandSlogan')) document.getElementById('siteFooterBrandSlogan').textContent = settings.brandSlogan || "CLAREZA GERA RESULTADOS";
+    if (document.getElementById('siteFooterBrandSlogan')) {
+        document.getElementById('siteFooterBrandSlogan').innerHTML = (settings.brandSlogan || "CLAREZA GERA RESULTADOS").replace(/\n/g, '<br>');
+    }
 
     if (settings.logoImage && document.getElementById('siteBrandLogo')) document.getElementById('siteBrandLogo').src = settings.logoImage;
     if (settings.logoImage && document.getElementById('siteFooterLogo')) document.getElementById('siteFooterLogo').src = settings.logoImage;
@@ -488,32 +492,38 @@ function renderApp() {
     if (document.getElementById('contactWaDisplay')) document.getElementById('contactWaDisplay').textContent = formattedPhone;
     if (document.getElementById('contactWaLink')) document.getElementById('contactWaLink').href = getWaLink();
     if (document.getElementById('contactEmailDisplay')) document.getElementById('contactEmailDisplay').textContent = settings.email;
-    if (document.getElementById('contactBusinessHoursDisplay')) document.getElementById('contactBusinessHoursDisplay').textContent = settings.businessHours || "Segunda a Sábado - 08h às 20h";
+    if (document.getElementById('contactBusinessHoursDisplay')) {
+        document.getElementById('contactBusinessHoursDisplay').innerHTML = (settings.businessHours || "Segunda a Sábado - 08h às 20h").replace(/\n/g, '<br>');
+    }
     if (document.getElementById('footerWaDisplay')) document.getElementById('footerWaDisplay').textContent = formattedPhone;
     if (document.getElementById('footerEmailDisplay')) document.getElementById('footerEmailDisplay').textContent = settings.email;
     if (document.getElementById('floatWaBtn')) document.getElementById('floatWaBtn').href = getWaLink();
 
     if (document.getElementById('heroTitle')) {
-        document.getElementById('heroTitle').innerHTML = settings.heroTitle.includes('span') 
-            ? settings.heroTitle 
-            : settings.heroTitle.replace(/sem pagar tudo de uma vez/gi, '<span class="gradient-text">sem pagar tudo de uma vez</span>');
+        const rawHeroTitle = settings.heroTitle || "Sites profissionais para o seu negócio, sem pagar tudo de uma vez.";
+        const formattedTitle = rawHeroTitle.includes('span') 
+            ? rawHeroTitle 
+            : rawHeroTitle.replace(/sem pagar tudo de uma vez/gi, '<span class="gradient-text">sem pagar tudo de uma vez</span>');
+        document.getElementById('heroTitle').innerHTML = formattedTitle.replace(/\n/g, '<br>');
     }
+
     if (document.getElementById('heroSubtitle')) {
-        document.getElementById('heroSubtitle').textContent = settings.heroSubtitle;
+        document.getElementById('heroSubtitle').innerHTML = (settings.heroSubtitle || "").replace(/\n/g, '<br>');
     }
 
     // Dynamic About Us Title and Text Rendering
     if (document.getElementById('siteAboutTitle')) {
         const titleStr = settings.aboutTitle || "Clareza Gera Resultados";
-        document.getElementById('siteAboutTitle').innerHTML = titleStr.includes('span')
+        const formattedAboutTitle = titleStr.includes('span')
             ? titleStr
             : titleStr.replace(/Resultados/gi, '<span class="gradient-text">Resultados</span>');
+        document.getElementById('siteAboutTitle').innerHTML = formattedAboutTitle.replace(/\n/g, '<br>');
     }
 
     if (document.getElementById('siteAboutTextContainer')) {
         const rawText = settings.aboutText || "";
         const paragraphs = rawText.split('\n\n').filter(Boolean);
-        document.getElementById('siteAboutTextContainer').innerHTML = paragraphs.map(p => `<p class="about-desc">${p.trim()}</p>`).join('');
+        document.getElementById('siteAboutTextContainer').innerHTML = paragraphs.map(p => `<p class="about-desc">${p.trim().replace(/\n/g, '<br>')}</p>`).join('');
     }
 
     renderPlansGrid();
