@@ -76,7 +76,6 @@ function loadState() {
     if (saved) {
         try {
             const parsed = JSON.parse(saved);
-            // Merge defaults to ensure no missing keys
             return {
                 ...DEFAULT_STATE,
                 ...parsed,
@@ -114,6 +113,7 @@ function getWaLink(customMessage = "") {
 
 function showToast(msg, type = "info") {
     const container = document.getElementById('toastContainer');
+    if (!container) return;
     const toast = document.createElement('div');
     toast.className = `toast toast-${type}`;
     toast.innerHTML = `<i class="fa-solid fa-circle-check text-cyan"></i> <span>${msg}</span>`;
@@ -121,7 +121,7 @@ function showToast(msg, type = "info") {
     setTimeout(() => toast.remove(), 4000);
 }
 
-// Apply Dynamic CSS Colors Palette to Document Root
+// Apply Dynamic CSS Colors Palette
 function applyThemeColors() {
     const { colors } = appState;
     if (!colors) return;
@@ -146,14 +146,16 @@ function renderApp() {
     const formattedPhone = formatPhone(settings.waNumber);
 
     // Brand Name & Slogan
-    document.getElementById('siteBrandName').textContent = settings.brandName || "LUMEN SYSTEM";
-    document.getElementById('siteBrandSlogan').textContent = settings.brandSlogan || "CLAREZA GERA RESULTADOS";
-    document.getElementById('siteFooterBrandName').textContent = settings.brandName || "LUMEN SYSTEM";
-    document.getElementById('siteFooterBrandSlogan').textContent = settings.brandSlogan || "CLAREZA GERA RESULTADOS";
+    if (document.getElementById('siteBrandName')) document.getElementById('siteBrandName').textContent = settings.brandName || "LUMEN SYSTEM";
+    if (document.getElementById('siteBrandSlogan')) document.getElementById('siteBrandSlogan').textContent = settings.brandSlogan || "CLAREZA GERA RESULTADOS";
+    if (document.getElementById('siteFooterBrandName')) document.getElementById('siteFooterBrandName').textContent = settings.brandName || "LUMEN SYSTEM";
+    if (document.getElementById('siteFooterBrandSlogan')) document.getElementById('siteFooterBrandSlogan').textContent = settings.brandSlogan || "CLAREZA GERA RESULTADOS";
 
     // Images
-    if (settings.logoImage) {
+    if (settings.logoImage && document.getElementById('siteBrandLogo')) {
         document.getElementById('siteBrandLogo').src = settings.logoImage;
+    }
+    if (settings.logoImage && document.getElementById('siteFooterLogo')) {
         document.getElementById('siteFooterLogo').src = settings.logoImage;
     }
     if (settings.heroImage && document.getElementById('heroMainImage')) {
@@ -164,19 +166,23 @@ function renderApp() {
     }
 
     // Displays
-    document.getElementById('headerWaDisplay').textContent = "Contato";
-    document.getElementById('contactWaDisplay').textContent = formattedPhone;
-    document.getElementById('contactWaLink').href = getWaLink();
-    document.getElementById('contactEmailDisplay').textContent = settings.email;
-    document.getElementById('footerWaDisplay').textContent = formattedPhone;
-    document.getElementById('footerEmailDisplay').textContent = settings.email;
-    document.getElementById('floatWaBtn').href = getWaLink();
+    if (document.getElementById('headerWaDisplay')) document.getElementById('headerWaDisplay').textContent = "Contato";
+    if (document.getElementById('contactWaDisplay')) document.getElementById('contactWaDisplay').textContent = formattedPhone;
+    if (document.getElementById('contactWaLink')) document.getElementById('contactWaLink').href = getWaLink();
+    if (document.getElementById('contactEmailDisplay')) document.getElementById('contactEmailDisplay').textContent = settings.email;
+    if (document.getElementById('footerWaDisplay')) document.getElementById('footerWaDisplay').textContent = formattedPhone;
+    if (document.getElementById('footerEmailDisplay')) document.getElementById('footerEmailDisplay').textContent = settings.email;
+    if (document.getElementById('floatWaBtn')) document.getElementById('floatWaBtn').href = getWaLink();
 
     // Hero Texts
-    document.getElementById('heroTitle').innerHTML = settings.heroTitle.includes('span') 
-        ? settings.heroTitle 
-        : settings.heroTitle.replace(/sem pagar tudo de uma vez/gi, '<span class="gradient-text">sem pagar tudo de uma vez</span>');
-    document.getElementById('heroSubtitle').textContent = settings.heroSubtitle;
+    if (document.getElementById('heroTitle')) {
+        document.getElementById('heroTitle').innerHTML = settings.heroTitle.includes('span') 
+            ? settings.heroTitle 
+            : settings.heroTitle.replace(/sem pagar tudo de uma vez/gi, '<span class="gradient-text">sem pagar tudo de uma vez</span>');
+    }
+    if (document.getElementById('heroSubtitle')) {
+        document.getElementById('heroSubtitle').textContent = settings.heroSubtitle;
+    }
 
     // Plans Render
     renderPlansGrid();
@@ -285,7 +291,6 @@ function renderPortfolioGrid() {
     grid.innerHTML = '';
     const cases = appState.portfolioCases || [];
 
-    // Sort so featured item comes first
     const sortedCases = [...cases].sort((a, b) => (b.isFeatured ? 1 : 0) - (a.isFeatured ? 1 : 0));
 
     sortedCases.forEach(item => {
@@ -316,7 +321,6 @@ function renderPortfolioGrid() {
     });
 }
 
-// Helper to convert File to Base64 DataURL
 function readFileAsDataURL(file) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -330,48 +334,57 @@ function readFileAsDataURL(file) {
 document.addEventListener('DOMContentLoaded', () => {
     renderApp();
 
+    // Auto open admin if hash #admin
+    if (window.location.hash === '#admin') {
+        const modal = document.getElementById('adminModalBackdrop');
+        if (modal) modal.classList.add('active');
+    }
+
     // Scroll Header effect
     const siteHeader = document.getElementById('siteHeader');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 30) {
-            siteHeader.classList.add('scrolled');
-        } else {
-            siteHeader.classList.remove('scrolled');
-        }
-    });
+    if (siteHeader) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 30) siteHeader.classList.add('scrolled');
+            else siteHeader.classList.remove('scrolled');
+        });
+    }
 
     // Accordion Toggle
     const accordionItems = document.querySelectorAll('.accordion-item');
     accordionItems.forEach(item => {
         const header = item.querySelector('.accordion-header');
-        header.addEventListener('click', () => {
-            const isActive = item.classList.contains('active');
-            accordionItems.forEach(i => i.classList.remove('active'));
-            if (!isActive) item.classList.add('active');
-        });
+        if (header) {
+            header.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                accordionItems.forEach(i => i.classList.remove('active'));
+                if (!isActive) item.classList.add('active');
+            });
+        }
     });
 
     // Contact Form
     const contactForm = document.getElementById('contactForm');
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const name = document.getElementById('contactName').value;
-        const business = document.getElementById('contactBusiness').value;
-        const phone = document.getElementById('contactPhone').value;
-        const email = document.getElementById('contactEmail').value;
-        const msg = document.getElementById('contactMessage').value;
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('contactName').value;
+            const business = document.getElementById('contactBusiness').value;
+            const phone = document.getElementById('contactPhone').value;
+            const email = document.getElementById('contactEmail').value;
+            const msg = document.getElementById('contactMessage').value;
 
-        showToast("Mensagem formatada! Redirecionando para o WhatsApp...", "success");
+            showToast("Mensagem formatada! Redirecionando para o WhatsApp...", "success");
 
-        let waText = `Olá! Meu nome é *${name}* da empresa *${business}*.\n`;
-        waText += `Telefone: ${phone} | E-mail: ${email || 'Não informado'}\n\n`;
-        waText += `Mensagem: ${msg || 'Gostaria de solicitar um orçamento para site por assinatura.'}`;
+            let waText = `Olá! Meu nome é *${name}* da empresa *${business}*.\n`;
+            waText += `Telefone: ${phone} | E-mail: ${email || 'Não informado'}\n\n`;
+            waText += `Mensagem: ${msg || 'Gostaria de solicitar um orçamento para site por assinatura.'}`;
 
-        setTimeout(() => {
-            window.open(getWaLink(waText), '_blank');
-            contactForm.reset();
-        }, 1200);
-    });
+            setTimeout(() => {
+                window.open(getWaLink(waText), '_blank');
+                contactForm.reset();
+            }, 1200);
+        });
+    }
 
     // Modal Triggers
     const adminModalBackdrop = document.getElementById('adminModalBackdrop');
@@ -380,32 +393,34 @@ document.addEventListener('DOMContentLoaded', () => {
     const footerAdminLink = document.getElementById('footerAdminLink');
     const closeAdminModalBtn = document.getElementById('closeAdminModalBtn');
 
-    function openAdminModal() { adminModalBackdrop.classList.add('active'); }
-    function closeAdminModal() { adminModalBackdrop.classList.remove('active'); }
+    function openAdminModal() { if (adminModalBackdrop) adminModalBackdrop.classList.add('active'); }
+    function closeAdminModal() { if (adminModalBackdrop) adminModalBackdrop.classList.remove('active'); }
 
-    openAdminBtn.addEventListener('click', openAdminModal);
-    floatAdminBtn.addEventListener('click', openAdminModal);
-    footerAdminLink.addEventListener('click', openAdminModal);
-    closeAdminModalBtn.addEventListener('click', closeAdminModal);
+    if (openAdminBtn) openAdminBtn.addEventListener('click', openAdminModal);
+    if (floatAdminBtn) floatAdminBtn.addEventListener('click', openAdminModal);
+    if (footerAdminLink) footerAdminLink.addEventListener('click', openAdminModal);
+    if (closeAdminModalBtn) closeAdminModalBtn.addEventListener('click', closeAdminModal);
 
-    // Login Form
+    // Login Form Authentication (SECURE CREDENTIALS: lumenadmin / Lumen123@)
     const adminLoginForm = document.getElementById('adminLoginForm');
-    adminLoginForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const u = document.getElementById('adminUser').value.trim();
-        const p = document.getElementById('adminPass').value.trim();
+    if (adminLoginForm) {
+        adminLoginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const u = document.getElementById('adminUser').value.trim();
+            const p = document.getElementById('adminPass').value.trim();
 
-        if (u === "admin" && p === "lumen123") {
-            isAdminLoggedIn = true;
-            document.getElementById('adminLoginView').classList.add('hidden');
-            document.getElementById('adminDashboardView').classList.remove('hidden');
-            populateAdminForms();
-            renderAdminCasesList();
-            showToast("Painel Admin Completo Autenticado com Sucesso!", "success");
-        } else {
-            showToast("Usuário ou senha incorretos!", "error");
-        }
-    });
+            if (u === "lumenadmin" && p === "Lumen123@") {
+                isAdminLoggedIn = true;
+                document.getElementById('adminLoginView').classList.add('hidden');
+                document.getElementById('adminDashboardView').classList.remove('hidden');
+                populateAdminForms();
+                renderAdminCasesList();
+                showToast("Autenticado com Sucesso no Painel Admin!", "success");
+            } else {
+                showToast("Usuário ou senha de administrador incorretos!", "error");
+            }
+        });
+    }
 
     // Admin Navigation Tabs
     const tabBtns = document.querySelectorAll('.tab-btn');
@@ -414,32 +429,36 @@ document.addEventListener('DOMContentLoaded', () => {
             tabBtns.forEach(b => b.classList.remove('active'));
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             tBtn.classList.add('active');
-            document.getElementById(tBtn.getAttribute('data-tab')).classList.add('active');
+            const targetTab = document.getElementById(tBtn.getAttribute('data-tab'));
+            if (targetTab) targetTab.classList.add('active');
         });
     });
 
-    // Image Upload Inputs Handlers (FileReader Base64)
+    // Image Upload Inputs
     setupImageUploader('fileUploadLogo', 'urlInputLogo', 'previewAdminLogo', 'logo');
     setupImageUploader('fileUploadHero', 'urlInputHero', 'previewAdminHero', 'hero');
     setupImageUploader('fileUploadAbout', 'urlInputAbout', 'previewAdminAbout', 'about');
 
-    document.getElementById('btnSaveImages').addEventListener('click', () => {
-        const logoUrl = document.getElementById('urlInputLogo').value.trim();
-        const heroUrl = document.getElementById('urlInputHero').value.trim();
-        const aboutUrl = document.getElementById('urlInputAbout').value.trim();
+    const btnSaveImages = document.getElementById('btnSaveImages');
+    if (btnSaveImages) {
+        btnSaveImages.addEventListener('click', () => {
+            const logoUrl = document.getElementById('urlInputLogo').value.trim();
+            const heroUrl = document.getElementById('urlInputHero').value.trim();
+            const aboutUrl = document.getElementById('urlInputAbout').value.trim();
 
-        if (tempImages.logo) appState.settings.logoImage = tempImages.logo;
-        else if (logoUrl) appState.settings.logoImage = logoUrl;
+            if (tempImages.logo) appState.settings.logoImage = tempImages.logo;
+            else if (logoUrl) appState.settings.logoImage = logoUrl;
 
-        if (tempImages.hero) appState.settings.heroImage = tempImages.hero;
-        else if (heroUrl) appState.settings.heroImage = heroUrl;
+            if (tempImages.hero) appState.settings.heroImage = tempImages.hero;
+            else if (heroUrl) appState.settings.heroImage = heroUrl;
 
-        if (tempImages.about) appState.settings.aboutImage = tempImages.about;
-        else if (aboutUrl) appState.settings.aboutImage = aboutUrl;
+            if (tempImages.about) appState.settings.aboutImage = tempImages.about;
+            else if (aboutUrl) appState.settings.aboutImage = aboutUrl;
 
-        saveState();
-        showToast("Imagens e Logotipo atualizados com sucesso!", "success");
-    });
+            saveState();
+            showToast("Imagens e Logotipo atualizados com sucesso!", "success");
+        });
+    }
 
     // Color Pickers Handlers
     bindColorPicker('colorCyan', 'colorCyanText');
@@ -447,65 +466,93 @@ document.addEventListener('DOMContentLoaded', () => {
     bindColorPicker('colorMagenta', 'colorMagentaText');
     bindColorPicker('colorBgDark', 'colorBgDarkText');
 
-    document.getElementById('themeColorForm').addEventListener('submit', (e) => {
-        e.preventDefault();
-        appState.colors = {
-            cyan: document.getElementById('colorCyan').value,
-            violet: document.getElementById('colorViolet').value,
-            magenta: document.getElementById('colorMagenta').value,
-            bgDark: document.getElementById('colorBgDark').value
-        };
-        saveState();
-        showToast("Paleta de cores aplicada e salva no site!", "success");
-    });
+    const themeColorForm = document.getElementById('themeColorForm');
+    if (themeColorForm) {
+        themeColorForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            appState.colors = {
+                cyan: document.getElementById('colorCyan').value,
+                violet: document.getElementById('colorViolet').value,
+                magenta: document.getElementById('colorMagenta').value,
+                bgDark: document.getElementById('colorBgDark').value
+            };
+            saveState();
+            showToast("Paleta de cores aplicada e salva no site!", "success");
+        });
+    }
 
-    document.getElementById('btnResetColors').addEventListener('click', () => {
-        appState.colors = { ...DEFAULT_STATE.colors };
-        saveState();
-        populateAdminForms();
-        showToast("Paleta de cores restaurada para o padrão!", "info");
-    });
+    const btnResetColors = document.getElementById('btnResetColors');
+    if (btnResetColors) {
+        btnResetColors.addEventListener('click', () => {
+            appState.colors = { ...DEFAULT_STATE.colors };
+            saveState();
+            populateAdminForms();
+            showToast("Paleta de cores restaurada para o padrão!", "info");
+        });
+    }
 
     // Portfolio Case Form Handlers
     const btnAddNewCase = document.getElementById('btnAddNewCase');
     const caseForm = document.getElementById('caseForm');
     const btnCancelCaseForm = document.getElementById('btnCancelCaseForm');
 
-    btnAddNewCase.addEventListener('click', () => {
-        caseForm.reset();
-        tempImages.case = null;
-        document.getElementById('caseEditId').value = "";
-        document.getElementById('caseFormTitle').textContent = "Adicionar Novo Case no Portfólio";
-        caseForm.classList.remove('hidden');
-    });
+    if (btnAddNewCase) {
+        btnAddNewCase.addEventListener('click', () => {
+            caseForm.reset();
+            tempImages.case = null;
+            document.getElementById('caseEditId').value = "";
+            document.getElementById('caseFormTitle').textContent = "Adicionar Novo Case no Portfólio";
+            caseForm.classList.remove('hidden');
+        });
+    }
 
-    btnCancelCaseForm.addEventListener('click', () => {
-        caseForm.classList.add('hidden');
-    });
+    if (btnCancelCaseForm) {
+        btnCancelCaseForm.addEventListener('click', () => {
+            caseForm.classList.add('hidden');
+        });
+    }
 
-    document.getElementById('fileCaseImage').addEventListener('change', async (e) => {
-        if (e.target.files && e.target.files[0]) {
-            tempImages.case = await readFileAsDataURL(e.target.files[0]);
-        }
-    });
+    const fileCaseImage = document.getElementById('fileCaseImage');
+    if (fileCaseImage) {
+        fileCaseImage.addEventListener('change', async (e) => {
+            if (e.target.files && e.target.files[0]) {
+                tempImages.case = await readFileAsDataURL(e.target.files[0]);
+            }
+        });
+    }
 
-    caseForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const idVal = document.getElementById('caseEditId').value;
-        const title = document.getElementById('caseTitle').value.trim();
-        const tag = document.getElementById('caseTag').value.trim();
-        const url = document.getElementById('caseUrl').value.trim();
-        const imageUrlInput = document.getElementById('caseImageUrl').value.trim();
-        const desc = document.getElementById('caseDesc').value.trim();
-        const isFeatured = document.getElementById('caseIsFeatured').checked;
+    if (caseForm) {
+        caseForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const idVal = document.getElementById('caseEditId').value;
+            const title = document.getElementById('caseTitle').value.trim();
+            const tag = document.getElementById('caseTag').value.trim();
+            const url = document.getElementById('caseUrl').value.trim();
+            const imageUrlInput = document.getElementById('caseImageUrl').value.trim();
+            const desc = document.getElementById('caseDesc').value.trim();
+            const isFeatured = document.getElementById('caseIsFeatured').checked;
 
-        const finalImage = tempImages.case || imageUrlInput || "assets/logo_lumen_system.jpg";
+            const finalImage = tempImages.case || imageUrlInput || "assets/logo_lumen_system.jpg";
 
-        if (idVal) {
-            const idx = appState.portfolioCases.findIndex(c => c.id == idVal);
-            if (idx !== -1) {
-                appState.portfolioCases[idx] = {
-                    id: parseInt(idVal),
+            if (idVal) {
+                const idx = appState.portfolioCases.findIndex(c => c.id == idVal);
+                if (idx !== -1) {
+                    appState.portfolioCases[idx] = {
+                        id: parseInt(idVal),
+                        title,
+                        tag: isFeatured ? "Cliente Principal" : tag,
+                        subtag: tag,
+                        url,
+                        image: finalImage,
+                        desc,
+                        isFeatured
+                    };
+                    showToast("Case atualizado no portfólio!", "success");
+                }
+            } else {
+                const newId = appState.portfolioCases.length ? Math.max(...appState.portfolioCases.map(c => c.id)) + 1 : 1;
+                appState.portfolioCases.push({
+                    id: newId,
                     title,
                     tag: isFeatured ? "Cliente Principal" : tag,
                     subtag: tag,
@@ -513,52 +560,45 @@ document.addEventListener('DOMContentLoaded', () => {
                     image: finalImage,
                     desc,
                     isFeatured
-                };
-                showToast("Case atualizado no portfólio!", "success");
+                });
+                showToast("Novo case adicionado ao portfólio!", "success");
             }
-        } else {
-            const newId = appState.portfolioCases.length ? Math.max(...appState.portfolioCases.map(c => c.id)) + 1 : 1;
-            appState.portfolioCases.push({
-                id: newId,
-                title,
-                tag: isFeatured ? "Cliente Principal" : tag,
-                subtag: tag,
-                url,
-                image: finalImage,
-                desc,
-                isFeatured
-            });
-            showToast("Novo case adicionado ao portfólio!", "success");
-        }
 
-        saveState();
-        caseForm.classList.add('hidden');
-    });
+            saveState();
+            caseForm.classList.add('hidden');
+        });
+    }
 
     // General Settings Save
-    document.getElementById('generalSettingsForm').addEventListener('submit', (e) => {
-        e.preventDefault();
-        appState.settings.brandName = document.getElementById('settingBrandName').value.trim();
-        appState.settings.brandSlogan = document.getElementById('settingBrandSlogan').value.trim();
-        appState.settings.waNumber = document.getElementById('settingWaNumber').value.trim();
-        appState.settings.email = document.getElementById('settingEmail').value.trim();
-        appState.settings.heroTitle = document.getElementById('settingHeroTitle').value.trim();
-        appState.settings.heroSubtitle = document.getElementById('settingHeroSubtitle').value.trim();
+    const generalSettingsForm = document.getElementById('generalSettingsForm');
+    if (generalSettingsForm) {
+        generalSettingsForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            appState.settings.brandName = document.getElementById('settingBrandName').value.trim();
+            appState.settings.brandSlogan = document.getElementById('settingBrandSlogan').value.trim();
+            appState.settings.waNumber = document.getElementById('settingWaNumber').value.trim();
+            appState.settings.email = document.getElementById('settingEmail').value.trim();
+            appState.settings.heroTitle = document.getElementById('settingHeroTitle').value.trim();
+            appState.settings.heroSubtitle = document.getElementById('settingHeroSubtitle').value.trim();
 
-        saveState();
-        showToast("Informações da empresa salvas com sucesso!", "success");
-    });
+            saveState();
+            showToast("Informações da empresa salvas com sucesso!", "success");
+        });
+    }
 
     // Reset Factory
-    document.getElementById('btnResetToDefaults').addEventListener('click', () => {
-        if (confirm("Deseja realmente restaurar todos os dados, fotos, cores e planos para os padrões de fábrica?")) {
-            localStorage.removeItem('lumen_full_admin_state');
-            appState = JSON.parse(JSON.stringify(DEFAULT_STATE));
-            saveState();
-            populateAdminForms();
-            showToast("Todos os dados foram resetados para os padrões originais!", "info");
-        }
-    });
+    const btnResetToDefaults = document.getElementById('btnResetToDefaults');
+    if (btnResetToDefaults) {
+        btnResetToDefaults.addEventListener('click', () => {
+            if (confirm("Deseja realmente restaurar todos os dados, fotos, cores e planos para os padrões de fábrica?")) {
+                localStorage.removeItem('lumen_full_admin_state');
+                appState = JSON.parse(JSON.stringify(DEFAULT_STATE));
+                saveState();
+                populateAdminForms();
+                showToast("Todos os dados foram resetados para os padrões originais!", "info");
+            }
+        });
+    }
 });
 
 function setupImageUploader(fileInputId, urlInputId, previewImgId, key) {
@@ -601,46 +641,42 @@ function bindColorPicker(pickerId, textId) {
 function populateAdminForms() {
     const { settings, colors, plans } = appState;
 
-    // Images previews & URLs
     if (document.getElementById('previewAdminLogo')) document.getElementById('previewAdminLogo').src = settings.logoImage;
     if (document.getElementById('previewAdminHero')) document.getElementById('previewAdminHero').src = settings.heroImage;
     if (document.getElementById('previewAdminAbout')) document.getElementById('previewAdminAbout').src = settings.aboutImage;
 
-    document.getElementById('urlInputLogo').value = settings.logoImage || "";
-    document.getElementById('urlInputHero').value = settings.heroImage || "";
-    document.getElementById('urlInputAbout').value = settings.aboutImage || "";
+    if (document.getElementById('urlInputLogo')) document.getElementById('urlInputLogo').value = settings.logoImage || "";
+    if (document.getElementById('urlInputHero')) document.getElementById('urlInputHero').value = settings.heroImage || "";
+    if (document.getElementById('urlInputAbout')) document.getElementById('urlInputAbout').value = settings.aboutImage || "";
 
-    // Colors
     if (colors) {
-        document.getElementById('colorCyan').value = colors.cyan;
-        document.getElementById('colorCyanText').value = colors.cyan;
+        if (document.getElementById('colorCyan')) document.getElementById('colorCyan').value = colors.cyan;
+        if (document.getElementById('colorCyanText')) document.getElementById('colorCyanText').value = colors.cyan;
 
-        document.getElementById('colorViolet').value = colors.violet;
-        document.getElementById('colorVioletText').value = colors.violet;
+        if (document.getElementById('colorViolet')) document.getElementById('colorViolet').value = colors.violet;
+        if (document.getElementById('colorVioletText')) document.getElementById('colorVioletText').value = colors.violet;
 
-        document.getElementById('colorMagenta').value = colors.magenta;
-        document.getElementById('colorMagentaText').value = colors.magenta;
+        if (document.getElementById('colorMagenta')) document.getElementById('colorMagenta').value = colors.magenta;
+        if (document.getElementById('colorMagentaText')) document.getElementById('colorMagentaText').value = colors.magenta;
 
-        document.getElementById('colorBgDark').value = colors.bgDark;
-        document.getElementById('colorBgDarkText').value = colors.bgDark;
+        if (document.getElementById('colorBgDark')) document.getElementById('colorBgDark').value = colors.bgDark;
+        if (document.getElementById('colorBgDarkText')) document.getElementById('colorBgDarkText').value = colors.bgDark;
     }
 
-    // General settings
-    document.getElementById('settingBrandName').value = settings.brandName || "LUMEN SYSTEM";
-    document.getElementById('settingBrandSlogan').value = settings.brandSlogan || "CLAREZA GERA RESULTADOS";
-    document.getElementById('settingWaNumber').value = settings.waNumber || "24992584133";
-    document.getElementById('settingEmail').value = settings.email || "contato@lumensystem.com.br";
-    document.getElementById('settingHeroTitle').value = settings.heroTitle;
-    document.getElementById('settingHeroSubtitle').value = settings.heroSubtitle;
+    if (document.getElementById('settingBrandName')) document.getElementById('settingBrandName').value = settings.brandName || "LUMEN SYSTEM";
+    if (document.getElementById('settingBrandSlogan')) document.getElementById('settingBrandSlogan').value = settings.brandSlogan || "CLAREZA GERA RESULTADOS";
+    if (document.getElementById('settingWaNumber')) document.getElementById('settingWaNumber').value = settings.waNumber || "24992584133";
+    if (document.getElementById('settingEmail')) document.getElementById('settingEmail').value = settings.email || "contato@lumensystem.com.br";
+    if (document.getElementById('settingHeroTitle')) document.getElementById('settingHeroTitle').value = settings.heroTitle;
+    if (document.getElementById('settingHeroSubtitle')) document.getElementById('settingHeroSubtitle').value = settings.heroSubtitle;
 
-    // Plans
     if (plans) {
-        document.getElementById('plan1Setup').value = plans.plan1.setup;
-        document.getElementById('plan1Monthly').value = plans.plan1.monthly;
-        document.getElementById('plan2Setup').value = plans.plan2.setup;
-        document.getElementById('plan2Monthly').value = plans.plan2.monthly;
-        document.getElementById('plan3Setup').value = plans.plan3.setup;
-        document.getElementById('plan3Monthly').value = plans.plan3.monthly;
+        if (document.getElementById('plan1Setup')) document.getElementById('plan1Setup').value = plans.plan1.setup;
+        if (document.getElementById('plan1Monthly')) document.getElementById('plan1Monthly').value = plans.plan1.monthly;
+        if (document.getElementById('plan2Setup')) document.getElementById('plan2Setup').value = plans.plan2.setup;
+        if (document.getElementById('plan2Monthly')) document.getElementById('plan2Monthly').value = plans.plan2.monthly;
+        if (document.getElementById('plan3Setup')) document.getElementById('plan3Setup').value = plans.plan3.setup;
+        if (document.getElementById('plan3Monthly')) document.getElementById('plan3Monthly').value = plans.plan3.monthly;
     }
 
     renderAdminCasesList();

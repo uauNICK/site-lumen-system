@@ -509,7 +509,7 @@
             <div class="modal-header">
                 <div class="modal-title">
                     <i class="fa-solid fa-user-shield text-cyan"></i>
-                    <span>Painel Administrativo Completo <strong>Lumen System</strong></span>
+                    <span>Painel Administrativo Restrito <strong>Lumen System</strong></span>
                 </div>
                 <button class="modal-close" id="closeAdminModalBtn">&times;</button>
             </div>
@@ -517,20 +517,20 @@
             <div class="modal-body">
                 <!-- Login View -->
                 <div id="adminLoginView" class="admin-view">
-                    <p class="login-instruction">Acesso restrito para administradores. Faça login para gerenciar fotos, cores, planos e portfólio.</p>
+                    <p class="login-instruction">Acesso restrito a administradores autorizados.</p>
                     <form id="adminLoginForm" class="login-form">
                         <div class="form-group">
-                            <label for="adminUser">Usuário</label>
-                            <input type="text" id="adminUser" placeholder="Ex: admin" required value="admin">
+                            <label for="adminUser">Usuário Admin</label>
+                            <input type="text" id="adminUser" placeholder="Informe o usuário admin" required>
                         </div>
                         <div class="form-group">
-                            <label for="adminPass">Senha</label>
-                            <input type="password" id="adminPass" placeholder="Senha admin" required value="lumen123">
+                            <label for="adminPass">Senha de Acesso</label>
+                            <input type="password" id="adminPass" placeholder="Informe sua senha privada" required>
                         </div>
                         <button type="submit" class="btn btn-primary btn-full">
-                            <i class="fa-solid fa-right-to-bracket"></i> Entrar no Painel Admin
+                            <i class="fa-solid fa-right-to-bracket"></i> Autenticar no Painel Admin
                         </button>
-                        <p class="login-hint"><i class="fa-solid fa-circle-info"></i> Credenciais padrão: Usuário: <code>admin</code> | Senha: <code>lumen123</code></p>
+                        <p class="login-hint"><i class="fa-solid fa-shield-halved text-cyan"></i> Acesso protegido com autenticação administrativa restrita.</p>
                     </form>
                 </div>
 

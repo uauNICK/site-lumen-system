@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumen System | Portal de Administração Exclusivo</title>
+    <meta name="robots" content="noindex, nofollow">
+    <!-- Google Fonts: Syne & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .standalone-admin-container {
+            width: 100%;
+            max-width: 900px;
+            background: var(--bg-modal);
+            border: 1px solid var(--border-glow);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.9);
+        }
+        .admin-page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 20px;
+            margin-bottom: 24px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-glow bg-glow-1" id="bgGlow1"></div>
+    <div class="ambient-glow bg-glow-2" id="bgGlow2"></div>
+
+    <div class="standalone-admin-container">
+        <div class="admin-page-header">
+            <a href="index.html" class="logo-brand">
+                <img src="assets/logo_lumen_system.jpg" alt="Lumen System Logo" class="brand-logo-img" id="siteBrandLogo">
+                <div class="brand-text">
+                    <span class="brand-name" id="siteBrandName">LUMEN SYSTEM</span>
+                    <span class="brand-slogan" id="siteBrandSlogan">PORTAL ADMIN EXCLUSIVO</span>
+                </div>
+            </a>
+            <a href="index.html" class="btn btn-outline btn-sm">
+                <i class="fa-solid fa-arrow-left"></i> Voltar ao Site Público
+            </a>
+        </div>
+
+        <!-- Login View -->
+        <div id="adminLoginView" class="admin-view">
+            <h2 class="text-center margin-bottom-6">Acesso Administrativo Restrito</h2>
+            <p class="login-instruction text-center">Digite suas credenciais exclusivas para acessar o painel de gerenciamento.</p>
+            <form id="adminLoginForm" class="login-form">
+                <div class="form-group">
+                    <label for="adminUser">Usuário Admin</label>
+                    <input type="text" id="adminUser" placeholder="Usuário administrador" required>
+                </div>
+                <div class="form-group">
+                    <label for="adminPass">Senha de Acesso</label>
+                    <input type="password" id="adminPass" placeholder="Senha privada" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full btn-lg">
+                    <i class="fa-solid fa-right-to-bracket"></i> Entrar no Painel Admin
+                </button>
+                <p class="login-hint text-center margin-top-20"><i class="fa-solid fa-shield-halved text-cyan"></i> Acesso seguro e restrito à equipe Lumen System.</p>
+            </form>
+        </div>
+
+        <!-- Admin Dashboard View -->
+        <div id="adminDashboardView" class="admin-view hidden">
+            <div class="admin-nav-tabs">
+                <button class="tab-btn active" data-tab="tab-images"><i class="fa-solid fa-image"></i> Imagens & Logo</button>
+                <button class="tab-btn" data-tab="tab-colors"><i class="fa-solid fa-palette"></i> Paleta de Cores</button>
+                <button class="tab-btn" data-tab="tab-portfolio-crud"><i class="fa-solid fa-briefcase"></i> Portfólio / Cases</button>
+                <button class="tab-btn" data-tab="tab-plans-edit"><i class="fa-solid fa-tags"></i> Preços dos Planos</button>
+                <button class="tab-btn" data-tab="tab-general"><i class="fa-solid fa-gear"></i> Empresa & Textos</button>
+            </div>
+
+            <!-- Tab 1: Upload & Replace Site Images & Logo -->
+            <div class="tab-content active" id="tab-images">
+                <h3>Gerenciamento de Imagens e Logotipo</h3>
+                <p class="tab-desc">Envie novas fotos direto do seu computador (Upload via arquivo) ou cole o link da imagem.</p>
+
+                <div class="admin-images-grid">
+                    <div class="image-upload-card">
+                        <h4>Logotipo Oficial da Empresa</h4>
+                        <div class="img-preview-box">
+                            <img src="assets/logo_lumen_system.jpg" id="previewAdminLogo" alt="Logo Preview">
+                        </div>
+                        <div class="upload-controls">
+                            <label class="btn btn-outline btn-sm upload-btn">
+                                <i class="fa-solid fa-upload"></i> Escolher Imagem (Upload)
+                                <input type="file" id="fileUploadLogo" accept="image/*" class="file-input-hidden">
+                            </label>
+                            <input type="text" id="urlInputLogo" placeholder="ou cole a URL da imagem..." class="form-input-sm">
+                        </div>
+                    </div>
+
+                    <div class="image-upload-card">
+                        <h4>Imagem Principal do Hero</h4>
+                        <div class="img-preview-box">
+                            <img src="assets/logo_lumen_system.jpg" id="previewAdminHero" alt="Hero Preview">
+                        </div>
+                        <div class="upload-controls">
+                            <label class="btn btn-outline btn-sm upload-btn">
+                                <i class="fa-solid fa-upload"></i> Escolher Imagem (Upload)
+                                <input type="file" id="fileUploadHero" accept="image/*" class="file-input-hidden">
+                            </label>
+                            <input type="text" id="urlInputHero" placeholder="ou cole a URL da imagem..." class="form-input-sm">
+                        </div>
+                    </div>
+
+                    <div class="image-upload-card">
+                        <h4>Imagem da Seção Sobre Nós</h4>
+                        <div class="img-preview-box">
+                            <img src="assets/logo_lumen_system.jpg" id="previewAdminAbout" alt="About Preview">
+                        </div>
+                        <div class="upload-controls">
+                            <label class="btn btn-outline btn-sm upload-btn">
+                                <i class="fa-solid fa-upload"></i> Escolher Imagem (Upload)
+                                <input type="file" id="fileUploadAbout" accept="image/*" class="file-input-hidden">
+                            </label>
+                            <input type="text" id="urlInputAbout" placeholder="ou cole a URL da imagem..." class="form-input-sm">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions margin-top-20">
+                    <button type="button" class="btn btn-primary" id="btnSaveImages"><i class="fa-solid fa-floppy-disk"></i> Salvar Todas as Imagens</button>
+                </div>
+            </div>
+
+            <!-- Tab 2: Custom Theme & Color Palette Picker -->
+            <div class="tab-content" id="tab-colors">
+                <h3>Personalização da Paleta de Cores do Site</h3>
+                <p class="tab-desc">Escolha as cores que combinam com a sua marca. As alterações refletem imediatamente no site.</p>
+
+                <form id="themeColorForm" class="settings-form">
+                    <div class="color-picker-grid">
+                        <div class="color-picker-item">
+                            <label for="colorCyan">Cor Primária (Ciano / Neon Principal)</label>
+                            <div class="color-input-flex">
+                                <input type="color" id="colorCyan" value="#00f0ff">
+                                <input type="text" id="colorCyanText" value="#00f0ff" readonly>
+                            </div>
+                        </div>
+
+                        <div class="color-picker-item">
+                            <label for="colorViolet">Cor Secundária (Violeta / Gradiente)</label>
+                            <div class="color-input-flex">
+                                <input type="color" id="colorViolet" value="#7000ff">
+                                <input type="text" id="colorVioletText" value="#7000ff" readonly>
+                            </div>
+                        </div>
+
+                        <div class="color-picker-item">
+                            <label for="colorMagenta">Cor de Acento (Magenta Glow)</label>
+                            <div class="color-input-flex">
+                                <input type="color" id="colorMagenta" value="#ff007f">
+                                <input type="text" id="colorMagentaText" value="#ff007f" readonly>
+                            </div>
+                        </div>
+
+                        <div class="color-picker-item">
+                            <label for="colorBgDark">Cor de Fundo Escuro (Background)</label>
+                            <div class="color-input-flex">
+                                <input type="color" id="colorBgDark" value="#090c15">
+                                <input type="text" id="colorBgDarkText" value="#090c15" readonly>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions margin-top-20">
+                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-palette"></i> Aplicar e Salvar Paleta de Cores</button>
+                        <button type="button" class="btn btn-outline" id="btnResetColors"><i class="fa-solid fa-rotate-left"></i> Restaurar Cores Padrão</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Tab 3: Portfolio & Cases CRUD -->
+            <div class="tab-content" id="tab-portfolio-crud">
+                <div class="tab-header-flex">
+                    <div>
+                        <h3>Gerenciador de Cases do Portfólio</h3>
+                        <p class="tab-desc">Adicione, edite ou remova os trabalhos exibidos na galeria.</p>
+                    </div>
+                    <button class="btn btn-primary btn-sm" id="btnAddNewCase">
+                        <i class="fa-solid fa-plus"></i> Adicionar Novo Case
+                    </button>
+                </div>
+
+                <!-- Case Edit/Add Form -->
+                <form id="caseForm" class="product-form hidden">
+                    <h4 id="caseFormTitle">Adicionar Novo Case no Portfólio</h4>
+                    <input type="hidden" id="caseEditId">
+
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label for="caseTitle">Nome do Cliente / Projeto *</label>
+                            <input type="text" id="caseTitle" placeholder="Ex: Cantinho do Sabor" required>
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="caseTag">Segmento / Categoria *</label>
+                            <input type="text" id="caseTag" placeholder="Ex: Gastronomia & Delivery" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label for="caseUrl">URL / Link do Site (Ex: https://...)</label>
+                            <input type="text" id="caseUrl" placeholder="Ex: https://cantinhodosaborvr.com.br" required>
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="caseImage">Imagem do Case (Upload ou URL)</label>
+                            <input type="file" id="fileCaseImage" accept="image/*" class="form-input-sm margin-bottom-6">
+                            <input type="text" id="caseImageUrl" placeholder="ou cole a URL da imagem da preview...">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="caseDesc">Descrição Curta / Resultado *</label>
+                        <textarea id="caseDesc" rows="3" placeholder="Descreva brevemente o que foi feito no projeto..." required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-card-inline">
+                            <input type="checkbox" id="caseIsFeatured">
+                            <span>Marcar como <strong>⭐ Cliente Principal / Destaque</strong></span>
+                        </label>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Salvar Case</button>
+                        <button type="button" class="btn btn-outline" id="btnCancelCaseForm">Cancelar</button>
+                    </div>
+                </form>
+
+                <!-- Portfolio Cases List -->
+                <div class="admin-products-list" id="adminCasesList">
+                    <!-- Dynamically populated -->
+                </div>
+            </div>
+
+            <!-- Tab 4: Plans Management -->
+            <div class="tab-content" id="tab-plans-edit">
+                <h3>Valores dos Planos (Setup & Mensalidade)</h3>
+                <form id="plansSettingsForm" class="settings-form">
+                    <div class="form-group">
+                        <label for="plan1Setup">Plano Essencial - Setup (R$)</label>
+                        <input type="text" id="plan1Setup" value="350,00">
+                        <label for="plan1Monthly">Plano Essencial - Mensalidade (R$)</label>
+                        <input type="text" id="plan1Monthly" value="89,00">
+                    </div>
+                    <hr style="border-color: var(--border-color); margin: 16px 0;">
+
+                    <div class="form-group">
+                        <label for="plan2Setup">Plano Profissional - Setup (R$)</label>
+                        <input type="text" id="plan2Setup" value="650,00">
+                        <label for="plan2Monthly">Plano Profissional - Mensalidade (R$)</label>
+                        <input type="text" id="plan2Monthly" value="149,00">
+                    </div>
+                    <hr style="border-color: var(--border-color); margin: 16px 0;">
+
+                    <div class="form-group">
+                        <label for="plan3Setup">Plano Loja / Sistema - Setup (R$)</label>
+                        <input type="text" id="plan3Setup" value="1200,00">
+                        <label for="plan3Monthly">Plano Loja / Sistema - Mensalidade (R$)</label>
+                        <input type="text" id="plan3Monthly" value="249,00">
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Salvar Preços dos Planos</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Tab 5: General Company Text & Settings -->
+            <div class="tab-content" id="tab-general">
+                <h3>Informações Gerais da Empresa e Textos</h3>
+                <form id="generalSettingsForm" class="settings-form">
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label for="settingBrandName">Nome da Empresa (Cabeçalho)</label>
+                            <input type="text" id="settingBrandName" value="LUMEN SYSTEM" required>
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="settingBrandSlogan">Slogan Oficial</label>
+                            <input type="text" id="settingBrandSlogan" value="CLAREZA GERA RESULTADOS" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label for="settingWaNumber">Telefone / WhatsApp (DDD + Número)</label>
+                            <input type="text" id="settingWaNumber" value="24992584133" required>
+                        </div>
+                        <div class="form-group col-6">
+                            <label for="settingEmail">E-mail Comercial</label>
+                            <input type="email" id="settingEmail" value="contato@lumensystem.com.br" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="settingHeroTitle">Título do Hero (Página Inicial)</label>
+                        <input type="text" id="settingHeroTitle" value="Sites profissionais para o seu negócio, sem pagar tudo de uma vez." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="settingHeroSubtitle">Subtítulo do Hero</label>
+                        <textarea id="settingHeroSubtitle" rows="3" required>Criamos e cuidamos do site da sua empresa por uma mensalidade acessível — hospedagem, suporte e atualizações inclusos.</textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Salvar Dados da Empresa</button>
+                        <button type="button" class="btn btn-danger-outline" id="btnResetToDefaults"><i class="fa-solid fa-rotate-left"></i> Resetar Tudo para Fábrica</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
