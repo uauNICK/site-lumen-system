@@ -62,7 +62,7 @@ function renderApp() {
     const formattedPhone = formatPhone(settings.waNumber);
 
     // Displays
-    document.getElementById('headerWaDisplay').textContent = formattedPhone;
+    document.getElementById('headerWaDisplay').textContent = "Contato";
     document.getElementById('contactWaDisplay').textContent = formattedPhone;
     document.getElementById('contactWaLink').href = getWaLink();
     document.getElementById('contactEmailDisplay').textContent = settings.email;
