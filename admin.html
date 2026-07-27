@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lumen System | Portal de Administração Exclusivo</title>
+    <title>Lumen System | Portal de Administração & Dashboard Exclusivo</title>
     <meta name="robots" content="noindex, nofollow">
     <!-- Google Fonts: Syne & Plus Jakarta Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,7 +22,7 @@
         }
         .standalone-admin-container {
             width: 100%;
-            max-width: 900px;
+            max-width: 1000px;
             background: var(--bg-modal);
             border: 1px solid var(--border-glow);
             border-radius: var(--radius-lg);
@@ -81,15 +81,116 @@
         <!-- Admin Dashboard View -->
         <div id="adminDashboardView" class="admin-view hidden">
             <div class="admin-nav-tabs">
-                <button class="tab-btn active" data-tab="tab-images"><i class="fa-solid fa-image"></i> Imagens & Logo</button>
+                <button class="tab-btn active" data-tab="tab-dashboard"><i class="fa-solid fa-chart-pie"></i> Dashboard & Analytics</button>
+                <button class="tab-btn" data-tab="tab-images"><i class="fa-solid fa-image"></i> Imagens & Logo</button>
                 <button class="tab-btn" data-tab="tab-colors"><i class="fa-solid fa-palette"></i> Paleta de Cores</button>
                 <button class="tab-btn" data-tab="tab-portfolio-crud"><i class="fa-solid fa-briefcase"></i> Portfólio / Cases</button>
                 <button class="tab-btn" data-tab="tab-plans-edit"><i class="fa-solid fa-tags"></i> Preços dos Planos</button>
                 <button class="tab-btn" data-tab="tab-general"><i class="fa-solid fa-gear"></i> Empresa & Textos</button>
             </div>
 
+            <!-- Tab 0: Dashboard & Analytics Engine -->
+            <div class="tab-content active" id="tab-dashboard">
+                <h3>Métricas de Acesso & Vendas dos Planos</h3>
+                <p class="tab-desc">Acompanhe as visitas em tempo real, taxa de conversão e interessados em contratar cada plano.</p>
+
+                <!-- KPI Cards Grid -->
+                <div class="kpi-grid">
+                    <div class="kpi-card">
+                        <div class="kpi-icon"><i class="fa-solid fa-eye"></i></div>
+                        <div class="kpi-info">
+                            <span class="kpi-label">Total de Pageviews / Acessos</span>
+                            <div class="kpi-val" id="kpiTotalVisits">0</div>
+                            <span class="kpi-sub" id="kpiUniqueVisits">0 visitantes únicos</span>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-icon icon-green"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                        <div class="kpi-info">
+                            <span class="kpi-label">Volume de Orçamentos / Vendas</span>
+                            <div class="kpi-val text-green" id="kpiTotalRevenue">R$ 0,00</div>
+                            <span class="kpi-sub" id="kpiConversionsCount">0 solicitações iniciadas</span>
+                        </div>
+                    </div>
+
+                    <div class="kpi-card">
+                        <div class="kpi-icon icon-purple"><i class="fa-solid fa-chart-line"></i></div>
+                        <div class="kpi-info">
+                            <span class="kpi-label">Taxa de Conversão (CTR)</span>
+                            <div class="kpi-val text-purple" id="kpiConversionRate">0.0%</div>
+                            <span class="kpi-sub">visitantes que solicitam proposta</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance & Plan Sales Charts -->
+                <div class="analytics-charts-grid margin-top-20">
+                    <div class="chart-box">
+                        <h4>Interesse por Plano de Assinatura</h4>
+                        <div class="analytics-bars" id="planSalesBars">
+                            <!-- Dynamic Bars -->
+                        </div>
+                    </div>
+
+                    <div class="chart-box">
+                        <h4>Dispositivos dos Clientes</h4>
+                        <div class="device-stats" id="deviceStatsBox">
+                            <!-- Dynamic Devices -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Leads / Sales Enquiries Table -->
+                <div class="margin-top-20">
+                    <div class="tab-header-flex">
+                        <h4>Interessados em Planos & Orçamentos (Leads)</h4>
+                        <button class="btn btn-outline btn-sm" id="btnClearLeadsLog"><i class="fa-solid fa-trash-can"></i> Limpar Leads</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="access-log-table">
+                            <thead>
+                                <tr>
+                                    <th>Data / Hora</th>
+                                    <th>Cliente / Negócio</th>
+                                    <th>Plano Escolhido</th>
+                                    <th>Valor Est.</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableLeadsLog">
+                                <!-- Dynamic Leads -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Recent Visitors Access Log Table -->
+                <div class="margin-top-20">
+                    <div class="tab-header-flex">
+                        <h4>Histórico Recente de Acessos de Clientes</h4>
+                        <button class="btn btn-outline btn-sm" id="btnClearAccessLogs"><i class="fa-solid fa-trash-can"></i> Limpar Acessos</button>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="access-log-table">
+                            <thead>
+                                <tr>
+                                    <th>Data / Hora</th>
+                                    <th>Dispositivo</th>
+                                    <th>Navegador</th>
+                                    <th>Tipo</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableAccessLogs">
+                                <!-- Dynamic Access Logs -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
             <!-- Tab 1: Upload & Replace Site Images & Logo -->
-            <div class="tab-content active" id="tab-images">
+            <div class="tab-content" id="tab-images">
                 <h3>Gerenciamento de Imagens e Logotipo</h3>
                 <p class="tab-desc">Envie novas fotos direto do seu computador (Upload via arquivo) ou cole o link da imagem.</p>
 

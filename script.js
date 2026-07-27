@@ -1,5 +1,5 @@
 /* ==========================================================================
-   LUMEN SYSTEM - CORE INSTITUTIONAL & COMPREHENSIVE ADMIN SCRIPT
+   LUMEN SYSTEM - CORE INSTITUTIONAL, ANALYTICS ENGINE & ADMIN DASHBOARD
    ========================================================================== */
 
 const DEFAULT_STATE = {
@@ -57,19 +57,68 @@ const DEFAULT_STATE = {
             desc: "Plataforma de catálogo digital de peças com painel administrativo para atualização de estoque e envio direto de pedidos para o WhatsApp.",
             isFeatured: false
         }
-    ]
+    ],
+    analytics: {
+        totalVisits: 142,
+        uniqueVisitorsCount: 89,
+        planInterests: {
+            "Plano Essencial": 18,
+            "Plano Profissional": 34,
+            "Loja Virtual / Sistema": 12
+        },
+        deviceCounts: {
+            "Desktop": 82,
+            "Mobile": 54,
+            "Tablet": 6
+        },
+        conversions: [
+            {
+                timestamp: new Date(Date.now() - 3600000 * 5).toLocaleString('pt-BR'),
+                clientName: "Cantinho do Sabor",
+                planName: "Loja Virtual / Sistema",
+                amount: 1449.00
+            },
+            {
+                timestamp: new Date(Date.now() - 3600000 * 18).toLocaleString('pt-BR'),
+                clientName: "Studio Márcia Araújo",
+                planName: "Plano Profissional",
+                amount: 799.00
+            },
+            {
+                timestamp: new Date(Date.now() - 3600000 * 42).toLocaleString('pt-BR'),
+                clientName: "Perfecto Confecções",
+                planName: "Plano Profissional",
+                amount: 799.00
+            }
+        ],
+        accessLogs: [
+            {
+                timestamp: new Date(Date.now() - 1000 * 60 * 12).toLocaleString('pt-BR'),
+                device: "Mobile",
+                browser: "Chrome Mobile (Android)",
+                type: "Visitante Recorrente"
+            },
+            {
+                timestamp: new Date(Date.now() - 1000 * 60 * 35).toLocaleString('pt-BR'),
+                device: "Desktop",
+                browser: "Chrome 122 (Windows)",
+                type: "Novo Visitante"
+            },
+            {
+                timestamp: new Date(Date.now() - 1000 * 60 * 85).toLocaleString('pt-BR'),
+                device: "Mobile",
+                browser: "Safari (iPhone)",
+                type: "Novo Visitante"
+            }
+        ]
+    }
 };
 
 let appState = loadState();
 let isAdminLoggedIn = false;
 
-// Uploaded base64 temporary buffers
-let tempImages = {
-    logo: null,
-    hero: null,
-    about: null,
-    case: null
-};
+// Temp Image Buffer
+let tempImages = { logo: null, hero: null, about: null, case: null };
 
 function loadState() {
     const saved = localStorage.getItem('lumen_full_admin_state');
@@ -82,7 +131,15 @@ function loadState() {
                 settings: { ...DEFAULT_STATE.settings, ...(parsed.settings || {}) },
                 colors: { ...DEFAULT_STATE.colors, ...(parsed.colors || {}) },
                 plans: { ...DEFAULT_STATE.plans, ...(parsed.plans || {}) },
-                portfolioCases: parsed.portfolioCases || DEFAULT_STATE.portfolioCases
+                portfolioCases: parsed.portfolioCases || DEFAULT_STATE.portfolioCases,
+                analytics: {
+                    ...DEFAULT_STATE.analytics,
+                    ...(parsed.analytics || {}),
+                    planInterests: { ...DEFAULT_STATE.analytics.planInterests, ...((parsed.analytics && parsed.analytics.planInterests) || {}) },
+                    deviceCounts: { ...DEFAULT_STATE.analytics.deviceCounts, ...((parsed.analytics && parsed.analytics.deviceCounts) || {}) },
+                    conversions: (parsed.analytics && parsed.analytics.conversions) || DEFAULT_STATE.analytics.conversions,
+                    accessLogs: (parsed.analytics && parsed.analytics.accessLogs) || DEFAULT_STATE.analytics.accessLogs
+                }
             };
         } catch (e) {
             console.error("Erro ao carregar estado do localStorage:", e);
@@ -91,9 +148,69 @@ function loadState() {
     return JSON.parse(JSON.stringify(DEFAULT_STATE));
 }
 
-function saveState() {
+function saveState(skipRender = false) {
     localStorage.setItem('lumen_full_admin_state', JSON.stringify(appState));
-    renderApp();
+    if (!skipRender) renderApp();
+}
+
+// Track Client Access Automatically
+function trackVisit() {
+    let visitorId = localStorage.getItem('lumen_visitor_id');
+    let isNew = false;
+    if (!visitorId) {
+        visitorId = 'v_' + Math.random().toString(36).substr(2, 9);
+        localStorage.setItem('lumen_visitor_id', visitorId);
+        isNew = true;
+        appState.analytics.uniqueVisitorsCount++;
+    }
+
+    appState.analytics.totalVisits++;
+
+    // Detect Device & Browser
+    const ua = navigator.userAgent;
+    let device = "Desktop";
+    if (/tablet|ipad|playbook|silk/i.test(ua)) device = "Tablet";
+    else if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated/i.test(ua)) device = "Mobile";
+
+    appState.analytics.deviceCounts[device] = (appState.analytics.deviceCounts[device] || 0) + 1;
+
+    let browser = "Navegador Web";
+    if (ua.includes("Chrome")) browser = "Chrome";
+    else if (ua.includes("Safari")) browser = "Safari";
+    else if (ua.includes("Firefox")) browser = "Firefox";
+    else if (ua.includes("Edg")) browser = "Edge";
+
+    const logEntry = {
+        timestamp: new Date().toLocaleString('pt-BR'),
+        device: device,
+        browser: `${browser} (${navigator.platform || 'OS'})`,
+        type: isNew ? "Novo Visitante" : "Visitante Recorrente"
+    };
+
+    appState.analytics.accessLogs.unshift(logEntry);
+    if (appState.analytics.accessLogs.length > 50) appState.analytics.accessLogs.pop();
+
+    saveState(true);
+}
+
+// Track Plan Conversion or Contact Enquiry Lead
+function trackConversion(planName, amount, clientName = "Cliente do Site") {
+    if (!appState.analytics.planInterests[planName]) {
+        appState.analytics.planInterests[planName] = 0;
+    }
+    appState.analytics.planInterests[planName]++;
+
+    const conversionEntry = {
+        timestamp: new Date().toLocaleString('pt-BR'),
+        clientName: clientName,
+        planName: planName,
+        amount: amount
+    };
+
+    appState.analytics.conversions.unshift(conversionEntry);
+    if (appState.analytics.conversions.length > 50) appState.analytics.conversions.pop();
+
+    saveState(true);
 }
 
 function formatPhone(numStr) {
@@ -121,7 +238,6 @@ function showToast(msg, type = "info") {
     setTimeout(() => toast.remove(), 4000);
 }
 
-// Apply Dynamic CSS Colors Palette
 function applyThemeColors() {
     const { colors } = appState;
     if (!colors) return;
@@ -138,34 +254,22 @@ function applyThemeColors() {
     if (glow2) glow2.style.background = colors.violet;
 }
 
-// Main Render Function
 function renderApp() {
     applyThemeColors();
 
-    const { settings, plans, portfolioCases } = appState;
+    const { settings, plans } = appState;
     const formattedPhone = formatPhone(settings.waNumber);
 
-    // Brand Name & Slogan
     if (document.getElementById('siteBrandName')) document.getElementById('siteBrandName').textContent = settings.brandName || "LUMEN SYSTEM";
     if (document.getElementById('siteBrandSlogan')) document.getElementById('siteBrandSlogan').textContent = settings.brandSlogan || "CLAREZA GERA RESULTADOS";
     if (document.getElementById('siteFooterBrandName')) document.getElementById('siteFooterBrandName').textContent = settings.brandName || "LUMEN SYSTEM";
     if (document.getElementById('siteFooterBrandSlogan')) document.getElementById('siteFooterBrandSlogan').textContent = settings.brandSlogan || "CLAREZA GERA RESULTADOS";
 
-    // Images
-    if (settings.logoImage && document.getElementById('siteBrandLogo')) {
-        document.getElementById('siteBrandLogo').src = settings.logoImage;
-    }
-    if (settings.logoImage && document.getElementById('siteFooterLogo')) {
-        document.getElementById('siteFooterLogo').src = settings.logoImage;
-    }
-    if (settings.heroImage && document.getElementById('heroMainImage')) {
-        document.getElementById('heroMainImage').src = settings.heroImage;
-    }
-    if (settings.aboutImage && document.getElementById('siteAboutImage')) {
-        document.getElementById('siteAboutImage').src = settings.aboutImage;
-    }
+    if (settings.logoImage && document.getElementById('siteBrandLogo')) document.getElementById('siteBrandLogo').src = settings.logoImage;
+    if (settings.logoImage && document.getElementById('siteFooterLogo')) document.getElementById('siteFooterLogo').src = settings.logoImage;
+    if (settings.heroImage && document.getElementById('heroMainImage')) document.getElementById('heroMainImage').src = settings.heroImage;
+    if (settings.aboutImage && document.getElementById('siteAboutImage')) document.getElementById('siteAboutImage').src = settings.aboutImage;
 
-    // Displays
     if (document.getElementById('headerWaDisplay')) document.getElementById('headerWaDisplay').textContent = "Contato";
     if (document.getElementById('contactWaDisplay')) document.getElementById('contactWaDisplay').textContent = formattedPhone;
     if (document.getElementById('contactWaLink')) document.getElementById('contactWaLink').href = getWaLink();
@@ -174,7 +278,6 @@ function renderApp() {
     if (document.getElementById('footerEmailDisplay')) document.getElementById('footerEmailDisplay').textContent = settings.email;
     if (document.getElementById('floatWaBtn')) document.getElementById('floatWaBtn').href = getWaLink();
 
-    // Hero Texts
     if (document.getElementById('heroTitle')) {
         document.getElementById('heroTitle').innerHTML = settings.heroTitle.includes('span') 
             ? settings.heroTitle 
@@ -184,25 +287,26 @@ function renderApp() {
         document.getElementById('heroSubtitle').textContent = settings.heroSubtitle;
     }
 
-    // Plans Render
     renderPlansGrid();
-
-    // Portfolio Render
     renderPortfolioGrid();
 
     if (isAdminLoggedIn) {
+        renderAnalyticsDashboard();
         renderAdminCasesList();
     }
 }
 
-// Render Plans Cards
 function renderPlansGrid() {
     const plansGrid = document.getElementById('plansGrid');
     if (!plansGrid) return;
 
     const { plans } = appState;
+
+    const p1SetupNum = parseFloat(plans.plan1.setup.replace('.', '').replace(',', '.')) || 350;
+    const p2SetupNum = parseFloat(plans.plan2.setup.replace('.', '').replace(',', '.')) || 650;
+    const p3SetupNum = parseFloat(plans.plan3.setup.replace('.', '').replace(',', '.')) || 1200;
+
     plansGrid.innerHTML = `
-        <!-- Plano 1 -->
         <div class="plan-card">
             <div class="plan-header">
                 <span class="plan-badge">Para Autônomos e Iniciantes</span>
@@ -222,13 +326,12 @@ function renderPlansGrid() {
                     <li><i class="fa-solid fa-circle-check"></i> Suporte Técnico e Atualizações</li>
                     <li><i class="fa-solid fa-circle-check"></i> Certificado de Segurança SSL</li>
                 </ul>
-                <a href="${getWaLink('Olá! Quero contratar o ' + plans.plan1.name)}" target="_blank" class="btn btn-glass btn-full">
+                <a href="${getWaLink('Olá! Quero contratar o ' + plans.plan1.name)}" target="_blank" onclick="trackConversion('${plans.plan1.name}', ${p1SetupNum})" class="btn btn-glass btn-full">
                     Escolher ${plans.plan1.name}
                 </a>
             </div>
         </div>
 
-        <!-- Plano 2 (Featured) -->
         <div class="plan-card featured">
             <div class="featured-ribbon">MAIS POPULAR</div>
             <div class="plan-header">
@@ -249,13 +352,12 @@ function renderPlansGrid() {
                     <li><i class="fa-solid fa-circle-check"></i> Otimização SEO para o Google</li>
                     <li><i class="fa-solid fa-circle-check"></i> Suporte VIP via WhatsApp</li>
                 </ul>
-                <a href="${getWaLink('Olá! Quero contratar o ' + plans.plan2.name)}" target="_blank" class="btn btn-primary btn-full">
+                <a href="${getWaLink('Olá! Quero contratar o ' + plans.plan2.name)}" target="_blank" onclick="trackConversion('${plans.plan2.name}', ${p2SetupNum})" class="btn btn-primary btn-full">
                     Escolher ${plans.plan2.name}
                 </a>
             </div>
         </div>
 
-        <!-- Plano 3 -->
         <div class="plan-card">
             <div class="plan-header">
                 <span class="plan-badge">Catálogo Completo & Vendas</span>
@@ -275,7 +377,7 @@ function renderPlansGrid() {
                     <li><i class="fa-solid fa-circle-check"></i> Hospedagem de Alta Velocidade + Domínio</li>
                     <li><i class="fa-solid fa-circle-check"></i> Suporte Prioritário 24/7</li>
                 </ul>
-                <a href="${getWaLink('Olá! Quero contratar o ' + plans.plan3.name)}" target="_blank" class="btn btn-glass btn-full">
+                <a href="${getWaLink('Olá! Quero contratar o ' + plans.plan3.name)}" target="_blank" onclick="trackConversion('${plans.plan3.name}', ${p3SetupNum})" class="btn btn-glass btn-full">
                     Escolher ${plans.plan3.name}
                 </a>
             </div>
@@ -283,14 +385,12 @@ function renderPlansGrid() {
     `;
 }
 
-// Render Portfolio Cases Grid
 function renderPortfolioGrid() {
     const grid = document.getElementById('portfolioGrid');
     if (!grid) return;
 
     grid.innerHTML = '';
     const cases = appState.portfolioCases || [];
-
     const sortedCases = [...cases].sort((a, b) => (b.isFeatured ? 1 : 0) - (a.isFeatured ? 1 : 0));
 
     sortedCases.forEach(item => {
@@ -321,6 +421,107 @@ function renderPortfolioGrid() {
     });
 }
 
+// Render Analytics Dashboard Component
+function renderAnalyticsDashboard() {
+    const { analytics } = appState;
+    if (!analytics) return;
+
+    // KPI 1: Pageviews & Unique Visitors
+    if (document.getElementById('kpiTotalVisits')) document.getElementById('kpiTotalVisits').textContent = analytics.totalVisits;
+    if (document.getElementById('kpiUniqueVisits')) document.getElementById('kpiUniqueVisits').textContent = `${analytics.uniqueVisitorsCount} visitantes únicos`;
+
+    // KPI 2: Total Revenue & Conversions
+    const totalRev = (analytics.conversions || []).reduce((acc, curr) => acc + (curr.amount || 0), 0);
+    if (document.getElementById('kpiTotalRevenue')) {
+        document.getElementById('kpiTotalRevenue').textContent = `R$ ${totalRev.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    }
+    if (document.getElementById('kpiConversionsCount')) {
+        document.getElementById('kpiConversionsCount').textContent = `${analytics.conversions.length} propostas iniciadas`;
+    }
+
+    // KPI 3: Conversion Rate CTR
+    const ctr = analytics.totalVisits > 0 ? ((analytics.conversions.length / analytics.totalVisits) * 100).toFixed(1) : "0.0";
+    if (document.getElementById('kpiConversionRate')) document.getElementById('kpiConversionRate').textContent = `${ctr}%`;
+
+    // Plan Sales Bars
+    const barsContainer = document.getElementById('planSalesBars');
+    if (barsContainer) {
+        barsContainer.innerHTML = '';
+        const interests = analytics.planInterests || {};
+        const maxVal = Math.max(...Object.values(interests), 1);
+
+        Object.keys(interests).forEach(planName => {
+            const count = interests[planName] || 0;
+            const pct = Math.round((count / maxVal) * 100);
+            const barItem = document.createElement('div');
+            barItem.className = 'bar-item';
+            barItem.innerHTML = `
+                <div class="bar-label-flex">
+                    <span>${planName}</span>
+                    <span>${count} solicitações (${pct}%)</span>
+                </div>
+                <div class="bar-bg">
+                    <div class="bar-fill" style="width: ${pct}%;"></div>
+                </div>
+            `;
+            barsContainer.appendChild(barItem);
+        });
+    }
+
+    // Device Stats Box
+    const deviceBox = document.getElementById('deviceStatsBox');
+    if (deviceBox) {
+        deviceBox.innerHTML = '';
+        const dCounts = analytics.deviceCounts || {};
+        const totalDev = Object.values(dCounts).reduce((a, b) => a + b, 0) || 1;
+
+        Object.keys(dCounts).forEach(dev => {
+            const cnt = dCounts[dev];
+            const pct = Math.round((cnt / totalDev) * 100);
+            const devItem = document.createElement('div');
+            devItem.className = 'device-item';
+            devItem.innerHTML = `
+                <span><i class="fa-solid fa-${dev === 'Mobile' ? 'mobile-screen' : (dev === 'Tablet' ? 'tablet-screen-button' : 'desktop')} text-cyan"></i> ${dev}</span>
+                <strong>${cnt} (${pct}%)</strong>
+            `;
+            deviceBox.appendChild(devItem);
+        });
+    }
+
+    // Leads Table
+    const tableLeads = document.getElementById('tableLeadsLog');
+    if (tableLeads) {
+        tableLeads.innerHTML = '';
+        (analytics.conversions || []).forEach(lead => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${lead.timestamp}</td>
+                <td><strong>${lead.clientName}</strong></td>
+                <td><span class="text-cyan">${lead.planName}</span></td>
+                <td>R$ ${lead.amount ? lead.amount.toLocaleString('pt-BR', { minimumFractionDigits: 2 }) : '350,00'}</td>
+                <td><a href="${getWaLink('Olá ' + lead.clientName + ', sobre a proposta do ' + lead.planName)}" target="_blank" class="btn btn-primary btn-sm"><i class="fa-brands fa-whatsapp"></i> Atender</a></td>
+            `;
+            tableLeads.appendChild(tr);
+        });
+    }
+
+    // Access Logs Table
+    const tableLogs = document.getElementById('tableAccessLogs');
+    if (tableLogs) {
+        tableLogs.innerHTML = '';
+        (analytics.accessLogs || []).slice(0, 15).forEach(log => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${log.timestamp}</td>
+                <td><i class="fa-solid fa-${log.device === 'Mobile' ? 'mobile-screen' : 'desktop'} text-cyan"></i> ${log.device}</td>
+                <td>${log.browser}</td>
+                <td><span class="badge-tag">${log.type}</span></td>
+            `;
+            tableLogs.appendChild(tr);
+        });
+    }
+}
+
 function readFileAsDataURL(file) {
     return new Promise((resolve, reject) => {
         const reader = new FileReader();
@@ -332,15 +533,14 @@ function readFileAsDataURL(file) {
 
 // DOM Initialization
 document.addEventListener('DOMContentLoaded', () => {
+    trackVisit();
     renderApp();
 
-    // Auto open admin if hash #admin
     if (window.location.hash === '#admin') {
         const modal = document.getElementById('adminModalBackdrop');
         if (modal) modal.classList.add('active');
     }
 
-    // Scroll Header effect
     const siteHeader = document.getElementById('siteHeader');
     if (siteHeader) {
         window.addEventListener('scroll', () => {
@@ -349,7 +549,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Accordion Toggle
     const accordionItems = document.querySelectorAll('.accordion-item');
     accordionItems.forEach(item => {
         const header = item.querySelector('.accordion-header');
@@ -362,7 +561,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Contact Form
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
         contactForm.addEventListener('submit', (e) => {
@@ -372,6 +570,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const phone = document.getElementById('contactPhone').value;
             const email = document.getElementById('contactEmail').value;
             const msg = document.getElementById('contactMessage').value;
+
+            trackConversion("Proposta Customizada", 350.00, `${name} (${business})`);
 
             showToast("Mensagem formatada! Redirecionando para o WhatsApp...", "success");
 
@@ -414,6 +614,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 document.getElementById('adminLoginView').classList.add('hidden');
                 document.getElementById('adminDashboardView').classList.remove('hidden');
                 populateAdminForms();
+                renderAnalyticsDashboard();
                 renderAdminCasesList();
                 showToast("Autenticado com Sucesso no Painel Admin!", "success");
             } else {
@@ -422,7 +623,32 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Admin Navigation Tabs
+    // Clear Logs Handlers
+    const btnClearAccessLogs = document.getElementById('btnClearAccessLogs');
+    if (btnClearAccessLogs) {
+        btnClearAccessLogs.addEventListener('click', () => {
+            if (confirm("Limpar todo o histórico de acessos recente?")) {
+                appState.analytics.accessLogs = [];
+                saveState();
+                renderAnalyticsDashboard();
+                showToast("Histórico de acessos limpo.", "info");
+            }
+        });
+    }
+
+    const btnClearLeadsLog = document.getElementById('btnClearLeadsLog');
+    if (btnClearLeadsLog) {
+        btnClearLeadsLog.addEventListener('click', () => {
+            if (confirm("Limpar a lista de interessados (leads)?")) {
+                appState.analytics.conversions = [];
+                saveState();
+                renderAnalyticsDashboard();
+                showToast("Lista de leads limpa.", "info");
+            }
+        });
+    }
+
+    // Navigation Tabs
     const tabBtns = document.querySelectorAll('.tab-btn');
     tabBtns.forEach(tBtn => {
         tBtn.addEventListener('click', () => {
@@ -679,6 +905,7 @@ function populateAdminForms() {
         if (document.getElementById('plan3Monthly')) document.getElementById('plan3Monthly').value = plans.plan3.monthly;
     }
 
+    renderAnalyticsDashboard();
     renderAdminCasesList();
 }
 
@@ -733,3 +960,5 @@ window.deleteCase = function(id) {
         showToast("Case removido do portfólio.", "info");
     }
 };
+
+window.trackConversion = trackConversion;
