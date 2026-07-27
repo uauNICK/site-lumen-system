@@ -943,7 +943,7 @@ function generateCustomReport() {
                 </tr>`;
             });
         }
-        html += `</tbody></table></div>`;
+        html += `</tbody>mtable></div>`;
         tableWrapper.innerHTML = html;
     }
 }
@@ -992,6 +992,29 @@ document.addEventListener('DOMContentLoaded', () => {
     initFirebaseConnection();
     trackVisit();
     renderApp();
+
+    // Prevent Enter inside textareas from submitting forms (Inserts new line)
+    document.querySelectorAll('textarea').forEach(textarea => {
+        textarea.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.stopPropagation(); // Prevents triggering form submission on Enter in textareas
+            }
+        });
+    });
+
+    // Prevent accidental form submission when pressing Enter in single-line text inputs
+    document.querySelectorAll('form input[type="text"], form input[type="email"], form input[type="tel"]').forEach(input => {
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const formInputs = Array.from(input.form ? input.form.querySelectorAll('input, textarea, select') : []);
+                const index = formInputs.indexOf(input);
+                if (index > -1 && index < formInputs.length - 1) {
+                    formInputs[index + 1].focus();
+                }
+            }
+        });
+    });
 
     // Mobile Hamburger Navigation Menu Toggle
     const mobileToggle = document.getElementById('mobileToggle');
