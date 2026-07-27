@@ -170,6 +170,102 @@ const DEFAULT_STATE = {
     }
 };
 
+const REAL_ARTICLES = {
+    1: {
+        category: "Estratégia Digital & SEO",
+        title: "5 Sinais de que seu negócio está perdendo clientes por não ter um site profissional",
+        content: `
+            <h2>5 Sinais de que seu negócio está perdendo clientes por não ter um site profissional</h2>
+            <div class="article-meta-info">
+                <span><i class="fa-regular fa-calendar"></i> 27 de Julho de 2026</span>
+                <span><i class="fa-regular fa-clock"></i> 4 minutos de leitura</span>
+                <span><i class="fa-solid fa-tag text-cyan"></i> SEO & Presença Digital</span>
+            </div>
+            
+            <p>Atualmente, a primeira reação de um cliente que precisa de um produto ou serviço é abrir o smartphone e pesquisar no Google. Se a sua empresa não aparece nessa busca com uma página oficial e profissional, você está invisível para uma enorme parcela de consumidores qualificados.</p>
+
+            <h3>1. Clientes pesquisam "perto de mim" antes de comprar</h3>
+            <p>O comportamento do consumidor mudou drasticamente. Buscas como <em>"clínica estética perto de mim"</em> ou <em>"restaurante em Volta Redonda"</em> cresceram mais de 200% nos últimos anos. Sem um site otimizado para a sua região, o mecanismo de busca entrega o tráfego diretamente para os seus concorrentes.</p>
+
+            <h3>2. 75% dos consumidores julgam a credibilidade pelo site</h3>
+            <p>De acordo com pesquisas sobre comportamento do usuário (Sebrae/E-commerce), três em cada quatro pessoas avaliam a seriedade e a reputação de uma empresa pela qualidade do seu site oficial. Um perfil de rede social é bom para relacionamento, mas o site é o canal formal de validação comercial.</p>
+
+            <div class="article-callout">
+                <strong>💡 Fato de Mercado:</strong>
+                <p>Uma empresa sem site passa a impressão de ser temporária ou informal. O site institucional funciona como a sede oficial do seu negócio na internet.</p>
+            </div>
+
+            <h3>3. A instabilidade do "terreno alugado" (Redes Sociais)</h3>
+            <p>Depender exclusivamente de redes sociais significa estar sujeito a mudanças abruptas de algoritmos, bloqueios de contas ou até quedas globais das plataformas. No seu site, você é dono de 100% do canal de comunicação e do conteúdo.</p>
+
+            <h3>4. Falta de um canal 24/7 para tirar dúvidas</h3>
+            <p>No site, seu cliente encontra seu cardápio, tabela de serviços, localização, horários de atendimento e depoimentos de outros clientes a qualquer hora do dia ou da noite, mesmo quando sua empresa está de portas fechadas.</p>
+
+            <h3>5. Perda de vendas para concorrentes com presença no Google</h3>
+            <p>Se o seu concorrente tem um site rápido, bem estruturado e com boas avaliações, ele ganha a preferência do consumidor antes mesmo do cliente saber que o seu negócio existe.</p>
+        `
+    },
+    2: {
+        category: "Redes Sociais vs. Site",
+        title: "Site Profissional vs. Redes Sociais: Qual a melhor estratégia para sua empresa?",
+        content: `
+            <h2>Site Profissional vs. Redes Sociais: Qual a melhor estratégia para sua empresa?</h2>
+            <div class="article-meta-info">
+                <span><i class="fa-regular fa-calendar"></i> 24 de Julho de 2026</span>
+                <span><i class="fa-regular fa-clock"></i> 5 minutos de leitura</span>
+                <span><i class="fa-solid fa-tag text-cyan"></i> Estratégia Comercial</span>
+            </div>
+
+            <p>Uma das dúvidas mais comuns entre pequenos e médios empresários é: <em>"Já tenho um perfil ativo no Instagram, realmente preciso investir em um site profissional?"</em> A resposta curta é: sim. Ambos desempenham papéis complementares e indispensáveis no ecossistema digital.</p>
+
+            <h3>O Papel das Redes Sociais (Instagram, TikTok, Facebook)</h3>
+            <p>As redes sociais funcionam de forma excelente como <strong>vitrine e canal de relacionamento instantâneo</strong>. Elas atraem atenção rápida através de vídeos, fotos do dia a dia e Stories. No entanto, o tempo de vida de uma postagem é curto (poucas horas) e a concorrência visual no feed é extremamente alta.</p>
+
+            <h3>O Papel do Site Profissional (Google & SEO)</h3>
+            <p>O site institucional é a <strong>sua sede própria digital</strong>. Quando alguém entra no seu site, não há anúncios de concorrentes ou distrações. O ambiente é 100% focado em apresentar sua proposta de valor, transmitir autoridade e estruturar a decisão de compra do cliente.</p>
+
+            <div class="article-callout">
+                <strong>📊 Comparativo Estratégico:</strong>
+                <ul>
+                    <li><strong>Redes Sociais:</strong> Relacionamento, engajamento e atração de novos seguidores.</li>
+                    <li><strong>Site Profissional:</strong> Vendas diretas, busca orgânica no Google (SEO) e consolidação da marca.</li>
+                </ul>
+            </div>
+
+            <h3>A Estratégia Integrada Ideal</h3>
+            <p>A melhor abordagem não é escolher entre um ou outro, mas sim usar as redes sociais como porta de entrada para atrair o público e direcionar esse tráfego qualificado para o seu site oficial, onde o cliente pode conferir todas as informações detalhadas e tomar uma decisão segura.</p>
+        `
+    },
+    3: {
+        category: "SEO Local & Google",
+        title: "Guia Prático de SEO Local: Como fazer sua empresa ser encontrada no Google por clientes da sua região",
+        content: `
+            <h2>Guia Prático de SEO Local: Como fazer sua empresa ser encontrada no Google por clientes da sua região</h2>
+            <div class="article-meta-info">
+                <span><i class="fa-regular fa-calendar"></i> 20 de Julho de 2026</span>
+                <span><i class="fa-regular fa-clock"></i> 6 minutos de leitura</span>
+                <span><i class="fa-solid fa-tag text-cyan"></i> SEO Local</span>
+            </div>
+
+            <p>O SEO Local (Search Engine Optimization) é o conjunto de técnicas desenvolvidas para fazer com que sua empresa física ou serviço regional apareça nos primeiros resultados do Google quando um cliente da sua cidade procura pelo que você oferece.</p>
+
+            <h3>1. Configuração do Google Perfil da Empresa (NAP)</h3>
+            <p>Garanta que o seu Nome, Endereço e Telefone (conhecido como NAP - Name, Address, Phone) estejam exatamente idênticos no seu site, no Google Meu Negócio e em todas as redes digitais. A consistência de dados é um dos fatores primordiais de ranqueamento.</p>
+
+            <h3>2. Otimização de Palavras-Chave de Geolocalização</h3>
+            <p>Insira termos que incluem sua cidade e bairro nos títulos e parágrafos do seu site. Por exemplo: em vez de apenas <em>"Consultoria Contábil"</em>, utilize <em>"Consultoria Contábil em Volta Redonda"</em>.</p>
+
+            <div class="article-callout">
+                <strong>⭐ Reputação & Avaliações:</strong>
+                <p>O Google prioriza empresas que possuem avaliações frequentes de clientes reais no perfil. Incentive seus clientes satisfeitos a deixarem depoimentos com nota 5 estrelas.</p>
+            </div>
+
+            <h3>3. Estrutura Técnica e Velocidade de Carregamento</h3>
+            <p>Mais de 70% das buscas por serviços locais são feitas por celulares em redes móveis (4G/5G). Seu site deve ser extremamente leve, rápido e 100% responsivo para que o Google o classifique no topo das recomendações.</p>
+        `
+    }
+};
+
 let appState = loadState();
 let isAdminLoggedIn = false;
 let isFirebaseConnected = false;
@@ -386,7 +482,6 @@ function renderApp() {
     if (settings.heroImage && document.getElementById('heroMainImage')) document.getElementById('heroMainImage').src = settings.heroImage;
     if (settings.aboutImage && document.getElementById('siteAboutImage')) document.getElementById('siteAboutImage').src = settings.aboutImage;
 
-    if (document.getElementById('headerWaDisplay')) document.getElementById('headerWaDisplay').textContent = "Contato";
     if (document.getElementById('contactWaDisplay')) document.getElementById('contactWaDisplay').textContent = formattedPhone;
     if (document.getElementById('contactWaLink')) document.getElementById('contactWaLink').href = getWaLink();
     if (document.getElementById('contactEmailDisplay')) document.getElementById('contactEmailDisplay').textContent = settings.email;
@@ -628,14 +723,33 @@ function renderAnalyticsDashboard() {
     }
 }
 
-/* ================= ==========================================================
+// Blog Article Reader Functions
+window.openBlogArticle = function(id) {
+    const article = REAL_ARTICLES[id];
+    if (!article) return;
+
+    const modalBackdrop = document.getElementById('blogArticleModalBackdrop');
+    const categorySpan = document.getElementById('articleModalCategory');
+    const bodyContainer = document.getElementById('articleModalBody');
+
+    if (categorySpan) categorySpan.textContent = article.category;
+    if (bodyContainer) bodyContainer.innerHTML = article.content;
+
+    if (modalBackdrop) modalBackdrop.classList.add('active');
+};
+
+function closeBlogArticle() {
+    const modalBackdrop = document.getElementById('blogArticleModalBackdrop');
+    if (modalBackdrop) modalBackdrop.classList.remove('active');
+}
+
+/* ==========================================================================
    REPORT GENERATION & DATE FILTERING LOGIC (WITHOUT DATE LIMITS)
    ========================================================================== */
 
 function parseEntryDate(entry) {
     if (entry.isoDate) return new Date(entry.isoDate);
     if (entry.timestamp) {
-        // Fallback for pt-BR timestamp strings "DD/MM/YYYY, HH:MM:SS"
         const parts = entry.timestamp.split(',');
         if (parts.length > 0) {
             const dParts = parts[0].trim().split('/');
@@ -911,12 +1025,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Modal Triggers
+    // Modal Triggers for Admin & Blog Articles
     const adminModalBackdrop = document.getElementById('adminModalBackdrop');
     const openAdminBtn = document.getElementById('openAdminBtn');
     const floatAdminBtn = document.getElementById('floatAdminBtn');
     const footerAdminLink = document.getElementById('footerAdminLink');
     const closeAdminModalBtn = document.getElementById('closeAdminModalBtn');
+    const closeBlogModalBtn = document.getElementById('closeBlogModalBtn');
 
     function openAdminModal() { if (adminModalBackdrop) adminModalBackdrop.classList.add('active'); }
     function closeAdminModal() { if (adminModalBackdrop) adminModalBackdrop.classList.remove('active'); }
@@ -925,6 +1040,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (floatAdminBtn) floatAdminBtn.addEventListener('click', openAdminModal);
     if (footerAdminLink) footerAdminLink.addEventListener('click', openAdminModal);
     if (closeAdminModalBtn) closeAdminModalBtn.addEventListener('click', closeAdminModal);
+    if (closeBlogModalBtn) closeBlogModalBtn.addEventListener('click', closeBlogArticle);
 
     // Login Form Authentication (SECURE CREDENTIALS: lumenadmin / Lumen123@)
     const adminLoginForm = document.getElementById('adminLoginForm');

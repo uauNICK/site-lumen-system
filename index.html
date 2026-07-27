@@ -369,39 +369,43 @@
             </div>
         </section>
 
-        <!-- 8. Seção Blog (SEO & Dicas) -->
+        <!-- 8. Seção Blog (Artigos Reais Informativos) -->
         <section class="blog-section" id="blog">
             <div class="container">
                 <div class="section-header text-center">
-                    <span class="section-tag">CONTEÚDO & AUTORIDADE</span>
-                    <h2 class="section-title">Dicas para impulsionar seu <span class="gradient-text">negócio no Google</span></h2>
+                    <span class="section-tag">CONTEÚDO & ARTIGOS COMPLETOS</span>
+                    <h2 class="section-title">Artigos Reais sobre <span class="gradient-text">Presença Digital & SEO</span></h2>
+                    <p class="section-subtitle">Conhecimento educativo completo para orientar a tomada de decisão do seu negócio. Clique no artigo para ler a matéria na íntegra.</p>
                 </div>
 
-                <div class="blog-grid">
-                    <article class="blog-card">
+                <div class="blog-grid" id="blogGrid">
+                    <!-- Artigo 1 -->
+                    <article class="blog-card" onclick="openBlogArticle(1)">
                         <div class="blog-body">
-                            <span class="blog-category">SEO & Presença Digital</span>
-                            <h3>5 sinais de que seu negócio está perdendo clientes por não ter site</h3>
-                            <p>Descubra como a falta de uma página oficial no Google pode estar direcionando seus clientes para a concorrência.</p>
-                            <a href="https://wa.me/5524992584133?text=Li%20o%20artigo%20sobre%20os%205%20sinais%20e%20quero%20um%20site." target="_blank" class="read-more">Ler artigo <i class="fa-solid fa-arrow-right"></i></a>
+                            <span class="blog-category"><i class="fa-solid fa-chart-line text-cyan"></i> Estratégia Digital</span>
+                            <h3>5 Sinais de que seu negócio está perdendo clientes por não ter um site profissional</h3>
+                            <p>Pesquisas mostram que 75% dos consumidores julgam a credibilidade de uma empresa pela presença de um site oficial no Google...</p>
+                            <span class="read-more-btn"><i class="fa-solid fa-book-open"></i> Ler Artigo Completo</span>
                         </div>
                     </article>
 
-                    <article class="blog-card">
+                    <!-- Artigo 2 -->
+                    <article class="blog-card" onclick="openBlogArticle(2)">
                         <div class="blog-body">
-                            <span class="blog-category">Estratégia</span>
-                            <h3>Site ou só Instagram: qual a diferença para o seu negócio?</h3>
-                            <p>Entenda por que depender apenas de redes sociais é um risco e como um site próprio gera mais vendas duradouras.</p>
-                            <a href="https://wa.me/5524992584133?text=Quero%20saber%20a%20diferen%C3%A7a%20entre%20site%20e%20Instagram." target="_blank" class="read-more">Ler artigo <i class="fa-solid fa-arrow-right"></i></a>
+                            <span class="blog-category"><i class="fa-brands fa-instagram text-cyan"></i> Redes Sociais vs. Site</span>
+                            <h3>Site Profissional vs. Redes Sociais: Qual a melhor estratégia para sua empresa?</h3>
+                            <p>Entenda a diferença entre ter uma 'sede própria digital' no Google e depender apenas de 'terrenos alugados' nas redes sociais...</p>
+                            <span class="read-more-btn"><i class="fa-solid fa-book-open"></i> Ler Artigo Completo</span>
                         </div>
                     </article>
 
-                    <article class="blog-card">
+                    <!-- Artigo 3 -->
+                    <article class="blog-card" onclick="openBlogArticle(3)">
                         <div class="blog-body">
-                            <span class="blog-category">Vendas & Conversão</span>
-                            <h3>Como um site ajuda seu negócio a aparecer no Google</h3>
-                            <p>Conheça os segredos do SEO local e como clientes da sua região podem encontrar seus serviços todos os dias.</p>
-                            <a href="https://wa.me/5524992584133?text=Quero%20aparecer%20no%20Google." target="_blank" class="read-more">Ler artigo <i class="fa-solid fa-arrow-right"></i></a>
+                            <span class="blog-category"><i class="fa-brands fa-google text-cyan"></i> Guia Prático de SEO Local</span>
+                            <h3>Como fazer sua empresa ser encontrada no Google por clientes da sua região</h3>
+                            <p>Aprenda como o SEO Local e o Google Meu Negócio colocam seu comércio nas primeiras pesquisas por serviços perto de você...</p>
+                            <span class="read-more-btn"><i class="fa-solid fa-book-open"></i> Ler Artigo Completo</span>
                         </div>
                     </article>
                 </div>
@@ -478,6 +482,23 @@
             </div>
         </section>
     </main>
+
+    <!-- Modal para Leitura Completa dos Artigos do Blog -->
+    <div class="modal-backdrop" id="blogArticleModalBackdrop">
+        <div class="admin-modal blog-article-modal">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <i class="fa-solid fa-newspaper text-cyan"></i>
+                    <span id="articleModalCategory">Artigo Educativo</span>
+                </div>
+                <button class="modal-close" id="closeBlogModalBtn">&times;</button>
+            </div>
+
+            <div class="modal-body article-full-body" id="articleModalBody">
+                <!-- Conteúdo do Artigo em Destaque Injetado via JS -->
+            </div>
+        </div>
+    </div>
 
     <!-- Botões Flutuantes Interativos (Lumen Float Bar) -->
     <div class="lumen-float-bar">
