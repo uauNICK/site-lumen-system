@@ -22,9 +22,48 @@ const DEFAULT_STATE = {
         bgDark: "#090c15"
     },
     plans: {
-        plan1: { name: "Plano Essencial", setup: "350,00", monthly: "89,00" },
-        plan2: { name: "Plano Profissional", setup: "650,00", monthly: "149,00" },
-        plan3: { name: "Loja Virtual / Sistema", setup: "1.200,00", monthly: "249,00" }
+        plan1: {
+            name: "Plano Essencial",
+            target: "Para Autônomos e Iniciantes",
+            setup: "350,00",
+            monthly: "89,00",
+            features: [
+                "Landing Page de 1 Página",
+                "Design 100% Responsivo (Mobile/PC)",
+                "Hospedagem + Domínio (.com.br) inclusos",
+                "Botão Direto para WhatsApp",
+                "Suporte Técnico e Atualizações",
+                "Certificado de Segurança SSL"
+            ]
+        },
+        plan2: {
+            name: "Plano Profissional",
+            target: "Para Empresas em Crescimento",
+            setup: "650,00",
+            monthly: "149,00",
+            features: [
+                "Site Multi-páginas (Até 5 Páginas)",
+                "Catálogo de Produtos / Serviços",
+                "Painel Admin Exclusivo para editar dados e fotos",
+                "Hospedagem + Domínio (.com.br) inclusos",
+                "Otimização SEO para o Google",
+                "Suporte VIP via WhatsApp"
+            ]
+        },
+        plan3: {
+            name: "Loja Virtual / Sistema",
+            target: "Catálogo Completo & Vendas",
+            setup: "1.200,00",
+            monthly: "249,00",
+            features: [
+                "Catálogo Ilimitado de Produtos",
+                "Sistema de Pedidos para WhatsApp",
+                "Painel de Gestão Avançado",
+                "Banco de Dados e Estatísticas",
+                "Hospedagem de Alta Velocidade + Domínio",
+                "Suporte Prioritário 24/7"
+            ]
+        }
     },
     portfolioCases: [
         {
@@ -131,7 +170,11 @@ function loadState() {
                 ...parsed,
                 settings: { ...DEFAULT_STATE.settings, ...(parsed.settings || {}) },
                 colors: { ...DEFAULT_STATE.colors, ...(parsed.colors || {}) },
-                plans: { ...DEFAULT_STATE.plans, ...(parsed.plans || {}) },
+                plans: {
+                    plan1: { ...DEFAULT_STATE.plans.plan1, ...((parsed.plans && parsed.plans.plan1) || {}) },
+                    plan2: { ...DEFAULT_STATE.plans.plan2, ...((parsed.plans && parsed.plans.plan2) || {}) },
+                    plan3: { ...DEFAULT_STATE.plans.plan3, ...((parsed.plans && parsed.plans.plan3) || {}) }
+                },
                 portfolioCases: parsed.portfolioCases || DEFAULT_STATE.portfolioCases,
                 analytics: {
                     ...DEFAULT_STATE.analytics,
@@ -304,12 +347,17 @@ function renderPlansGrid() {
     const p2SetupNum = parseFloat(plans.plan2.setup.replace('.', '').replace(',', '.')) || 650;
     const p3SetupNum = parseFloat(plans.plan3.setup.replace('.', '').replace(',', '.')) || 1200;
 
+    const renderFeaturesList = (featArray) => {
+        if (!featArray || !featArray.length) return '';
+        return featArray.map(f => `<li><i class="fa-solid fa-circle-check"></i> ${f}</li>`).join('');
+    };
+
     plansGrid.innerHTML = `
         <div class="plan-card">
             <div class="plan-header">
-                <span class="plan-badge">Para Autônomos e Iniciantes</span>
+                <span class="plan-badge">${plans.plan1.target || 'Para Autônomos e Iniciantes'}</span>
                 <h3 class="plan-name">${plans.plan1.name}</h3>
-                <p class="plan-target">Ideal para validar seu negócio na internet rapidamente.</p>
+                <p class="plan-target">${plans.plan1.target || 'Ideal para validar seu negócio na internet rapidamente.'}</p>
                 <div class="plan-price-box">
                     <span class="setup-price">Setup de Implantação: R$ ${plans.plan1.setup}</span>
                     <div class="monthly-price">R$ ${plans.plan1.monthly.split(',')[0]}<span class="period">/mês</span></div>
@@ -317,12 +365,7 @@ function renderPlansGrid() {
             </div>
             <div class="plan-body">
                 <ul class="plan-features">
-                    <li><i class="fa-solid fa-circle-check"></i> Landing Page de 1 Página</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Design 100% Responsivo (Mobile/PC)</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Hospedagem + Domínio (.com.br) inclusos</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Botão Direto para WhatsApp</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Suporte Técnico e Atualizações</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Certificado de Segurança SSL</li>
+                    ${renderFeaturesList(plans.plan1.features)}
                 </ul>
                 <a href="${getWaLink('Olá! Quero contratar o ' + plans.plan1.name)}" target="_blank" onclick="trackConversion('${plans.plan1.name}', ${p1SetupNum})" class="btn btn-glass btn-full">
                     Escolher ${plans.plan1.name}
@@ -333,9 +376,9 @@ function renderPlansGrid() {
         <div class="plan-card featured">
             <div class="featured-ribbon">MAIS POPULAR</div>
             <div class="plan-header">
-                <span class="plan-badge">Para Empresas em Crescimento</span>
+                <span class="plan-badge">${plans.plan2.target || 'Para Empresas em Crescimento'}</span>
                 <h3 class="plan-name">${plans.plan2.name}</h3>
-                <p class="plan-target">Site completo com múltiplas páginas e catálogo.</p>
+                <p class="plan-target">${plans.plan2.target || 'Site completo com múltiplas páginas e catálogo.'}</p>
                 <div class="plan-price-box">
                     <span class="setup-price">Setup de Implantação: R$ ${plans.plan2.setup}</span>
                     <div class="monthly-price">R$ ${plans.plan2.monthly.split(',')[0]}<span class="period">/mês</span></div>
@@ -343,12 +386,7 @@ function renderPlansGrid() {
             </div>
             <div class="plan-body">
                 <ul class="plan-features">
-                    <li><i class="fa-solid fa-circle-check"></i> Site Multi-páginas (Até 5 Páginas)</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Catálogo de Produtos / Serviços</li>
-                    <li><i class="fa-solid fa-circle-check"></i> <strong>Painel Admin Exclusivo</strong> para editar dados e fotos</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Hospedagem + Domínio (.com.br) inclusos</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Otimização SEO para o Google</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Suporte VIP via WhatsApp</li>
+                    ${renderFeaturesList(plans.plan2.features)}
                 </ul>
                 <a href="${getWaLink('Olá! Quero contratar o ' + plans.plan2.name)}" target="_blank" onclick="trackConversion('${plans.plan2.name}', ${p2SetupNum})" class="btn btn-primary btn-full">
                     Escolher ${plans.plan2.name}
@@ -358,9 +396,9 @@ function renderPlansGrid() {
 
         <div class="plan-card">
             <div class="plan-header">
-                <span class="plan-badge">Catálogo Completo & Vendas</span>
+                <span class="plan-badge">${plans.plan3.target || 'Catálogo Completo & Vendas'}</span>
                 <h3 class="plan-name">${plans.plan3.name}</h3>
-                <p class="plan-target">Para quem precisa de catálogo avançado ou pedidos online.</p>
+                <p class="plan-target">${plans.plan3.target || 'Para quem precisa de catálogo avançado ou pedidos online.'}</p>
                 <div class="plan-price-box">
                     <span class="setup-price">Setup de Implantação: R$ ${plans.plan3.setup}</span>
                     <div class="monthly-price">R$ ${plans.plan3.monthly.split(',')[0]}<span class="period">/mês</span></div>
@@ -368,12 +406,7 @@ function renderPlansGrid() {
             </div>
             <div class="plan-body">
                 <ul class="plan-features">
-                    <li><i class="fa-solid fa-circle-check"></i> Catálogo Ilimitado de Produtos</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Sistema de Pedidos para WhatsApp</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Painel de Gestão Avançado</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Banco de Dados e Estatísticas</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Hospedagem de Alta Velocidade + Domínio</li>
-                    <li><i class="fa-solid fa-circle-check"></i> Suporte Prioritário 24/7</li>
+                    ${renderFeaturesList(plans.plan3.features)}
                 </ul>
                 <a href="${getWaLink('Olá! Quero contratar o ' + plans.plan3.name)}" target="_blank" onclick="trackConversion('${plans.plan3.name}', ${p3SetupNum})" class="btn btn-glass btn-full">
                     Escolher ${plans.plan3.name}
@@ -618,6 +651,45 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 showToast("Usuário ou senha de administrador incorretos!", "error");
             }
+        });
+    }
+
+    // Plans Form Submission Handler
+    const plansSettingsForm = document.getElementById('plansSettingsForm');
+    if (plansSettingsForm) {
+        plansSettingsForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const p1FeaturesText = document.getElementById('plan1Features').value;
+            const p2FeaturesText = document.getElementById('plan2Features').value;
+            const p3FeaturesText = document.getElementById('plan3Features').value;
+
+            appState.plans.plan1 = {
+                name: document.getElementById('plan1Name').value.trim(),
+                target: document.getElementById('plan1Target').value.trim(),
+                setup: document.getElementById('plan1Setup').value.trim(),
+                monthly: document.getElementById('plan1Monthly').value.trim(),
+                features: p1FeaturesText.split('\n').map(s => s.trim()).filter(Boolean)
+            };
+
+            appState.plans.plan2 = {
+                name: document.getElementById('plan2Name').value.trim(),
+                target: document.getElementById('plan2Target').value.trim(),
+                setup: document.getElementById('plan2Setup').value.trim(),
+                monthly: document.getElementById('plan2Monthly').value.trim(),
+                features: p2FeaturesText.split('\n').map(s => s.trim()).filter(Boolean)
+            };
+
+            appState.plans.plan3 = {
+                name: document.getElementById('plan3Name').value.trim(),
+                target: document.getElementById('plan3Target').value.trim(),
+                setup: document.getElementById('plan3Setup').value.trim(),
+                monthly: document.getElementById('plan3Monthly').value.trim(),
+                features: p3FeaturesText.split('\n').map(s => s.trim()).filter(Boolean)
+            };
+
+            saveState();
+            showToast("Todos os Planos, Preços e Recursos foram atualizados!", "success");
         });
     }
 
@@ -895,12 +967,23 @@ function populateAdminForms() {
     if (document.getElementById('settingHeroSubtitle')) document.getElementById('settingHeroSubtitle').value = settings.heroSubtitle;
 
     if (plans) {
+        if (document.getElementById('plan1Name')) document.getElementById('plan1Name').value = plans.plan1.name || "Plano Essencial";
+        if (document.getElementById('plan1Target')) document.getElementById('plan1Target').value = plans.plan1.target || "Para Autônomos e Iniciantes";
         if (document.getElementById('plan1Setup')) document.getElementById('plan1Setup').value = plans.plan1.setup;
         if (document.getElementById('plan1Monthly')) document.getElementById('plan1Monthly').value = plans.plan1.monthly;
+        if (document.getElementById('plan1Features')) document.getElementById('plan1Features').value = (plans.plan1.features || []).join('\n');
+
+        if (document.getElementById('plan2Name')) document.getElementById('plan2Name').value = plans.plan2.name || "Plano Profissional";
+        if (document.getElementById('plan2Target')) document.getElementById('plan2Target').value = plans.plan2.target || "Para Empresas em Crescimento";
         if (document.getElementById('plan2Setup')) document.getElementById('plan2Setup').value = plans.plan2.setup;
         if (document.getElementById('plan2Monthly')) document.getElementById('plan2Monthly').value = plans.plan2.monthly;
+        if (document.getElementById('plan2Features')) document.getElementById('plan2Features').value = (plans.plan2.features || []).join('\n');
+
+        if (document.getElementById('plan3Name')) document.getElementById('plan3Name').value = plans.plan3.name || "Loja Virtual / Sistema";
+        if (document.getElementById('plan3Target')) document.getElementById('plan3Target').value = plans.plan3.target || "Catálogo Completo & Vendas";
         if (document.getElementById('plan3Setup')) document.getElementById('plan3Setup').value = plans.plan3.setup;
         if (document.getElementById('plan3Monthly')) document.getElementById('plan3Monthly').value = plans.plan3.monthly;
+        if (document.getElementById('plan3Features')) document.getElementById('plan3Features').value = (plans.plan3.features || []).join('\n');
     }
 
     renderAnalyticsDashboard();

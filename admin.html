@@ -82,10 +82,10 @@
         <div id="adminDashboardView" class="admin-view hidden">
             <div class="admin-nav-tabs">
                 <button class="tab-btn active" data-tab="tab-dashboard"><i class="fa-solid fa-chart-pie"></i> Dashboard & Analytics</button>
+                <button class="tab-btn" data-tab="tab-plans-edit"><i class="fa-solid fa-tags"></i> Gerenciar Planos & Vantagens</button>
                 <button class="tab-btn" data-tab="tab-images"><i class="fa-solid fa-image"></i> Imagens & Logo</button>
                 <button class="tab-btn" data-tab="tab-colors"><i class="fa-solid fa-palette"></i> Paleta de Cores</button>
                 <button class="tab-btn" data-tab="tab-portfolio-crud"><i class="fa-solid fa-briefcase"></i> Portfólio / Cases</button>
-                <button class="tab-btn" data-tab="tab-plans-edit"><i class="fa-solid fa-tags"></i> Preços dos Planos</button>
                 <button class="tab-btn" data-tab="tab-general"><i class="fa-solid fa-gear"></i> Empresa & Textos</button>
             </div>
 
@@ -94,7 +94,6 @@
                 <h3>Métricas de Acesso & Vendas dos Planos</h3>
                 <p class="tab-desc">Acompanhe as visitas em tempo real, taxa de conversão e interessados em contratar cada plano.</p>
 
-                <!-- KPI Cards Grid -->
                 <div class="kpi-grid">
                     <div class="kpi-card">
                         <div class="kpi-icon"><i class="fa-solid fa-eye"></i></div>
@@ -124,24 +123,20 @@
                     </div>
                 </div>
 
-                <!-- Performance & Plan Sales Charts -->
                 <div class="analytics-charts-grid margin-top-20">
                     <div class="chart-box">
                         <h4>Interesse por Plano de Assinatura</h4>
                         <div class="analytics-bars" id="planSalesBars">
-                            <!-- Dynamic Bars -->
                         </div>
                     </div>
 
                     <div class="chart-box">
                         <h4>Dispositivos dos Clientes</h4>
                         <div class="device-stats" id="deviceStatsBox">
-                            <!-- Dynamic Devices -->
                         </div>
                     </div>
                 </div>
 
-                <!-- Recent Leads / Sales Enquiries Table -->
                 <div class="margin-top-20">
                     <div class="tab-header-flex">
                         <h4>Interessados em Planos & Orçamentos (Leads)</h4>
@@ -159,13 +154,11 @@
                                 </tr>
                             </thead>
                             <tbody id="tableLeadsLog">
-                                <!-- Dynamic Leads -->
                             </tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- Recent Visitors Access Log Table -->
                 <div class="margin-top-20">
                     <div class="tab-header-flex">
                         <h4>Histórico Recente de Acessos de Clientes</h4>
@@ -182,11 +175,109 @@
                                 </tr>
                             </thead>
                             <tbody id="tableAccessLogs">
-                                <!-- Dynamic Access Logs -->
                             </tbody>
                         </table>
                     </div>
                 </div>
+            </div>
+
+            <!-- Tab 4: Plans & Features Management -->
+            <div class="tab-content" id="tab-plans-edit">
+                <h3>Gerenciador Completo de Planos e Vantagens</h3>
+                <p class="tab-desc">Edite os nomes dos planos, públicos-alvo, preços de setup, mensalidades e a lista completa de tudo que cada plano oferece.</p>
+
+                <form id="plansSettingsForm" class="settings-form">
+                    <!-- PLAN 1 -->
+                    <div class="product-form">
+                        <h4 class="text-cyan"><i class="fa-solid fa-cube"></i> Configuração do Plano 1 (Essencial)</h4>
+                        <div class="form-row margin-top-20">
+                            <div class="form-group col-6">
+                                <label for="plan1Name">Nome do Plano</label>
+                                <input type="text" id="plan1Name" value="Plano Essencial">
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="plan1Target">Público-Alvo / Subtítulo</label>
+                                <input type="text" id="plan1Target" value="Para Autônomos e Iniciantes">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-6">
+                                <label for="plan1Setup">Preço de Setup (R$)</label>
+                                <input type="text" id="plan1Setup" value="350,00">
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="plan1Monthly">Preço Mensalidade (R$)</label>
+                                <input type="text" id="plan1Monthly" value="89,00">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="plan1Features">Recursos / O que o plano oferece (1 item por linha)</label>
+                            <textarea id="plan1Features" rows="5" placeholder="Escreva cada benefício em uma linha nova..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- PLAN 2 -->
+                    <div class="product-form">
+                        <h4 class="text-cyan"><i class="fa-solid fa-crown"></i> Configuração do Plano 2 (Profissional)</h4>
+                        <div class="form-row margin-top-20">
+                            <div class="form-group col-6">
+                                <label for="plan2Name">Nome do Plano</label>
+                                <input type="text" id="plan2Name" value="Plano Profissional">
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="plan2Target">Público-Alvo / Subtítulo</label>
+                                <input type="text" id="plan2Target" value="Para Empresas em Crescimento">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-6">
+                                <label for="plan2Setup">Preço de Setup (R$)</label>
+                                <input type="text" id="plan2Setup" value="650,00">
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="plan2Monthly">Preço Mensalidade (R$)</label>
+                                <input type="text" id="plan2Monthly" value="149,00">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="plan2Features">Recursos / O que o plano oferece (1 item por linha)</label>
+                            <textarea id="plan2Features" rows="5" placeholder="Escreva cada benefício em uma linha nova..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- PLAN 3 -->
+                    <div class="product-form">
+                        <h4 class="text-cyan"><i class="fa-solid fa-store"></i> Configuração do Plano 3 (Loja / Sistema)</h4>
+                        <div class="form-row margin-top-20">
+                            <div class="form-group col-6">
+                                <label for="plan3Name">Nome do Plano</label>
+                                <input type="text" id="plan3Name" value="Loja Virtual / Sistema">
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="plan3Target">Público-Alvo / Subtítulo</label>
+                                <input type="text" id="plan3Target" value="Catálogo Completo & Vendas">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-6">
+                                <label for="plan3Setup">Preço de Setup (R$)</label>
+                                <input type="text" id="plan3Setup" value="1200,00">
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="plan3Monthly">Preço Mensalidade (R$)</label>
+                                <input type="text" id="plan3Monthly" value="249,00">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="plan3Features">Recursos / O que o plano oferece (1 item por linha)</label>
+                            <textarea id="plan3Features" rows="5" placeholder="Escreva cada benefício em uma linha nova..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-actions margin-top-20">
+                        <button type="submit" class="btn btn-primary btn-lg"><i class="fa-solid fa-floppy-disk"></i> Salvar Todos os Planos & Recursos</button>
+                    </div>
+                </form>
             </div>
 
             <!-- Tab 1: Upload & Replace Site Images & Logo -->
@@ -352,39 +443,6 @@
                 <div class="admin-products-list" id="adminCasesList">
                     <!-- Dynamically populated -->
                 </div>
-            </div>
-
-            <!-- Tab 4: Plans Management -->
-            <div class="tab-content" id="tab-plans-edit">
-                <h3>Valores dos Planos (Setup & Mensalidade)</h3>
-                <form id="plansSettingsForm" class="settings-form">
-                    <div class="form-group">
-                        <label for="plan1Setup">Plano Essencial - Setup (R$)</label>
-                        <input type="text" id="plan1Setup" value="350,00">
-                        <label for="plan1Monthly">Plano Essencial - Mensalidade (R$)</label>
-                        <input type="text" id="plan1Monthly" value="89,00">
-                    </div>
-                    <hr style="border-color: var(--border-color); margin: 16px 0;">
-
-                    <div class="form-group">
-                        <label for="plan2Setup">Plano Profissional - Setup (R$)</label>
-                        <input type="text" id="plan2Setup" value="650,00">
-                        <label for="plan2Monthly">Plano Profissional - Mensalidade (R$)</label>
-                        <input type="text" id="plan2Monthly" value="149,00">
-                    </div>
-                    <hr style="border-color: var(--border-color); margin: 16px 0;">
-
-                    <div class="form-group">
-                        <label for="plan3Setup">Plano Loja / Sistema - Setup (R$)</label>
-                        <input type="text" id="plan3Setup" value="1200,00">
-                        <label for="plan3Monthly">Plano Loja / Sistema - Mensalidade (R$)</label>
-                        <input type="text" id="plan3Monthly" value="249,00">
-                    </div>
-
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Salvar Preços dos Planos</button>
-                    </div>
-                </form>
             </div>
 
             <!-- Tab 5: General Company Text & Settings -->
