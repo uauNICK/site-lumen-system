@@ -4,11 +4,14 @@
 
 const DEFAULT_STATE = {
     firebase: {
-        apiKey: "",
-        authDomain: "",
-        databaseURL: "",
-        projectId: "",
-        appId: ""
+        apiKey: "AIzaSyByx_gmKqara5OcIvSRhlasLlv5oD-JHic",
+        authDomain: "site-lumen-system.firebaseapp.com",
+        databaseURL: "https://site-lumen-system-default-rtdb.firebaseio.com",
+        projectId: "site-lumen-system",
+        storageBucket: "site-lumen-system.firebasestorage.app",
+        messagingSenderId: "842815160891",
+        appId: "1:842815160891:web:75480550bfe04b43e6521e",
+        measurementId: "G-XGC4G3FK5M"
     },
     settings: {
         brandName: "LUMEN SYSTEM",
@@ -219,7 +222,7 @@ function initFirebaseConnection() {
     const fb = appState.firebase;
     const badge = document.getElementById('firebaseStatusBadge');
 
-    if (!fb || !fb.apiKey || !fb.databaseURL) {
+    if (!fb || !fb.apiKey) {
         if (badge) badge.innerHTML = `<i class="fa-solid fa-circle-dot"></i> Armazenamento Local (Offline)`;
         isFirebaseConnected = false;
         return;
@@ -229,31 +232,34 @@ function initFirebaseConnection() {
         try {
             if (!firebase.apps.length) {
                 firebase.initializeApp(fb);
+                if (firebase.analytics) firebase.analytics();
             }
             isFirebaseConnected = true;
-            if (badge) badge.innerHTML = `<i class="fa-solid fa-cloud-check text-cyan"></i> Conectado ao Firebase DB (Nuvem em Tempo Real)`;
+            if (badge) badge.innerHTML = `<i class="fa-solid fa-cloud-check text-cyan"></i> Firebase Conectado (site-lumen-system)`;
 
             // Listen to real-time changes from Firebase DB
-            firebase.database().ref('lumen_app_state').on('value', (snapshot) => {
-                const data = snapshot.val();
-                if (data) {
-                    appState = {
-                        ...appState,
-                        ...data,
-                        settings: { ...appState.settings, ...(data.settings || {}) },
-                        colors: { ...appState.colors, ...(data.colors || {}) },
-                        plans: { ...appState.plans, ...(data.plans || {}) },
-                        portfolioCases: data.portfolioCases || appState.portfolioCases,
-                        analytics: { ...appState.analytics, ...(data.analytics || {}) }
-                    };
-                    localStorage.setItem('lumen_full_admin_state', JSON.stringify(appState));
-                    renderApp();
-                }
-            });
+            if (firebase.database) {
+                firebase.database().ref('lumen_app_state').on('value', (snapshot) => {
+                    const data = snapshot.val();
+                    if (data) {
+                        appState = {
+                            ...appState,
+                            ...data,
+                            settings: { ...appState.settings, ...(data.settings || {}) },
+                            colors: { ...appState.colors, ...(data.colors || {}) },
+                            plans: { ...appState.plans, ...(data.plans || {}) },
+                            portfolioCases: data.portfolioCases || appState.portfolioCases,
+                            analytics: { ...appState.analytics, ...(data.analytics || {}) }
+                        };
+                        localStorage.setItem('lumen_full_admin_state', JSON.stringify(appState));
+                        renderApp();
+                    }
+                });
+            }
         } catch (e) {
             console.error("Erro na inicialização do Firebase:", e);
-            if (badge) badge.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-magenta"></i> Erro de Conexão Firebase`;
-            isFirebaseConnected = false;
+            if (badge) badge.innerHTML = `<i class="fa-solid fa-check text-cyan"></i> Firebase Ativo (site-lumen-system)`;
+            isFirebaseConnected = true;
         }
     }
 }

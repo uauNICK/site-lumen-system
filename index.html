@@ -16,6 +16,7 @@
     <!-- Firebase SDK Compat via CDN -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-analytics-compat.js"></script>
 </head>
 <body>
 
@@ -637,37 +638,37 @@
                     <!-- Tab Firebase Connection -->
                     <div class="tab-content" id="tab-firebase">
                         <h3><i class="fa-solid fa-fire text-cyan"></i> Conexão e Sincronização com o Firebase DB</h3>
-                        <p class="tab-desc">Cole as chaves do seu projeto Firebase para sincronizar dados, métricas e fotos em tempo real na nuvem.</p>
+                        <p class="tab-desc">Projeto Firebase Ativo: <strong>site-lumen-system</strong></p>
 
                         <div class="product-form">
                             <div class="form-group">
                                 <label for="fbApiKey">API Key (`apiKey`)</label>
-                                <input type="text" id="fbApiKey" placeholder="AIzaSy...">
+                                <input type="text" id="fbApiKey" placeholder="AIzaSyByx_gmKqara5OcIvSRhlasLlv5oD-JHic">
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-6">
                                     <label for="fbAuthDomain">Auth Domain (`authDomain`)</label>
-                                    <input type="text" id="fbAuthDomain" placeholder="seu-projeto.firebaseapp.com">
+                                    <input type="text" id="fbAuthDomain" placeholder="site-lumen-system.firebaseapp.com">
                                 </div>
                                 <div class="form-group col-6">
                                     <label for="fbDatabaseURL">Database URL (`databaseURL`)</label>
-                                    <input type="text" id="fbDatabaseURL" placeholder="https://seu-projeto-default-rtdb.firebaseio.com">
+                                    <input type="text" id="fbDatabaseURL" placeholder="https://site-lumen-system-default-rtdb.firebaseio.com">
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-6">
                                     <label for="fbProjectId">Project ID (`projectId`)</label>
-                                    <input type="text" id="fbProjectId" placeholder="seu-projeto-id">
+                                    <input type="text" id="fbProjectId" placeholder="site-lumen-system">
                                 </div>
                                 <div class="form-group col-6">
                                     <label for="fbAppId">App ID (`appId`)</label>
-                                    <input type="text" id="fbAppId" placeholder="1:123456789:web:abcdef">
+                                    <input type="text" id="fbAppId" placeholder="1:842815160891:web:75480550bfe04b43e6521e">
                                 </div>
                             </div>
 
                             <div class="form-actions margin-top-20">
-                                <button type="button" class="btn btn-primary" id="btnSaveFirebaseConfig"><i class="fa-solid fa-bolt"></i> Salvar e Conectar ao Firebase</button>
-                                <span id="firebaseStatusBadge" class="badge-tag margin-left-12"><i class="fa-solid fa-circle-dot"></i> Armazenamento Local (Offline)</span>
+                                <button type="button" class="btn btn-primary" id="btnSaveFirebaseConfig"><i class="fa-solid fa-bolt"></i> Salvar e Reconectar ao Firebase</button>
+                                <span id="firebaseStatusBadge" class="badge-tag margin-left-12"><i class="fa-solid fa-cloud-check text-cyan"></i> Firebase Integrado (site-lumen-system)</span>
                             </div>
                         </div>
                     </div>
